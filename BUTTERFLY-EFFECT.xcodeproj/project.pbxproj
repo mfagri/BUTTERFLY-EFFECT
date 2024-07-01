@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		AE319E8B2C3279FD00FDFD4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE319E602C3279FA00FDFD4C /* ContentView.swift */; };
 		AE319E8C2C3279FD00FDFD4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE319E612C3279FD00FDFD4C /* Assets.xcassets */; };
 		AE319E8D2C3279FD00FDFD4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE319E612C3279FD00FDFD4C /* Assets.xcassets */; };
+		AE319EA42C3285DB00FDFD4C /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = AE319EA32C3285DB00FDFD4C /* URLImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE319EA42C3285DB00FDFD4C /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +169,9 @@
 			dependencies = (
 			);
 			name = "BUTTERFLY-EFFECT (iOS)";
+			packageProductDependencies = (
+				AE319EA32C3285DB00FDFD4C /* URLImage */,
+			);
 			productName = "BUTTERFLY-EFFECT (iOS)";
 			productReference = AE319E662C3279FD00FDFD4C /* BUTTERFLY-EFFECT.app */;
 			productType = "com.apple.product-type.application";
@@ -258,6 +263,9 @@
 				Base,
 			);
 			mainGroup = AE319E592C3279FA00FDFD4C;
+			packageReferences = (
+				AE319EA02C3285DB00FDFD4C /* XCRemoteSwiftPackageReference "url-image" */,
+			);
 			productRefGroup = AE319E672C3279FD00FDFD4C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -686,6 +694,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AE319EA02C3285DB00FDFD4C /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AE319EA32C3285DB00FDFD4C /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE319EA02C3285DB00FDFD4C /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AE319E5A2C3279FA00FDFD4C /* Project object */;
 }
