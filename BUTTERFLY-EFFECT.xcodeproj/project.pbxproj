@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE1534CB2C336416002EFA88 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = AE1534CA2C336416002EFA88 /* KeyboardKit */; };
+		AE1534D72C336AD9002EFA88 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1534D62C336AD9002EFA88 /* KeyboardViewController.swift */; };
+		AE1534DB2C336AD9002EFA88 /* mykeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AE1534D42C336AD9002EFA88 /* mykeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AE1534E62C3373CB002EFA88 /* viewkeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1534E52C3373CB002EFA88 /* viewkeyboard.swift */; };
+		AE1534EC2C3374EC002EFA88 /* viewkeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1534E52C3373CB002EFA88 /* viewkeyboard.swift */; };
+		AE1534F22C3374F3002EFA88 /* viewkeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1534E52C3373CB002EFA88 /* viewkeyboard.swift */; };
 		AE319E7B2C3279FD00FDFD4C /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE319E7A2C3279FD00FDFD4C /* Tests_iOS.swift */; };
 		AE319E862C3279FD00FDFD4C /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE319E852C3279FD00FDFD4C /* Tests_macOS.swift */; };
 		AE319E882C3279FD00FDFD4C /* BUTTERFLY_EFFECTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE319E5F2C3279FA00FDFD4C /* BUTTERFLY_EFFECTApp.swift */; };
@@ -19,6 +25,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AE1534D92C336AD9002EFA88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE319E5A2C3279FA00FDFD4C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE1534D32C336AD9002EFA88;
+			remoteInfo = mykeyboard;
+		};
 		AE319E772C3279FD00FDFD4C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AE319E5A2C3279FA00FDFD4C /* Project object */;
@@ -35,7 +48,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AE1534DF2C336AD9002EFA88 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AE1534DB2C336AD9002EFA88 /* mykeyboard.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		AE1534D42C336AD9002EFA88 /* mykeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = mykeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE1534D62C336AD9002EFA88 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		AE1534D82C336AD9002EFA88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE1534E52C3373CB002EFA88 /* viewkeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewkeyboard.swift; sourceTree = "<group>"; };
 		AE319E5F2C3279FA00FDFD4C /* BUTTERFLY_EFFECTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUTTERFLY_EFFECTApp.swift; sourceTree = "<group>"; };
 		AE319E602C3279FA00FDFD4C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AE319E612C3279FD00FDFD4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,10 +84,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AE1534D12C336AD9002EFA88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AE319E632C3279FD00FDFD4C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE1534CB2C336416002EFA88 /* KeyboardKit in Frameworks */,
 				AE319EA42C3285DB00FDFD4C /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,6 +124,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE1534D52C336AD9002EFA88 /* mykeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				AE1534D62C336AD9002EFA88 /* KeyboardViewController.swift */,
+				AE1534D82C336AD9002EFA88 /* Info.plist */,
+				AE1534E52C3373CB002EFA88 /* viewkeyboard.swift */,
+			);
+			path = mykeyboard;
+			sourceTree = "<group>";
+		};
 		AE319E592C3279FA00FDFD4C = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +142,7 @@
 				AE319E6F2C3279FD00FDFD4C /* macOS */,
 				AE319E792C3279FD00FDFD4C /* Tests iOS */,
 				AE319E842C3279FD00FDFD4C /* Tests macOS */,
+				AE1534D52C336AD9002EFA88 /* mykeyboard */,
 				AE319E672C3279FD00FDFD4C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,6 +164,7 @@
 				AE319E6E2C3279FD00FDFD4C /* BUTTERFLY-EFFECT.app */,
 				AE319E762C3279FD00FDFD4C /* Tests iOS.xctest */,
 				AE319E812C3279FD00FDFD4C /* Tests macOS.xctest */,
+				AE1534D42C336AD9002EFA88 /* mykeyboard.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,6 +207,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AE1534D32C336AD9002EFA88 /* mykeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE1534DC2C336AD9002EFA88 /* Build configuration list for PBXNativeTarget "mykeyboard" */;
+			buildPhases = (
+				AE1534D02C336AD9002EFA88 /* Sources */,
+				AE1534D12C336AD9002EFA88 /* Frameworks */,
+				AE1534D22C336AD9002EFA88 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = mykeyboard;
+			productName = mykeyboard;
+			productReference = AE1534D42C336AD9002EFA88 /* mykeyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		AE319E652C3279FD00FDFD4C /* BUTTERFLY-EFFECT (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE319E902C3279FD00FDFD4C /* Build configuration list for PBXNativeTarget "BUTTERFLY-EFFECT (iOS)" */;
@@ -163,14 +231,17 @@
 				AE319E622C3279FD00FDFD4C /* Sources */,
 				AE319E632C3279FD00FDFD4C /* Frameworks */,
 				AE319E642C3279FD00FDFD4C /* Resources */,
+				AE1534DF2C336AD9002EFA88 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AE1534DA2C336AD9002EFA88 /* PBXTargetDependency */,
 			);
 			name = "BUTTERFLY-EFFECT (iOS)";
 			packageProductDependencies = (
 				AE319EA32C3285DB00FDFD4C /* URLImage */,
+				AE1534CA2C336416002EFA88 /* KeyboardKit */,
 			);
 			productName = "BUTTERFLY-EFFECT (iOS)";
 			productReference = AE319E662C3279FD00FDFD4C /* BUTTERFLY-EFFECT.app */;
@@ -238,6 +309,9 @@
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					AE1534D32C336AD9002EFA88 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					AE319E652C3279FD00FDFD4C = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -265,6 +339,7 @@
 			mainGroup = AE319E592C3279FA00FDFD4C;
 			packageReferences = (
 				AE319EA02C3285DB00FDFD4C /* XCRemoteSwiftPackageReference "url-image" */,
+				AE1534C92C336416002EFA88 /* XCRemoteSwiftPackageReference "KeyboardKit" */,
 			);
 			productRefGroup = AE319E672C3279FD00FDFD4C /* Products */;
 			projectDirPath = "";
@@ -274,11 +349,19 @@
 				AE319E6D2C3279FD00FDFD4C /* BUTTERFLY-EFFECT (macOS) */,
 				AE319E752C3279FD00FDFD4C /* Tests iOS */,
 				AE319E802C3279FD00FDFD4C /* Tests macOS */,
+				AE1534D32C336AD9002EFA88 /* mykeyboard */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AE1534D22C336AD9002EFA88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AE319E642C3279FD00FDFD4C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -312,10 +395,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AE1534D02C336AD9002EFA88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE1534D72C336AD9002EFA88 /* KeyboardViewController.swift in Sources */,
+				AE1534E62C3373CB002EFA88 /* viewkeyboard.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AE319E622C3279FD00FDFD4C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE1534EC2C3374EC002EFA88 /* viewkeyboard.swift in Sources */,
 				AE319E8A2C3279FD00FDFD4C /* ContentView.swift in Sources */,
 				AE319E882C3279FD00FDFD4C /* BUTTERFLY_EFFECTApp.swift in Sources */,
 			);
@@ -325,6 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE1534F22C3374F3002EFA88 /* viewkeyboard.swift in Sources */,
 				AE319E8B2C3279FD00FDFD4C /* ContentView.swift in Sources */,
 				AE319E892C3279FD00FDFD4C /* BUTTERFLY_EFFECTApp.swift in Sources */,
 			);
@@ -349,6 +443,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		AE1534DA2C336AD9002EFA88 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AE1534D32C336AD9002EFA88 /* mykeyboard */;
+			targetProxy = AE1534D92C336AD9002EFA88 /* PBXContainerItemProxy */;
+		};
 		AE319E782C3279FD00FDFD4C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AE319E652C3279FD00FDFD4C /* BUTTERFLY-EFFECT (iOS) */;
@@ -362,6 +461,47 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		AE1534DD2C336AD9002EFA88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = mykeyboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT.mykeyboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AE1534DE2C336AD9002EFA88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = mykeyboard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT.mykeyboard";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		AE319E8E2C3279FD00FDFD4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -476,6 +616,7 @@
 		AE319E912C3279FD00FDFD4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -497,6 +638,7 @@
 		AE319E922C3279FD00FDFD4C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -648,6 +790,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AE1534DC2C336AD9002EFA88 /* Build configuration list for PBXNativeTarget "mykeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE1534DD2C336AD9002EFA88 /* Debug */,
+				AE1534DE2C336AD9002EFA88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AE319E5D2C3279FA00FDFD4C /* Build configuration list for PBXProject "BUTTERFLY-EFFECT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -696,6 +847,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AE1534C92C336416002EFA88 /* XCRemoteSwiftPackageReference "KeyboardKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/KeyboardKit/KeyboardKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		AE319EA02C3285DB00FDFD4C /* XCRemoteSwiftPackageReference "url-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
@@ -707,6 +866,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AE1534CA2C336416002EFA88 /* KeyboardKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE1534C92C336416002EFA88 /* XCRemoteSwiftPackageReference "KeyboardKit" */;
+			productName = KeyboardKit;
+		};
 		AE319EA32C3285DB00FDFD4C /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AE319EA02C3285DB00FDFD4C /* XCRemoteSwiftPackageReference "url-image" */;

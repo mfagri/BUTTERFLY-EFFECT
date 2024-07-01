@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "KeyboardKit",
+        "repositoryURL": "https://github.com/KeyboardKit/KeyboardKit",
+        "state": {
+          "branch": null,
+          "revision": "0a3f2018f9884a6aa846ca0652fdf257bbf3b7ee",
+          "version": "4.9.3"
+        }
+      },
+      {
         "package": "URLImage",
         "repositoryURL": "https://github.com/dmytro-anokhin/url-image",
         "state": {
