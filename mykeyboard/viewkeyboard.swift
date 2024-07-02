@@ -2,6 +2,13 @@ import SwiftUI
 
 struct viewkeyboard: View {
     @State private var isUpperCase = false
+       @State private var isSymbolMode = false
+
+    private var selectedColor: Color
+    
+    init(selectedColor: Color) {
+        self.selectedColor = selectedColor
+    }
     
     var body: some View {
         VStack(spacing: 5) {
@@ -13,7 +20,7 @@ struct viewkeyboard: View {
                         }) {
                             Text(self.getButtonText(key: key))
                                 .frame(width: self.getKeyWidth(key: key), height: 40)
-                                .background(Color.blue)
+                                 .background(self.selectedColor)
                                 .foregroundColor(.white)
                                 .cornerRadius(5)
                         }
@@ -21,14 +28,26 @@ struct viewkeyboard: View {
                 }
             }
             
-            Button(action: {
-                self.isUpperCase.toggle()
-            }) {
-                Text("ABC")
-                    .frame(width: 80, height: 40)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(5)
+             HStack(spacing: 5) {
+                Button(action: {
+                    self.isUpperCase.toggle()
+                }) {
+                    Text(self.isUpperCase ? "abc" : "ABC")
+                        .frame(width: 80, height: 40)
+                         .background(self.selectedColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
+                }
+                
+                Button(action: {
+                    self.isSymbolMode.toggle()
+                }) {
+                    Text(self.isSymbolMode ? "123" : "!@#")
+                        .frame(width: 80, height: 40)
+                         .background(self.selectedColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
+                }
             }
             .padding(.top, 10)
         }
@@ -67,7 +86,18 @@ struct viewkeyboard: View {
             ]
             return keys
 
-        } else {
+        }
+        if isSymbolMode {
+            keys = [
+                ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "Delete"],
+                ["_", "+", "-", "=", "|", "}", "{", "\"", "'", ":"],
+                [";", ">", "<", ",", ".", "?", "/", "\\", "[", "]"],
+                ["`", "~", "??", "!!", ":)", "<>", "()"],
+                ["Space", "Return"]
+            ]
+            return keys
+        } 
+        else {
             return keys
         }
     }
@@ -101,6 +131,6 @@ struct viewkeyboard: View {
 
 struct viewkeyboard_Previews: PreviewProvider {
     static var previews: some View {
-        viewkeyboard()
+        viewkeyboard(selectedColor: Color.blue)
     }
 }

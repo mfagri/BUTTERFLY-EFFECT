@@ -9,9 +9,9 @@ import UIKit
 import SwiftUI
 
 class KeyboardViewController: UIInputViewController {
-
+    
     @IBOutlet var nextKeyboardButton: UIButton!
-    private let keyboardView = viewkeyboard()
+    private var selectedColor: UIColor = .blue // Default color
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -35,16 +35,25 @@ class KeyboardViewController: UIInputViewController {
         
         self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-
         
-        view.addKeyboardView(UIHostingController(rootView: keyboardView).view)
+        // Load selected color from UserDefaults
+        let loadedString = loadString(forKey: "greeting")
+        if let string = loadedString {
+        print("The loaded string is: \(string)")
+        } else {
+        print("No greeting string found in UserDefaults")
+        }
+        ////////////////////////////////
+        
+        // Initialize viewkeyboard with a selected color binding
+        let hostingController = UIHostingController(rootView: viewkeyboard(selectedColor: Color(selectedColor)))
+        view.addKeyboardView(hostingController.view)
+        
         NotificationCenter.default.addObserver(
             forName: NSNotification.Name(rawValue: "addkey"),
             object: nil,
             queue: nil,
-            using: 
-            {
-                notification in 
+            using: { notification in
                 if let key = notification.object as? String {
                     if key == "delete" {
                         self.textDocumentProxy.deleteBackward()
@@ -52,18 +61,8 @@ class KeyboardViewController: UIInputViewController {
                         self.textDocumentProxy.insertText(key)
                     }
                 }
-            }           
+            }
         )
-        //toolbar
-        // let toolbar = UIToolbar()
-        // toolbar.sizeToFit()
-        // let nextKeyboardButton = UIBarButtonItem(title: "Next Keyboard", style: .plain, target: self, action: #selector(handleInputModeList(from:with:)))
-        // let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        // let dismissButton = UIBarButtonItem(title: "Dismiss", style: .plain, target: self, action: #selector(dismissKeyboard))
-        // toolbar.items = [nextKeyboardButton, flexibleSpace, dismissButton]
-        // self.view.addSubview(toolbar)
-        // self.view.addKeyboardView(toolbar)
-
     }
     
     override func viewWillLayoutSubviews() {
@@ -83,12 +82,28 @@ class KeyboardViewController: UIInputViewController {
         if proxy.keyboardAppearance == UIKeyboardAppearance.dark {
             textColor = UIColor.white
         } else {
-            //here is the change to the original code to make the text red
-            textColor = UIColor.black
+            // Change text color based on the selectedColor
+            textColor = self.selectedColor
         }
         self.nextKeyboardButton.setTitleColor(textColor, for: [])
     }
-
+    
+    // MARK: - UserDefaults handling
+    
+    func loadString(forKey key: String) -> String? {
+        // Retrieve the string associated with the key
+        let savedString = UserDefaults.standard.string(forKey: key)
+        
+        // Check if a value exists for the key
+        if let savedString = savedString {
+            print("Loaded string \"\(savedString)\" from UserDefaults with key: \(key)")
+            return savedString
+        } else {
+            print("No string data found for key: \(key) in UserDefaults")
+            return nil
+        }
+        }
+    
 }
 
 extension UIView {
@@ -102,3 +117,20 @@ extension UIView {
     }
 }
 
+extension Color {
+    // Extension to convert Hex string to Color
+    init?(hexString: String) {
+        let scanner = Scanner(string: hexString)
+        var rgbValue: UInt64 = 0
+        
+        guard scanner.scanHexInt64(&rgbValue) else {
+            return nil
+        }
+        
+        let r = CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0
+        let g = CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0
+        let b = CGFloat(rgbValue & 0x0000FF) / 255.0
+        
+        self.init(red: Double(r), green: Double(g), blue: Double(b))
+    }
+}
