@@ -1,6 +1,6 @@
 # Butterfly Effect
 
-![App Screenshots](screenshots.png)
+
 
 ## Description
 
@@ -8,18 +8,23 @@ Butterfly Effect is a custom keyboard app developed in SwiftUI. It features a fu
 
 ## Screenshots
 
+### Screenshot 1
 ![Screenshot 1](screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2000.02.51.png)
 *Description of screenshot 1.*
 
+### Screenshot 2
 ![Screenshot 2](screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2000.38.37.png)
 *Description of screenshot 2.*
 
+### Screenshot 3
 ![Screenshot 3](screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2001.04.01.png)
 *Description of screenshot 3.*
 
+### Screenshot 4
 ![Screenshot 4](screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2002.30.59.png)
 *Description of screenshot 4.*
 
+### Screenshot 5
 ![Screenshot 5](screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2003.53.56.png)
 *Description of screenshot 5.*
 
@@ -36,3 +41,4 @@ Clone the repository and open it using Xcode. Build and run the project on a sim
 
 ```bash
 git clone https://github.com/mfagri/BUTTERFLY-EFFECT.git
+
