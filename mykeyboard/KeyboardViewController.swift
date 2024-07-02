@@ -50,6 +50,16 @@ class KeyboardViewController: UIInputViewController {
                 }
             }           
         )
+        //toolbar
+        // let toolbar = UIToolbar()
+        // toolbar.sizeToFit()
+        // let nextKeyboardButton = UIBarButtonItem(title: "Next Keyboard", style: .plain, target: self, action: #selector(handleInputModeList(from:with:)))
+        // let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        // let dismissButton = UIBarButtonItem(title: "Dismiss", style: .plain, target: self, action: #selector(dismissKeyboard))
+        // toolbar.items = [nextKeyboardButton, flexibleSpace, dismissButton]
+        // self.view.addSubview(toolbar)
+        // self.view.addKeyboardView(toolbar)
+
     }
     
     override func viewWillLayoutSubviews() {
@@ -87,3 +97,4 @@ extension UIView {
         subview.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
 }
+
