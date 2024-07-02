@@ -38,6 +38,18 @@ class KeyboardViewController: UIInputViewController {
 
         
         view.addKeyboardView(UIHostingController(rootView: keyboardView).view)
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name(rawValue: "addkey"),
+            object: nil,
+            queue: nil,
+            using: 
+            {
+                notification in 
+                if let key = notification.object as? String {
+                    self.textDocumentProxy.insertText(key)
+                }
+            }           
+        )
     }
     
     override func viewWillLayoutSubviews() {
@@ -58,7 +70,7 @@ class KeyboardViewController: UIInputViewController {
             textColor = UIColor.white
         } else {
             //here is the change to the original code to make the text red
-            textColor = UIColor.red
+            textColor = UIColor.black
         }
         self.nextKeyboardButton.setTitleColor(textColor, for: [])
     }
