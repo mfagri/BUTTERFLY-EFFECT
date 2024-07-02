@@ -1,18 +1,18 @@
 import SwiftUI
 
 struct viewkeyboard: View {
-    @State private var showAlert = false
-
+    @State private var isUpperCase = false
+    
     var body: some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 5) {
             ForEach(getRows(), id: \.self) { row in
-                HStack(spacing: 4) {
+                HStack(spacing: 5) {
                     ForEach(row, id: \.self) { key in
                         Button(action: {
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: getKeyOutput(key: key))
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: self.getKeyOutput(key: key))
                         }) {
-                            Text(key)
-                                .frame(width: getKeyWidth(key: key), height: 40)
+                            Text(self.getButtonText(key: key))
+                                .frame(width: self.getKeyWidth(key: key), height: 40)
                                 .background(Color.blue)
                                 .foregroundColor(.white)
                                 .cornerRadius(5)
@@ -20,6 +20,17 @@ struct viewkeyboard: View {
                     }
                 }
             }
+            
+            Button(action: {
+                self.isUpperCase.toggle()
+            }) {
+                Text("ABC")
+                    .frame(width: 80, height: 40)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(5)
+            }
+            .padding(.top, 10)
         }
         .padding()
     }
@@ -28,23 +39,50 @@ struct viewkeyboard: View {
         switch key {
         case "Space":
             return 160
-        case "Return":
-            return 80
-        case "Delete":
+        case "Return", "Delete":
             return 80
         default:
-            return 35
+            return 25
         }
     }
 
     func getRows() -> [[String]] {
-        return [
+        var keys: [[String]] = [
+           //lowercase
             ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "Delete"],
-            ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-            ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-            ["Z", "X", "C", "V", "B", "N", "M"],
+            ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+            ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+            ["z", "x", "c", "v", "b", "n", "m"],
             ["Space", "Return"]
         ]
+        
+        // Optionally convert to uppercase if needed
+        if isUpperCase {
+           keys  = [
+                ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "Delete"],
+                ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+                ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+                ["Z", "X", "C", "V", "B", "N", "M"],
+                ["Space", "Return"]
+            ]
+            return keys
+
+        } else {
+            return keys
+        }
+    }
+    
+    func getButtonText(key: String) -> String {
+        switch key {
+        case "Space":
+            return "Space"
+        case "Return":
+            return "Return"
+        case "Delete":
+            return "delete"
+        default:
+            return key
+        }
     }
     
     func getKeyOutput(key: String) -> String {
