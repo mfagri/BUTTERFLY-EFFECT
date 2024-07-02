@@ -4,9 +4,9 @@ struct viewkeyboard: View {
     @State private var showAlert = false
 
     var body: some View {
-        VStack(spacing: 5) {
+        VStack(spacing: 4) {
             ForEach(getRows(), id: \.self) { row in
-                HStack(spacing: 5) {
+                HStack(spacing: 4) {
                     ForEach(row, id: \.self) { key in
                         Button(action: {
                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: getKeyOutput(key: key))
@@ -30,6 +30,8 @@ struct viewkeyboard: View {
             return 160
         case "Return":
             return 80
+        case "Delete":
+            return 80
         default:
             return 35
         }
@@ -37,7 +39,7 @@ struct viewkeyboard: View {
 
     func getRows() -> [[String]] {
         return [
-            ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
+            ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "Delete"],
             ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
             ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
             ["Z", "X", "C", "V", "B", "N", "M"],
@@ -51,6 +53,8 @@ struct viewkeyboard: View {
             return " "
         case "Return":
             return "\n"
+        case "Delete":
+            return "delete"
         default:
             return key
         }

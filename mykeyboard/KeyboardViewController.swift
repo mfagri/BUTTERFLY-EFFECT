@@ -45,8 +45,12 @@ class KeyboardViewController: UIInputViewController {
             using: 
             {
                 notification in 
-                if let key = notification.object as? String {
-                    self.textDocumentProxy.insertText(key)
+                 if let key = notification.object as? String {
+                    if key == "delete" {
+                        self.textDocumentProxy.deleteBackward()
+                    } else {
+                        self.textDocumentProxy.insertText(key)
+                    }
                 }
             }           
         )
