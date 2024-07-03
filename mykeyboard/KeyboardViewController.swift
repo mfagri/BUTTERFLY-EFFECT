@@ -1,6 +1,5 @@
 import UIKit
 import SwiftUI
-import Security
 
 class KeyboardViewController: UIInputViewController {
     
@@ -28,22 +27,40 @@ class KeyboardViewController: UIInputViewController {
         self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
         // Load selected color from UserDefaults
-        dataload(key: "greeting")
+        
         let loadedData = loadFromKeychain(key: "greeting")
         if let string = loadedData {
             print("The loaded string is: \(string)")
         } else {
-            print("No greeting string found in Keychain")
+            print("No greeting string found in UserDefaults")
         }
         
         // Initialize viewkeyboard with a selected color binding
         let hostingController = UIHostingController(rootView: viewkeyboard(selectedColor: Color(selectedColor)))
         view.addKeyboardView(hostingController.view)
+        
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name(rawValue: "addkey"),
+            object: nil,
+            queue: nil,
+            using: { notification in
+                if let key = notification.object as? String {
+                    if key == "delete" {
+                        self.textDocumentProxy.deleteBackward()
+                    } else {
+                        self.textDocumentProxy.insertText(key)
+                    }
+                }
+            }
+        )
     }
     
     override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
         self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
+        super.viewWillLayoutSubviews()
+    }
+    
+    override func textWillChange(_ textInput: UITextInput?) {
     }
     
     override func textDidChange(_ textInput: UITextInput?) {
@@ -57,79 +74,47 @@ class KeyboardViewController: UIInputViewController {
         self.nextKeyboardButton.setTitleColor(textColor, for: [])
     }
     
-    @objc func handleInputModeList(from sender: Any) {
-        // Handle input mode switching here
-    }
+    // MARK: - UserDefaults handling
     
-    // MARK: - Keychain Operations
-    
-    func saveToKeychain(key: String, data: Data) -> Bool {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key,
-            kSecValueData as String: data,
-            kSecAttrAccessGroup as String: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT"
-        ]
-        
-        SecItemDelete(query as CFDictionary)
-        let status = SecItemAdd(query as CFDictionary, nil)
-        return status == errSecSuccess
-    }
-    
-    func loadFromKeychain(key: String) -> Data? {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: key,
-            kSecReturnData as String: kCFBooleanTrue!,
-            kSecMatchLimit as String: kSecMatchLimitOne,
-            kSecAttrAccessGroup as String: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT"
-        ]
-        
-        var dataTypeRef: AnyObject? = nil
-        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
-        
-        if status == errSecSuccess {
-            return dataTypeRef as? Data
+     func loadString(forKey key: String) -> String? {
+        if let userDefaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT") {
+            let savedString = userDefaults.string(forKey: key)
+            print("Loaded string \"\(savedString)\" from UserDefaults with key: \(key)")
+            
+            if let savedString = savedString {
+                print("Loaded string \"\(savedString)\" from UserDefaults with key: \(key)")
+                return savedString
+            } else {
+                loadFromKeychain(key: key)
+                print("No string data found for key: \(key) in UserDefaults")
+                return nil
+            }
         } else {
-            print("Error loading from Keychain: \(status)")
+            print("Failed to access UserDefaults with App Group")
             return nil
         }
     }
 
-    func dataload(key: String) -> String? {
-        let userDefaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT")
-         if let savedString = userDefaults?.string(forKey: key) {
-            print("Loaded string \"\(savedString)\" from UserDefaults with key: \(key)")
-            return savedString
-        } else {
-            print("No string data found for key: \(key) in UserDefaults")
-            return nil
-        }
-    
-}
-    
-    
-    // Helper method to print all keychain items (for debugging purposes)
-    func printAllKeychainItems() {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecReturnAttributes as String: true,
-            kSecMatchLimit as String: kSecMatchLimitAll
-        ]
-        
-        var result: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &result)
-        
-        if status == errSecSuccess, let items = result as? [[String: Any]] {
-            for item in items {
-                print(item)
-            }
-        } else {
-            print("Error retrieving keychain items: \(status)")
-        }
+    func loadFromKeychain(key: String) -> Data? {
+    let query: [String: Any] = [
+        kSecClass as String: kSecClassGenericPassword,
+        kSecAttrAccount as String: key,
+        kSecReturnData as String: kCFBooleanTrue!,
+        kSecMatchLimit as String: kSecMatchLimitOne,
+        kSecAttrAccessGroup as String: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT"
+    ]
+
+    var dataTypeRef: AnyObject? = nil
+    let status: OSStatus = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
+    if status == errSecSuccess {
+        //print the data 
+        print("Data found")
+        print(dataTypeRef as Any)
+        return dataTypeRef as? Data
+    } else {
+        return nil
     }
-    
-    // Other methods and extensions as needed
+}
 }
 
 extension UIView {
