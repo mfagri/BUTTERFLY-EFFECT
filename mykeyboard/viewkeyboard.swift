@@ -29,6 +29,12 @@ struct viewkeyboard: View {
                         .background(self.selectedColor)
                         .foregroundColor(self.foregroundColor)
                         .cornerRadius(5)
+                        .cornerRadius(5)
+                        .font(.system(size: 16, weight: .bold, design: .default))
+                          .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(self.foregroundColor, lineWidth: 2)
+                        )
                 }
                 Spacer()
             }
@@ -47,6 +53,12 @@ struct viewkeyboard: View {
                         .background(self.selectedColor)
                         .foregroundColor(self.foregroundColor)
                         .cornerRadius(5)
+                        .cornerRadius(5)
+                        .font(.system(size: 16, weight: .bold, design: .default))
+                          .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(self.foregroundColor, lineWidth: 2)
+                        )
                 }
             }
             .padding()
@@ -66,6 +78,12 @@ struct viewkeyboard: View {
                         .background(self.selectedColor)
                         .foregroundColor(self.foregroundColor)
                         .cornerRadius(5)
+                        .cornerRadius(5)
+                        .font(.system(size: 16, weight: .bold, design: .default))
+                          .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(self.foregroundColor, lineWidth: 2)
+                        )
                 }
                 Spacer()
                  Button(action: {
@@ -76,6 +94,12 @@ struct viewkeyboard: View {
                         .background(self.selectedColor)
                         .foregroundColor(self.foregroundColor)
                         .cornerRadius(5)
+                        .cornerRadius(5)
+                        .font(.system(size: 16, weight: .bold, design: .default))
+                          .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(self.foregroundColor, lineWidth: 2)
+                        )
                 }
             }
             .padding()
@@ -166,7 +190,7 @@ struct viewkeyboard: View {
             .padding(.top, 0)
         }
         .padding()
-        }
+        }.padding(4)
     }
     
     func getKeyWidth(key: String) -> CGFloat {

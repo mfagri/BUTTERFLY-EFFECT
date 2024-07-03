@@ -1,12 +1,6 @@
-//
-//  KeyboardViewController.swift
-//  mykeyboard
-//
-//  Created by Marouane Fagri on 7/1/24.
-//
-
 import UIKit
 import SwiftUI
+import Security
 
 class KeyboardViewController: UIInputViewController {
     
@@ -15,14 +9,11 @@ class KeyboardViewController: UIInputViewController {
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        
-        // Add custom view sizing constraints here
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Perform custom UI setup here
         self.nextKeyboardButton = UIButton(type: .system)
         
         self.nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), for: [])
@@ -37,73 +28,108 @@ class KeyboardViewController: UIInputViewController {
         self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
         // Load selected color from UserDefaults
-        let loadedString = loadString(forKey: "greeting")
-        if let string = loadedString {
-        print("The loaded string is: \(string)")
+        dataload(key: "greeting")
+        let loadedData = loadFromKeychain(key: "greeting")
+        if let string = loadedData {
+            print("The loaded string is: \(string)")
         } else {
-        print("No greeting string found in UserDefaults")
+            print("No greeting string found in Keychain")
         }
-        ////////////////////////////////
         
         // Initialize viewkeyboard with a selected color binding
         let hostingController = UIHostingController(rootView: viewkeyboard(selectedColor: Color(selectedColor)))
         view.addKeyboardView(hostingController.view)
-        
-        NotificationCenter.default.addObserver(
-            forName: NSNotification.Name(rawValue: "addkey"),
-            object: nil,
-            queue: nil,
-            using: { notification in
-                if let key = notification.object as? String {
-                    if key == "delete" {
-                        self.textDocumentProxy.deleteBackward()
-                    } else {
-                        self.textDocumentProxy.insertText(key)
-                    }
-                }
-            }
-        )
     }
     
     override func viewWillLayoutSubviews() {
-        self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
         super.viewWillLayoutSubviews()
-    }
-    
-    override func textWillChange(_ textInput: UITextInput?) {
-        // The app is about to change the document's contents. Perform any preparation here.
+        self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
     }
     
     override func textDidChange(_ textInput: UITextInput?) {
-        // The app has just changed the document's contents, the document context has been updated.
-        
         var textColor: UIColor
         let proxy = self.textDocumentProxy
         if proxy.keyboardAppearance == UIKeyboardAppearance.dark {
             textColor = UIColor.white
         } else {
-            // Change text color based on the selectedColor
             textColor = self.selectedColor
         }
         self.nextKeyboardButton.setTitleColor(textColor, for: [])
     }
     
-    // MARK: - UserDefaults handling
+    @objc func handleInputModeList(from sender: Any) {
+        // Handle input mode switching here
+    }
     
-    func loadString(forKey key: String) -> String? {
-        // Retrieve the string associated with the key
-        let savedString = UserDefaults.standard.string(forKey: key)
+    // MARK: - Keychain Operations
+    
+    func saveToKeychain(key: String, data: Data) -> Bool {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key,
+            kSecValueData as String: data,
+            kSecAttrAccessGroup as String: "group.com.company.myApp"
+        ]
         
-        // Check if a value exists for the key
-        if let savedString = savedString {
+        SecItemDelete(query as CFDictionary)
+        let status = SecItemAdd(query as CFDictionary, nil)
+        return status == errSecSuccess
+    }
+    
+    func loadFromKeychain(key: String) -> Data? {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: key,
+            kSecReturnData as String: kCFBooleanTrue!,
+            kSecMatchLimit as String: kSecMatchLimitOne,
+            kSecAttrAccessGroup as String: "group.com.company.myApp"
+        ]
+        
+        var dataTypeRef: AnyObject? = nil
+        let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
+        
+        if status == errSecSuccess {
+            return dataTypeRef as? Data
+        } else {
+            print("Error loading from Keychain: \(status)")
+            return nil
+        }
+    }
+
+    func dataload(key: String) -> String? {
+        let userDefaults = UserDefaults(suiteName: "group.com.company.myApp")
+         if let savedString = userDefaults?.string(forKey: key) {
             print("Loaded string \"\(savedString)\" from UserDefaults with key: \(key)")
             return savedString
         } else {
             print("No string data found for key: \(key) in UserDefaults")
             return nil
         }
-        }
     
+}
+    
+    
+    // Helper method to print all keychain items (for debugging purposes)
+    func printAllKeychainItems() {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecReturnAttributes as String: true,
+            kSecMatchLimit as String: kSecMatchLimitAll
+        ]
+        
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        
+        if status == errSecSuccess, let items = result as? [[String: Any]] {
+            for item in items {
+                print(item)
+            }
+        } else {
+            print("Error retrieving keychain items: \(status)")
+        }
+    }
+    
+    // Other methods and extensions as needed
 }
 
 extension UIView {
@@ -118,7 +144,6 @@ extension UIView {
 }
 
 extension Color {
-    // Extension to convert Hex string to Color
     init?(hexString: String) {
         let scanner = Scanner(string: hexString)
         var rgbValue: UInt64 = 0
