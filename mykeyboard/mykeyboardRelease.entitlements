@@ -4,7 +4,7 @@
 <dict>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)group.com.company.myApp</string>
+		<string>$(AppIdentifierPrefix)group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT</string>
 	</array>
 </dict>
 </plist>

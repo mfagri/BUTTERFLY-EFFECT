@@ -68,7 +68,7 @@ class KeyboardViewController: UIInputViewController {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key,
             kSecValueData as String: data,
-            kSecAttrAccessGroup as String: "group.com.company.myApp"
+            kSecAttrAccessGroup as String: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT"
         ]
         
         SecItemDelete(query as CFDictionary)
@@ -82,7 +82,7 @@ class KeyboardViewController: UIInputViewController {
             kSecAttrAccount as String: key,
             kSecReturnData as String: kCFBooleanTrue!,
             kSecMatchLimit as String: kSecMatchLimitOne,
-            kSecAttrAccessGroup as String: "group.com.company.myApp"
+            kSecAttrAccessGroup as String: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT"
         ]
         
         var dataTypeRef: AnyObject? = nil
@@ -97,7 +97,7 @@ class KeyboardViewController: UIInputViewController {
     }
 
     func dataload(key: String) -> String? {
-        let userDefaults = UserDefaults(suiteName: "group.com.company.myApp")
+        let userDefaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT")
          if let savedString = userDefaults?.string(forKey: key) {
             print("Loaded string \"\(savedString)\" from UserDefaults with key: \(key)")
             return savedString

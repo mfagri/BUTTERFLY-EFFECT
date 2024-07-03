@@ -22,6 +22,8 @@
 		AE319E8C2C3279FD00FDFD4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE319E612C3279FD00FDFD4C /* Assets.xcassets */; };
 		AE319E8D2C3279FD00FDFD4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE319E612C3279FD00FDFD4C /* Assets.xcassets */; };
 		AE319EA42C3285DB00FDFD4C /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = AE319EA32C3285DB00FDFD4C /* URLImage */; };
+		AEC52D7E2C350AC400DC904E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE319E602C3279FA00FDFD4C /* ContentView.swift */; };
+		AEC52D8E2C35163700DC904E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE319E612C3279FD00FDFD4C /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -363,6 +365,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEC52D8E2C35163700DC904E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE1534D72C336AD9002EFA88 /* KeyboardViewController.swift in Sources */,
+				AEC52D7E2C350AC400DC904E /* ContentView.swift in Sources */,
 				AE1534E62C3373CB002EFA88 /* viewkeyboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,7 +651,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "BUTTERFLY-EFFECTRelease.entitlements";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
