@@ -11,7 +11,7 @@ import SwiftUI
 class KeyboardViewController: UIInputViewController {
     
     @IBOutlet var nextKeyboardButton: UIButton!
-    private var selectedColor: UIColor = .blue // Default color
+    private var selectedColor: UIColor = .white // Default color
     
     override func updateViewConstraints() {
         super.updateViewConstraints()

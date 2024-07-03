@@ -81,6 +81,8 @@
 		AE319E812C3279FD00FDFD4C /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE319E852C3279FD00FDFD4C /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		AE319E872C3279FD00FDFD4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AECC52072C34B6BD00D18D04 /* mykeyboardRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mykeyboardRelease.entitlements; sourceTree = "<group>"; };
+		AECC520D2C34BF7700D18D04 /* BUTTERFLY-EFFECTRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BUTTERFLY-EFFECTRelease.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		AE1534D52C336AD9002EFA88 /* mykeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				AECC52072C34B6BD00D18D04 /* mykeyboardRelease.entitlements */,
 				AE1534D62C336AD9002EFA88 /* KeyboardViewController.swift */,
 				AE1534D82C336AD9002EFA88 /* Info.plist */,
 				AE1534E52C3373CB002EFA88 /* viewkeyboard.swift */,
@@ -137,6 +140,7 @@
 		AE319E592C3279FA00FDFD4C = {
 			isa = PBXGroup;
 			children = (
+				AECC520D2C34BF7700D18D04 /* BUTTERFLY-EFFECTRelease.entitlements */,
 				AE319E5E2C3279FA00FDFD4C /* Shared */,
 				AE319E682C3279FD00FDFD4C /* iOS */,
 				AE319E6F2C3279FD00FDFD4C /* macOS */,
@@ -484,6 +488,7 @@
 		AE1534DE2C336AD9002EFA88 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = mykeyboard/mykeyboardRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = mykeyboard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
@@ -641,7 +646,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = "BUTTERFLY-EFFECTRelease.entitlements";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -651,6 +658,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT";
 				PRODUCT_NAME = "BUTTERFLY-EFFECT";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

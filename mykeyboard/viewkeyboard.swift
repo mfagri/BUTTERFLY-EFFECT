@@ -5,53 +5,168 @@ struct viewkeyboard: View {
        @State private var isSymbolMode = false
 
     private var selectedColor: Color
+    private var foregroundColor: Color = .black
     
     init(selectedColor: Color) {
         self.selectedColor = selectedColor
+
     }
     
     var body: some View {
+        ZStack {
+            Color.white
+                .edgesIgnoringSafeArea(.all)
+        //add button int bottom left
+        VStack {
+        Spacer()
+        
+        HStack {
+            Button(action: {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: "delete")
+                }) {
+                    Text("test")
+                        .frame(width: 40, height: 80)
+                        .background(self.selectedColor)
+                        .foregroundColor(self.foregroundColor)
+                        .cornerRadius(5)
+                }
+                Spacer()
+            }
+            .padding()
+        }
+           VStack {
+        Spacer()
+        
+        HStack {
+                Spacer()
+            Button(action: {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: "delete")
+                }) {
+                    Text("test")
+                        .frame(width: 40, height: 80)
+                        .background(self.selectedColor)
+                        .foregroundColor(self.foregroundColor)
+                        .cornerRadius(5)
+                }
+            }
+            .padding()
+        }
+
+               VStack {
+        Spacer()
+         Spacer().frame(
+                height: 10
+            )
+        HStack {
+            Button(action: {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: "delete")
+                }) {
+                    Text("test")
+                        .frame(width: 30, height: 60)
+                        .background(self.selectedColor)
+                        .foregroundColor(self.foregroundColor)
+                        .cornerRadius(5)
+                }
+                Spacer()
+                 Button(action: {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: "delete")
+                }) {
+                    Text("test")
+                        .frame(width: 30, height: 60)
+                        .background(self.selectedColor)
+                        .foregroundColor(self.foregroundColor)
+                        .cornerRadius(5)
+                }
+            }
+            .padding()
+        Spacer()
+        }
+        
         VStack(spacing: 5) {
+            //text field take what is typed
+             TextField("The worst she can do is say no", text: .constant(""))//
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(5)
+                    .frame(height: 50)
+                    
+            //add space between rows of height 5
+            Spacer().frame(
+                height: 4
+            )
+            
             ForEach(getRows(), id: \.self) { row in
                 HStack(spacing: 5) {
                     ForEach(row, id: \.self) { key in
-                        Button(action: {
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: self.getKeyOutput(key: key))
-                        }) {
-                            Text(self.getButtonText(key: key))
-                                .frame(width: self.getKeyWidth(key: key), height: 40)
-                                 .background(self.selectedColor)
-                                .foregroundColor(.white)
-                                .cornerRadius(5)
-                        }
+                                    Button(action: {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: self.getKeyOutput(key: key))
+                }) {
+                    Text(self.getButtonText(key: key))
+                        .frame(width: self.getKeyWidth(key: key), height: 25)
+                        .background(self.selectedColor)
+                        .foregroundColor(self.foregroundColor)
+                        .cornerRadius(5)
+                        .font(.system(size: 16, weight: .bold, design: .default))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(self.foregroundColor, lineWidth: 2)
+                        )
+                }
+
+
                     }
                 }
             }
-            
              HStack(spacing: 5) {
                 Button(action: {
                     self.isUpperCase.toggle()
                 }) {
                     Text(self.isUpperCase ? "abc" : "ABC")
-                        .frame(width: 80, height: 40)
+                        .frame(width: 80, height: 25)
                          .background(self.selectedColor)
-                        .foregroundColor(.white)
+                        .foregroundColor(self.foregroundColor)
                         .cornerRadius(5)
+                         .font(.system(size: 16, weight: .bold, design: .default))
+                          .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(self.foregroundColor, lineWidth: 2)
+                        )
                 }
                 
                 Button(action: {
                     self.isSymbolMode.toggle()
                 }) {
                     Text(self.isSymbolMode ? "123" : "!@#")
-                        .frame(width: 80, height: 40)
+                        .frame(width: 80, height: 25)
                          .background(self.selectedColor)
-                        .foregroundColor(.white)
+                        .foregroundColor(self.foregroundColor)
                         .cornerRadius(5)
+                        .font(.system(size: 16, weight: .bold, design: .default))
+                         .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(self.foregroundColor, lineWidth: 2)
+                        )
+                }
+                //empty button
+                Button(action: {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: "")
+                }) {
+                    Text("🙂")
+                        .frame(width: 80, height: 25)
+                        .background(self.selectedColor)
+                        .foregroundColor(self.foregroundColor)
+                        .cornerRadius(5)
+                        .font(.system(size: 16, weight: .bold, design: .default))
+                         .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(self.foregroundColor, lineWidth: 2)
+                        )
                 }
             }
-            .padding(.top, 10)
+            .padding(.top, 0)
         }
         .padding()
+        }
     }
     
     func getKeyWidth(key: String) -> CGFloat {
