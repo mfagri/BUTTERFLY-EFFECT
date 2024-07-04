@@ -15,6 +15,9 @@
 		AE1534F22C3374F3002EFA88 /* viewkeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1534E52C3373CB002EFA88 /* viewkeyboard.swift */; };
 		AE1535292C3384C6002EFA88 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1534D62C336AD9002EFA88 /* KeyboardViewController.swift */; };
 		AE15352F2C3384CF002EFA88 /* BUTTERFLY_EFFECTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE319E5F2C3279FA00FDFD4C /* BUTTERFLY_EFFECTApp.swift */; };
+		AE2C492A2C36991E0079071B /* Home in Resources */ = {isa = PBXBuildFile; fileRef = AE2C49292C36991E0079071B /* Home */; };
+		AE2C492B2C36991E0079071B /* Home in Resources */ = {isa = PBXBuildFile; fileRef = AE2C49292C36991E0079071B /* Home */; };
+		AE2C492C2C36991E0079071B /* Home in Resources */ = {isa = PBXBuildFile; fileRef = AE2C49292C36991E0079071B /* Home */; };
 		AE319E7B2C3279FD00FDFD4C /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE319E7A2C3279FD00FDFD4C /* Tests_iOS.swift */; };
 		AE319E862C3279FD00FDFD4C /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE319E852C3279FD00FDFD4C /* Tests_macOS.swift */; };
 		AE319E8A2C3279FD00FDFD4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE319E602C3279FA00FDFD4C /* ContentView.swift */; };
@@ -69,6 +72,7 @@
 		AE1534D62C336AD9002EFA88 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		AE1534D82C336AD9002EFA88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE1534E52C3373CB002EFA88 /* viewkeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewkeyboard.swift; sourceTree = "<group>"; };
+		AE2C49292C36991E0079071B /* Home */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Home; sourceTree = "<group>"; };
 		AE319E5F2C3279FA00FDFD4C /* BUTTERFLY_EFFECTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUTTERFLY_EFFECTApp.swift; sourceTree = "<group>"; };
 		AE319E602C3279FA00FDFD4C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AE319E612C3279FD00FDFD4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 		AE319E5E2C3279FA00FDFD4C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				AE2C49292C36991E0079071B /* Home */,
 				AE319E5F2C3279FA00FDFD4C /* BUTTERFLY_EFFECTApp.swift */,
 				AE319E602C3279FA00FDFD4C /* ContentView.swift */,
 				AE319E612C3279FD00FDFD4C /* Assets.xcassets */,
@@ -366,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEC52D8E2C35163700DC904E /* Assets.xcassets in Resources */,
+				AE2C492C2C36991E0079071B /* Home in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +380,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE319E8C2C3279FD00FDFD4C /* Assets.xcassets in Resources */,
+				AE2C492A2C36991E0079071B /* Home in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE319E8D2C3279FD00FDFD4C /* Assets.xcassets in Resources */,
+				AE2C492B2C36991E0079071B /* Home in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

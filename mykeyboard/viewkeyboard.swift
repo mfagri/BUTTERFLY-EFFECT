@@ -6,6 +6,7 @@ struct viewkeyboard: View {
 
     private var selectedColor: Color
     private var foregroundColor: Color = .black
+    @State private var showingAlert = false
     
     init(selectedColor: Color) {
         self.selectedColor = selectedColor
@@ -31,11 +32,8 @@ struct viewkeyboard: View {
                         .cornerRadius(5)
                         .cornerRadius(5)
                         .font(.system(size: 16, weight: .bold, design: .default))
-                          .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(self.foregroundColor, lineWidth: 2)
-                        )
-                }
+                       
+                } 
                 Spacer()
             }
             .padding()
@@ -102,6 +100,7 @@ struct viewkeyboard: View {
                         )
                 }
             }
+        
             .padding()
         Spacer()
         }

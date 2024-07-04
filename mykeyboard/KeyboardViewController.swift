@@ -5,7 +5,8 @@ class KeyboardViewController: UIInputViewController {
     
     @IBOutlet var nextKeyboardButton: UIButton!
     private var selectedColor: UIColor = .white // Default color
-    
+    private let userDefaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT")
+
     override func updateViewConstraints() {
         super.updateViewConstraints()
     }
@@ -29,6 +30,7 @@ class KeyboardViewController: UIInputViewController {
         // Load selected color from UserDefaults
         
         let loadedData = loadFromKeychain(key: "greeting")
+        loadString(forKey: "greeting")
         if let string = loadedData {
             print("The loaded string is: \(string)")
         } else {
@@ -114,7 +116,17 @@ class KeyboardViewController: UIInputViewController {
     } else {
         return nil
     }
-}
+    }
+
+    // func loadString(forKey key: String) -> String? {
+    //     if let savedString = userDefaults?.string(forKey: key) {
+    //         print("Loaded string \"\(savedString)\" from UserDefaults with key: \(key)")
+    //         return savedString
+    //     } else {
+    //         print("No string data found for key: \(key) in UserDefaults")
+    //         return nil
+    //     }
+    // }
 }
 
 extension UIView {

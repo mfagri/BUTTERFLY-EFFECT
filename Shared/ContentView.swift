@@ -1,75 +1,69 @@
 import SwiftUI
 import Security
 
+
+
 @available(OSX 11.0, *)
 struct ContentView: View {
     @State private var selectedColor = Color.blue // Default color
     
     // Key for UserDefaults
     private let selectedColorKey = "selectedColorKey"
+    //redus var
+    @State private var redus : CGFloat = 24.0
+    @State var isActive:Bool = false
     private let userDefaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT")
     
     var body: some View {
         GeometryReader { geometry in
-            VStack {
-                Text("Change the color of the clavier")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(24)
-                    .padding()
-                //button
-                Button(action: {//
-                     
-                    let loadedString = loadFromKeychain(key: "greeting")
-                    if let string = loadedString {
-                        print("The loaded string is: \(string)")
-                    } else {
-                        print("No greeting string found in UserDefaults")
-                    }
-                    let string = loadString(forKey: "greeting")
-                }) {
-                    Text("Red")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                        .padding()
-                        .background(Color.red)
-                        .cornerRadius(24)
-                        .padding()
-                }
-                ScrollView {
-                    VStack(spacing: 5) {
-                        ForEach(0..<5) { index in
-                            Button(action: {
-                                // print("Selected color: \(index)")
-                                // let myString = "Hello, world!"
-                                // saveString(myString, forKey: "greeting")
-                                let myString = "Hello, world!"
-                                let saveSuccessful = saveToKeychain(key: "greeting", data: myString.data(using: .utf8)!)
-                                if saveSuccessful {
-                                    print("Data saved successfully")
-                                } else {
-                                    print("Data save failed")
+           if !self.isActive {
+             VStack {
+                Color.blue.ignoresSafeArea().opacity(0.6).overlay(      HStack{
+                    Rectangle(
+                    )
+                        .fill(Color.black)
+                        .frame(width: 100, height: 100)
+                        .cornerRadius(self.redus)
+                        .padding(10).overlay(
+                            VStack{
+                                Image(systemName: "star").resizable().frame(width: 20, height: 20).foregroundColor(.white)
+                                Text("KeYbAI")
+                                .foregroundColor(.white).font(.system(size: 16, weight: .bold, design: .default))
+                                //random icon
+                                HStack{
+                                    Image(systemName: "star").resizable().frame(width: 35, height: 35).foregroundColor(.white)
+                                    Image(systemName: "star").resizable().frame(width: 25, height: 25).foregroundColor(.white)
                                 }
-                                saveString(myString, forKey: "greeting")
+                            }.padding(10)
+                        )
+                }.padding(
+                    EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+                ))
 
-                            }) {
-                                Rectangle()
-                                    .fill(Color(hue: Double(index) / 5, saturation: 1, brightness: 1))
-                                    .frame(width: geometry.size.width, height: 80)
-                                    .cornerRadius(24)
-                            }
-                        }
-                    }
-                    .padding()
-                }
+        //                NavigationView {
+        //     VStack {
+        //         NavigationLink(destination:  HomeView()) {
+        //             Text("Navigate to Destination View")
+        //         }
+        //     }
+        // }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.white)
-        }
+           }
+           else{
+                LoginScreen()
+           }
+        }.onAppear {
+          
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+           
+                withAnimation {
+                    self.isActive = true
+                }
+            }
+        
+    }
     }
     
     func saveString(_ value: String, forKey key: String) {
@@ -87,48 +81,19 @@ struct ContentView: View {
         }
     }
 
-    //
-    func saveToKeychain(key: String, data: Data) -> Bool {
-    let query: [String: Any] = [
-        kSecClass as String: kSecClassGenericPassword,
-        kSecAttrAccount as String: key,
-        kSecValueData as String: data,
-        kSecAttrAccessGroup as String: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT"
-    ]
-
-    // Delete any existing item
-    SecItemDelete(query as CFDictionary)
-
-    // Add the new item
-    let status = SecItemAdd(query as CFDictionary, nil)
-    
-    if status != errSecSuccess {
-        print("Error saving to Keychain: \(status)")
-    } else {
-        print("Data saved successfully")
-    }
-    return status == errSecSuccess
 }
 
-   func loadFromKeychain(key: String) -> Data? {
-    let query: [String: Any] = [
-        kSecClass as String: kSecClassGenericPassword,
-        kSecAttrAccount as String: key,
-        kSecReturnData as String: kCFBooleanTrue!,
-        kSecMatchLimit as String: kSecMatchLimitOne,
-        kSecAttrAccessGroup as String: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT"
-    ]
-
-    var dataTypeRef: AnyObject? = nil
-    let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
-    
-    if status == errSecSuccess {
-        return dataTypeRef as? Data
-    } else {
-        print("Error loading from Keychain: \(status)")
-        return nil
+struct LoginScreen: View {
+    var body: some View {
+        
+        VStack {
+            
+            Text("Welcome to")
+            Text("the LoginView")
+            
+        }
+        
     }
-}
 }
 
 struct ContentView_Previews: PreviewProvider {
