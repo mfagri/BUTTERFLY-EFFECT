@@ -88,7 +88,7 @@ struct HomeTabView: View {
                 VStack {
                      Rectangle()
                     .fill(Color.white)
-                    .frame(width: geometry.size.width - 30, height: 350)
+                    .frame(width: geometry.size.width - 40, height: 340)
                     .cornerRadius(10)
                     .padding(10)
                     .overlay(
@@ -100,7 +100,7 @@ struct HomeTabView: View {
                             )
                             Image(step["image"]!)
                             .resizable()
-                            .frame(width: geometry.size.width - 50, height: 250)
+                            .frame(width: geometry.size.width - 60, height: 240)
                             .cornerRadius(10)
                             .padding(10)
                             Text(step["title"]!)
@@ -116,14 +116,14 @@ struct HomeTabView: View {
                 }
             
                     }
-                    }.padding(10)
+                    }
                 }
                         
                     
                 
                 //Get Started
                 HStack{
-                  Text("Future updates 🚀"
+                  Text("Future of KeYbAI 🚀"
                   )
                 .foregroundColor(.black).font(.system(size: 20, weight: .bold, design: .default))
                 Spacer()
@@ -131,46 +131,47 @@ struct HomeTabView: View {
                 EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
                 )
                 //future of KeYbAI
-                VStack{
-                    Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(width: geometry.size.width - 20, height: 200)
+               VStack {
+                Rectangle()
+                    .fill(Color.white)
+                    .frame(width: geometry.size.width - 40, height: 200)
                     .cornerRadius(10)
-                    .padding(0).overlay(
-                        VStack{
-                            Spacer(
-                                
-                            ).frame(
-                                height: 24
-                            )
-                            Text("Future updates will include:")
-                            .foregroundColor(.black)
-                            .font(.system(size: 16, weight: .bold, design: .default))
-                            HStack{
-                                Text("More themes")
-                                .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                    .overlay(
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Text("- More themes")
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 16, weight: .bold, design: .default))
                                 Spacer()
                             }
-                            HStack{
-                                Text("More languages")
-                                .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
-                                   Spacer()
-                            }
-                            HStack{
-                                Text("More features")
-                                .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
-                                   Spacer()
-                            }
-                            HStack{
-                                Text("More features")
-                                .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
-                                   Spacer()
+                            Spacer()
+                            HStack {
+                                Text("- Integrate with other apps")
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 16, weight: .bold, design: .default))
+                                Spacer()
                             }
                             Spacer()
-
+                            HStack {
+                                Text("- More Emojis and GIFs") 
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 16, weight: .bold, design: .default))
+                                Spacer()
+                            }
+                            Spacer()
+                            HStack {
+                                Text("- Improve AI prediction")
+                                    .foregroundColor(.black)
+                                    .font(.system(size: 16, weight: .bold, design: .default))
+                                Spacer()
+                            }                 
+                            Spacer()
                         }
+                        .padding(24)
                     )
-                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
                 Spacer().frame(
                     height: 24
                 )
