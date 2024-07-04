@@ -39,14 +39,6 @@ struct ContentView: View {
                 }.padding(
                     EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
                 ))
-
-        //                NavigationView {
-        //     VStack {
-        //         NavigationLink(destination:  HomeView()) {
-        //             Text("Navigate to Destination View")
-        //         }
-        //     }
-        // }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.white)

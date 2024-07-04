@@ -3,12 +3,13 @@ import UIKit
 struct HomeView: View {
     @State private var selectedTab = 0
     init() {
-    UITabBar.appearance().backgroundColor =  UIColor(Color.black)
-    UITabBar.appearance().barTintColor = UIColor(Color.black)
+    UITabBar.appearance().backgroundColor =  UIColor(Color.white)
+    UITabBar.appearance().barTintColor = UIColor(Color.white)
     UITabBar.appearance().tintColor = UIColor(Color.red)
-    UITabBar.appearance().unselectedItemTintColor = UIColor.white
+    UITabBar.appearance().unselectedItemTintColor = UIColor(Color.gray).withAlphaComponent(0.6)
     UITabBar.appearance().isTranslucent = false
     UITabBar.appearance().layer.borderWidth = 0.0
+    UITabBar.appearance().clipsToBounds = true
 }
     var body: some View {
         NavigationView {
@@ -17,57 +18,88 @@ struct HomeView: View {
                     TabView(selection: $selectedTab) {                   
                         HomeTabView()
                             .tabItem {
-                                Image(systemName: "house.fill")
+                                Image(systemName: "house")
                                 Text("Home")
                             }
                             .tag(0)
 
                         ProfileView()
                             .tabItem {
-                                Image(systemName: "person")
+                                Image(systemName: "person.fill")
                                 Text("Profile")
                             }
                             .tag(1)
                         SettingView()
                             .tabItem {
-                                Image(systemName: "gear")
+                                Image(systemName: "gearshape.fill")
                                 Text("Setting")
                             }
                             .tag(2)
-                    }.accentColor(.red)  
+                    }.accentColor(Color.blue).opacity(0.7)  
                 }
             }
         }
     }
 }
 
-extension Color {
-    init(hex: UInt, alpha: Double = 1) {
-        self.init(
-            .sRGB,
-            red: Double((hex >> 16) & 0xff) / 255,
-            green: Double((hex >> 08) & 0xff) / 255,
-            blue: Double((hex >> 00) & 0xff) / 255,
-            opacity: alpha
-        )
-    }
-}
-
 struct HomeTabView: View {
     var body: some View {
-        Text("Home View")
+        GeometryReader { geometry in
+            VStack{
+           Color.white
+           .overlay(   
+            VStack{
+            //wellcome to KeYbAI 
+               HStack{
+                 Text("Wellcome to KeYbAI")
+                .foregroundColor(.black).font(.system(size: 26, weight: .bold, design: .default))
+                Spacer()
+               }.padding(
+                EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+               )
+               //How to use
+                VStack{
+                    Rectangle(
+                    )
+                        .fill(Color.gray).opacity(0.4)
+                        .frame(width:geometry.size.width - 40, height: geometry.size.height/3)
+                        .cornerRadius(24)
+                        .padding(10).overlay(
+                            VStack{
+                                
+                                HStack{
+                                    Text("How to use")
+                                    .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                    Spacer()
+                                }.padding(
+                                    EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                                )
+                               
+                            }.padding(10)
+                        )
+                }
+            }.padding(10)
+            )
+        }
+        }
     }
 }
 
 struct ProfileView: View {
     var body: some View {
-        Text("Profile View")
+            Color.white
+           .overlay(
+            Text("a")
+           )
     }
 }
 
 struct SettingView: View {
     var body: some View {
-        Text("Setting View")
+           Color.white
+            .overlay(
+            Text("Setting View")
+            )
     }
 }
 
