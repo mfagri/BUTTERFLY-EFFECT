@@ -3,9 +3,9 @@ import UIKit
 struct HomeView: View {
     @State private var selectedTab = 0
     init() {
-    UITabBar.appearance().backgroundColor =  UIColor(Color.white)
-    UITabBar.appearance().barTintColor = UIColor(Color.white)
-    UITabBar.appearance().tintColor = UIColor(Color.red)
+    UITabBar.appearance().backgroundColor =  UIColor(Color.black)
+    UITabBar.appearance().barTintColor = UIColor(Color.black)
+    UITabBar.appearance().tintColor = UIColor(Color.black)
     UITabBar.appearance().unselectedItemTintColor = UIColor(Color.gray).withAlphaComponent(0.6)
     UITabBar.appearance().isTranslucent = false
     UITabBar.appearance().layer.borderWidth = 0.0
@@ -35,7 +35,7 @@ struct HomeView: View {
                                 Text("Setting")
                             }
                             .tag(2)
-                    }.accentColor(Color.blue).opacity(0.7)  
+                    }.accentColor(Color.white)
                 }
             }
         }
@@ -53,10 +53,10 @@ struct HomeTabView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack{
-           Color.white
+           Color.blue.opacity(0.6).edgesIgnoringSafeArea(.all)
            .overlay(   
             //scroll view
-            ScrollView(.vertical, showsIndicators: false) {
+            ScrollView(.vertical, showsIndicators: false ) {
                         VStack{
             //wellcome to KeYbAI 
                HStack{
@@ -64,7 +64,7 @@ struct HomeTabView: View {
                 .foregroundColor(.black).font(.system(size: 26, weight: .bold, design: .default))
                 Spacer()
                }.padding(
-                EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                EdgeInsets(top: 50, leading: 24, bottom: 24, trailing: 24)
                )
                //How to use
                 HStack{
@@ -87,8 +87,8 @@ struct HomeTabView: View {
                 let step = steps[index]
                 VStack {
                      Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(width: geometry.size.width - 20, height: 350)
+                    .fill(Color.white)
+                    .frame(width: geometry.size.width - 30, height: 350)
                     .cornerRadius(10)
                     .padding(10)
                     .overlay(
@@ -100,7 +100,7 @@ struct HomeTabView: View {
                             )
                             Image(step["image"]!)
                             .resizable()
-                            .frame(width: geometry.size.width - 40, height: 250)
+                            .frame(width: geometry.size.width - 50, height: 250)
                             .cornerRadius(10)
                             .padding(10)
                             Text(step["title"]!)
@@ -134,52 +134,50 @@ struct HomeTabView: View {
                 VStack{
                     Rectangle()
                     .fill(Color.gray.opacity(0.3))
-                    .frame(width: geometry.size.width - 20, height: 150)
+                    .frame(width: geometry.size.width - 20, height: 200)
                     .cornerRadius(10)
-                    .padding(10).overlay(
+                    .padding(0).overlay(
                         VStack{
                             Spacer(
                                 
                             ).frame(
-                                height: 30
+                                height: 24
                             )
                             Text("Future updates will include:")
                             .foregroundColor(.black)
                             .font(.system(size: 16, weight: .bold, design: .default))
                             HStack{
-                                Image(systemName: "star").resizable().frame(width: 20, height: 20).foregroundColor(.black)
                                 Text("More themes")
                                 .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                Spacer()
                             }
                             HStack{
-                                Image(systemName: "star").resizable().frame(width: 20, height: 20).foregroundColor(.black)
                                 Text("More languages")
                                 .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                   Spacer()
                             }
                             HStack{
-                                Image(systemName: "star").resizable().frame(width: 20, height: 20).foregroundColor(.black)
                                 Text("More features")
                                 .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                   Spacer()
+                            }
+                            HStack{
+                                Text("More features")
+                                .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                   Spacer()
                             }
                             Spacer()
 
                         }
                     )
                 }
-                //Contact us
-                HStack{
-                  Text("Contact us 📧"
-                  )
-                .foregroundColor(.black).font(.system(size: 20, weight: .bold, design: .default))
-                Spacer()
-                }.padding(
-                EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                Spacer().frame(
+                    height: 24
                 )
-                
             }.padding(10)
             }
             )
-        }
+        }.ignoresSafeArea()
         }
     }
 }
