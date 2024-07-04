@@ -5,7 +5,7 @@ struct HomeView: View {
     init() {
     UITabBar.appearance().backgroundColor =  UIColor(Color.black)
     UITabBar.appearance().barTintColor = UIColor(Color.black)
-    UITabBar.appearance().tintColor = UIColor.white.withAlphaComponent(0.5)
+    UITabBar.appearance().tintColor = UIColor(Color.red)
     UITabBar.appearance().unselectedItemTintColor = UIColor.white
     UITabBar.appearance().isTranslucent = false
     UITabBar.appearance().layer.borderWidth = 0.0
@@ -14,8 +14,7 @@ struct HomeView: View {
         NavigationView {
             GeometryReader { geometry in
                 VStack {
-                    TabView(selection: $selectedTab) {
-                    
+                    TabView(selection: $selectedTab) {                   
                         HomeTabView()
                             .tabItem {
                                 Image(systemName: "house.fill")
@@ -35,7 +34,7 @@ struct HomeView: View {
                                 Text("Setting")
                             }
                             .tag(2)
-                    }.foregroundColor(.black)    
+                    }.accentColor(.red)  
                 }
             }
         }
@@ -68,7 +67,7 @@ struct ProfileView: View {
 
 struct SettingView: View {
     var body: some View {
-        Text("Profile View")
+        Text("Setting View")
     }
 }
 
