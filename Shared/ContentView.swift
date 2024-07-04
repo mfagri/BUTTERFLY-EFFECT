@@ -52,7 +52,7 @@ struct ContentView: View {
             .background(Color.white)
            }
            else{
-                LoginScreen()
+                HomeView()
            }
         }.onAppear {
           
@@ -83,18 +83,6 @@ struct ContentView: View {
 
 }
 
-struct LoginScreen: View {
-    var body: some View {
-        
-        VStack {
-            
-            Text("Welcome to")
-            Text("the LoginView")
-            
-        }
-        
-    }
-}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
