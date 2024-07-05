@@ -202,13 +202,11 @@ struct SettingView: View {
         //keybAI settings
         GeometryReader {
             geometry in
-           VStack{
-            Color.white.edgesIgnoringSafeArea(.all)
-             ScrollView{
-                VStack{
+            VStack{
                 Color.white.edgesIgnoringSafeArea(.all)
                 .overlay(
-                    VStack{
+                   ScrollView {
+                     VStack{
                         HStack{
                             Text("KeYbAI Settings")
                             .foregroundColor(.black).font(.system(size: 26, weight: .bold, design: .default))
@@ -247,13 +245,6 @@ struct SettingView: View {
                                 .labelsHidden()
                             ColorPicker("", selection: $foregroundColor, supportsOpacity: false)
                                 .labelsHidden()
-            // .overlay(
-            //     VStack {
-            //         ColorPicker("", selection: $bgColor, supportsOpacity: false)
-            //             .labelsHidden()
-            //     }
-            //     .padding(geometry.size.width / 2 - 20)
-            // )
                         //About
                         HStack{
                             Text("About")
@@ -309,11 +300,10 @@ struct SettingView: View {
                             height: 24
                         )
                     }.padding(0)
+                   }
                 )
-            }
+            }.ignoresSafeArea()
         }
-           }.ignoresSafeArea()
-            }
     }
 }
 
