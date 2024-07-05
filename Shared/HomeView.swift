@@ -50,6 +50,9 @@ struct HomeTabView: View {
         ["image": "step4", "description": "Select 'Custom Keyboard'"],
         ["image": "step5", "description": "Select KeYbAI Keyboard"]
     ]
+    //int 
+    @State private var selectedStep = 0
+    @State private var backgroundOffset: CGFloat = 0
     var body: some View {
         GeometryReader { geometry in
             VStack{
@@ -81,7 +84,7 @@ struct HomeTabView: View {
                        
                         
                            
-                                   ScrollView(.horizontal, showsIndicators: false) {
+                                //    ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
                          ForEach(0..<steps.count, id: \.self) { index in
                 let step = steps[index]
@@ -114,13 +117,45 @@ struct HomeTabView: View {
                             Spacer()
 
                         }
+                        .padding(24)
                     )
+                   
                 }
-            
+
                     }
+                    }.offset(x: (self.backgroundOffset))
+                    .animation(.spring())
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                self.backgroundOffset = value.translation.width
+                            }
+                            .onEnded { value in
+                                 if value.translation.width > 10 {
+                                    if self.backgroundOffset >= 0 {
+                                        self.backgroundOffset -= 1
+                                    }
+                                } else if value.translation.width < -10 {
+                                    if self.backgroundOffset <= 4 {
+                                        self.backgroundOffset += 1
+                                    } 
+                                }
+                            self.selectedStep = Int((self.backgroundOffset + 20) / (geometry.size.width - 40))
+                            }
+                    )
+
+                    
+                // }
+                   //indicator
+                    HStack {
+                                ForEach(0..<steps.count, id: \.self) { i in
+                                    Circle()
+                                        .fill(i == 0 ? Color.black : Color.gray)
+                                        .frame(width: 8, height: 8)
+                                }
                     }
-                }
-                        
+                    .padding(24)
+                    .background(Color.white)     
                     
                 
                 //Get Started
@@ -216,11 +251,11 @@ struct SettingView: View {
                         )
                         //Theme
                         HStack{
-                            Text("Make your KeYbAI unique")
-                            .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
+                            Text("Customize My Keyboard")
+                            .foregroundColor(.gray).font(.system(size: 18, weight: .bold, design: .default))
                             Spacer()
                         }.padding(
-                            EdgeInsets(top: 10, leading: 24, bottom: 24, trailing: 24)
+                            EdgeInsets(top: 10, leading: 24, bottom: 0, trailing: 24)
                         )
                         //theme selection
                            VStack {
@@ -239,66 +274,38 @@ struct SettingView: View {
                                             // .overlay()
                                      
                                     )
-                            ColorPicker("", selection: $bgColor, supportsOpacity: false)
+                            HStack{
+                                Text("Background")
+                                .foregroundColor(.black).font(.system(size: 18, design: .default))
+                                ColorPicker("", selection: $bgColor, supportsOpacity: false)
                                 .labelsHidden()
-                            ColorPicker("", selection: $selectedColor, supportsOpacity: false)
+                                Spacer()
+                            }.padding(
+                                EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                            )
+                            HStack{
+                                Text("Buttons Color")
+                                .foregroundColor(.black).font(.system(size: 18, design: .default))
+                                ColorPicker("", selection: $selectedColor, supportsOpacity: false)
                                 .labelsHidden()
-                            ColorPicker("", selection: $foregroundColor, supportsOpacity: false)
+                                Spacer()
+                            }.padding(
+                                EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                            )
+                             HStack{
+                                Text("Foreground")
+                                .foregroundColor(.black).font(.system(size: 18, design: .default))
+                                ColorPicker("", selection: $foregroundColor, supportsOpacity: false)
                                 .labelsHidden()
-                        //About
-                        HStack{
-                            Text("About")
-                            .foregroundColor(.black).font(.system(size: 18, weight: .bold, design
-                            : .default))
-                            Spacer()
-                        }.padding(
-                            EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
-                        )
-                        //about KeYbAI
-                        VStack {
-                            Rectangle()
-                                .fill(Color.white)
-                                .frame(width: geometry.size.width - 40, height: 200)
-                                .cornerRadius(10)
-                                .overlay(
-                                    VStack {
-                                        Spacer()
-                                        HStack {
-                                            Text("KeYbAI")
-                                                .foregroundColor(.black)
-                                                .font(.system(size: 16, weight: .bold, design: .default))
-                                            Spacer()
-                                        }
-                                        Spacer()
-                                        HStack {
-                                            Text("Version 1.0")
-                                                .foregroundColor(.black)
-                                                .font(.system(size: 14, weight: .bold, design: .default))
-                                            Spacer()
-                                        }
-                                        Spacer()
-                                        HStack {
-                                            Text("Developed by mfagri")
-                                                .foregroundColor(.black)
-                                                .font(.system(size: 14, weight: .bold, design: .default))
-                                            Spacer()
-                                        }
-                                        Spacer()
-                                        HStack {
-                                            Text("© 2024 KeYbAI")
-                                                .foregroundColor(.black)
-                                                .font(.system(size: 14, weight: .bold, design: .default))
-                                            Spacer()
-                                        }
-                                        Spacer()
-                                    }
-                                    .padding(10)
-                                )
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        Spacer().frame(
-                            height: 24
-                        )
+                                Spacer()
+                            }.padding(
+                                EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                            )
+                        
+                        // Spacer().frame(
+                        //     height: 24
+                        // )
+
                     }.padding(0)
                    }
                 )

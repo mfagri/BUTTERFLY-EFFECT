@@ -26,13 +26,13 @@ struct ContentView: View {
                         .cornerRadius(self.redus)
                         .padding(10).overlay(
                             VStack{
-                                Image(systemName: "star").resizable().frame(width: 20, height: 20).foregroundColor(.white)
+                                Image(systemName: "star").resizable().frame(width: 20, height: 20).foregroundColor(Color.blue.opacity(0.7))
                                 Text("KeYbAI")
                                 .foregroundColor(.white).font(.system(size: 16, weight: .bold, design: .default))
                                 //random icon
                                 HStack{
-                                    Image(systemName: "star").resizable().frame(width: 35, height: 35).foregroundColor(.white)
-                                    Image(systemName: "star").resizable().frame(width: 25, height: 25).foregroundColor(.white)
+                                    Image(systemName: "star").resizable().frame(width: 35, height: 35).foregroundColor(Color.blue.opacity(0.7))
+                                    Image(systemName: "star").resizable().frame(width: 25, height: 25).foregroundColor(Color.blue.opacity(0.7))
                                 }
                             }.padding(10)
                         )
