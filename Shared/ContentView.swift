@@ -18,7 +18,7 @@ struct ContentView: View {
         GeometryReader { geometry in
            if !self.isActive {
              VStack {
-                Color.blue.ignoresSafeArea().opacity(0.6).overlay(      HStack{
+                Color.white.ignoresSafeArea().overlay(      HStack{
                     Rectangle(
                     )
                         .fill(Color.black)

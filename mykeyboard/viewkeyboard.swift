@@ -5,17 +5,19 @@ struct viewkeyboard: View {
        @State private var isSymbolMode = false
 
     private var selectedColor: Color
+    private var backgroundColor: Color = .white
     private var foregroundColor: Color = .black
     @State private var showingAlert = false
     
-    init(selectedColor: Color) {
+    init(selectedColor: Color , backgroundColor: Color = .white, foregroundColor: Color = .black) {
         self.selectedColor = selectedColor
-
+        self.backgroundColor = backgroundColor
+        self.foregroundColor = foregroundColor
     }
     
     var body: some View {
         ZStack {
-            Color.white
+            backgroundColor
                 .edgesIgnoringSafeArea(.all)
         //add button int bottom left
         VStack {

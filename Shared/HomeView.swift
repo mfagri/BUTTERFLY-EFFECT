@@ -4,9 +4,9 @@ struct HomeView: View {
     @State private var selectedTab = 0
     init() {
     UITabBar.appearance().backgroundColor =  UIColor(Color.black)
-    UITabBar.appearance().barTintColor = UIColor(Color.black)
+    UITabBar.appearance().barTintColor = UIColor(Color.blue.opacity(0.5))
     UITabBar.appearance().tintColor = UIColor(Color.black)
-    UITabBar.appearance().unselectedItemTintColor = UIColor(Color.gray).withAlphaComponent(0.6)
+    UITabBar.appearance().unselectedItemTintColor = UIColor(Color.black).withAlphaComponent(0.6)
     UITabBar.appearance().isTranslucent = false
     UITabBar.appearance().layer.borderWidth = 0.0
     UITabBar.appearance().clipsToBounds = true
@@ -44,23 +44,23 @@ struct HomeView: View {
 
 struct HomeTabView: View {
      let steps = [
-        ["image": "step1", "title": "Step 1:", "description": "Open the keyboard settings"],
-        ["image": "step2", "title": "Step 2:", "description": "Tap on 'Keyboards'"],
-        ["image": "step3", "title": "Step 3:", "description": "Tap on 'Add New Keyboard'"],
-        ["image": "step4", "title": "Step 4:", "description": "Select 'Custom Keyboard'"],
-        ["image": "step5", "title": "Step 5:", "description": "Select KeYbAI Keyboard"]
+        ["image": "step1", "description": "Open the keyboard settings"],
+        ["image": "step2", "description": "Tap on 'Keyboards'"],
+        ["image": "step3", "description": "Tap on 'Add New Keyboard'"],
+        ["image": "step4", "description": "Select 'Custom Keyboard'"],
+        ["image": "step5", "description": "Select KeYbAI Keyboard"]
     ]
     var body: some View {
         GeometryReader { geometry in
             VStack{
-           Color.blue.opacity(0.6).edgesIgnoringSafeArea(.all)
+           Color.white.edgesIgnoringSafeArea(.all)
            .overlay(   
             //scroll view
             ScrollView(.vertical, showsIndicators: false ) {
                         VStack{
             //wellcome to KeYbAI 
                HStack{
-                 Text("Wellcome to KeYbAI 👋")
+                 Text("Wellcome to KeYbAI")
                 .foregroundColor(.black).font(.system(size: 26, weight: .bold, design: .default))
                 Spacer()
                }.padding(
@@ -68,8 +68,8 @@ struct HomeTabView: View {
                )
                //How to use
                 HStack{
-                  Text("How to use 🤔")
-                .foregroundColor(.black).font(.system(size: 20, weight: .bold, design: .default))
+                  Text("How to use")
+                .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
                 Spacer()
                 }.padding(
                 EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
@@ -90,7 +90,9 @@ struct HomeTabView: View {
                     .fill(Color.white)
                     .frame(width: geometry.size.width - 40, height: 340)
                     .cornerRadius(10)
+                    .shadow(radius: 2)
                     .padding(10)
+                   
                     .overlay(
                         VStack{
                             Spacer(
@@ -103,9 +105,9 @@ struct HomeTabView: View {
                             .frame(width: geometry.size.width - 60, height: 240)
                             .cornerRadius(10)
                             .padding(10)
-                            Text(step["title"]!)
-                            .foregroundColor(.black)
-                            .font(.system(size: 16, weight: .bold, design: .default))
+                            // Text(step["title"]!)
+                            // .foregroundColor(.black)
+                            // .font(.system(size: 16, weight: .bold, design: .default))
                             Text(step["description"]!)
                             .foregroundColor(.black)
                             .font(.system(size: 16, weight: .bold, design: .default))
@@ -123,9 +125,9 @@ struct HomeTabView: View {
                 
                 //Get Started
                 HStack{
-                  Text("Future of KeYbAI 🚀"
+                  Text("Future of KeYbAI"
                   )
-                .foregroundColor(.black).font(.system(size: 20, weight: .bold, design: .default))
+                .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
                 Spacer()
                 }.padding(
                 EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
@@ -193,11 +195,125 @@ struct ProfileView: View {
 }
 
 struct SettingView: View {
+     @State private var bgColor = Color.white
+     @State private var selectedColor = Color.blue // Default color
+     @State private var foregroundColor = Color.white
     var body: some View {
-           Color.white
-            .overlay(
-            Text("Setting View")
-            )
+        //keybAI settings
+        GeometryReader {
+            geometry in
+           VStack{
+            Color.white.edgesIgnoringSafeArea(.all)
+             ScrollView{
+                VStack{
+                Color.white.edgesIgnoringSafeArea(.all)
+                .overlay(
+                    VStack{
+                        HStack{
+                            Text("KeYbAI Settings")
+                            .foregroundColor(.black).font(.system(size: 26, weight: .bold, design: .default))
+                            Spacer()
+                        }.padding(
+                            EdgeInsets(top: 50, leading: 24, bottom: 24, trailing: 24)
+                        )
+                        //Theme
+                        HStack{
+                            Text("Make your KeYbAI unique")
+                            .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
+                            Spacer()
+                        }.padding(
+                            EdgeInsets(top: 10, leading: 24, bottom: 24, trailing: 24)
+                        )
+                        //theme selection
+                           VStack {
+                                Rectangle()
+                                    .fill(bgColor)
+                                    .frame(width: geometry.size.width - 40, height: 340)
+                                    .cornerRadius(10)
+                                    .shadow(radius: 2)
+                                    .padding(10)
+                                   
+                            } .overlay(
+                                        viewkeyboard(selectedColor: selectedColor, backgroundColor: bgColor, foregroundColor: foregroundColor)
+                                            .frame(width: geometry.size.width - 40, height: 340)
+                                            .cornerRadius(10)
+                                            .padding(10)
+                                            // .overlay()
+                                     
+                                    )
+                            ColorPicker("", selection: $bgColor, supportsOpacity: false)
+                                .labelsHidden()
+                            ColorPicker("", selection: $selectedColor, supportsOpacity: false)
+                                .labelsHidden()
+                            ColorPicker("", selection: $foregroundColor, supportsOpacity: false)
+                                .labelsHidden()
+            // .overlay(
+            //     VStack {
+            //         ColorPicker("", selection: $bgColor, supportsOpacity: false)
+            //             .labelsHidden()
+            //     }
+            //     .padding(geometry.size.width / 2 - 20)
+            // )
+                        //About
+                        HStack{
+                            Text("About")
+                            .foregroundColor(.black).font(.system(size: 18, weight: .bold, design
+                            : .default))
+                            Spacer()
+                        }.padding(
+                            EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                        )
+                        //about KeYbAI
+                        VStack {
+                            Rectangle()
+                                .fill(Color.white)
+                                .frame(width: geometry.size.width - 40, height: 200)
+                                .cornerRadius(10)
+                                .overlay(
+                                    VStack {
+                                        Spacer()
+                                        HStack {
+                                            Text("KeYbAI")
+                                                .foregroundColor(.black)
+                                                .font(.system(size: 16, weight: .bold, design: .default))
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                        HStack {
+                                            Text("Version 1.0")
+                                                .foregroundColor(.black)
+                                                .font(.system(size: 14, weight: .bold, design: .default))
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                        HStack {
+                                            Text("Developed by mfagri")
+                                                .foregroundColor(.black)
+                                                .font(.system(size: 14, weight: .bold, design: .default))
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                        HStack {
+                                            Text("© 2024 KeYbAI")
+                                                .foregroundColor(.black)
+                                                .font(.system(size: 14, weight: .bold, design: .default))
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }
+                                    .padding(10)
+                                )
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        Spacer().frame(
+                            height: 24
+                        )
+                    }.padding(0)
+                )
+            }
+        }
+           }.ignoresSafeArea()
+            }
     }
 }
 
