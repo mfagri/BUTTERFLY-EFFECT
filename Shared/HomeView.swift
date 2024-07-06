@@ -81,81 +81,81 @@ struct HomeTabView: View {
                 //scroll view
                
                    
-                       
-                        
+                ImageCarousel()
+                
                            
-                                //    ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 20) {
-                         ForEach(0..<steps.count, id: \.self) { index in
-                let step = steps[index]
-                VStack {
-                     Rectangle()
-                    .fill(Color.white)
-                    .frame(width: geometry.size.width - 40, height: 340)
-                    .cornerRadius(10)
-                    .shadow(radius: 2)
-                    .padding(10)
+                //                 //    ScrollView(.horizontal, showsIndicators: false) {
+                //     HStack(spacing: 20) {
+                //          ForEach(0..<steps.count, id: \.self) { index in
+                // let step = steps[index]
+                // VStack {
+                //      Rectangle()
+                //     .fill(Color.white)
+                //     .frame(width: geometry.size.width - 40, height: 340)
+                //     .cornerRadius(10)
+                //     .shadow(radius: 2)
+                //     .padding(10)
                    
-                    .overlay(
-                        VStack{
-                            Spacer(
+                //     .overlay(
+                //         VStack{
+                //             Spacer(
                                 
-                            ).frame(
-                                height: 30
-                            )
-                            Image(step["image"]!)
-                            .resizable()
-                            .frame(width: geometry.size.width - 60, height: 240)
-                            .cornerRadius(10)
-                            .padding(10)
-                            // Text(step["title"]!)
-                            // .foregroundColor(.black)
-                            // .font(.system(size: 16, weight: .bold, design: .default))
-                            Text(step["description"]!)
-                            .foregroundColor(.black)
-                            .font(.system(size: 16, weight: .bold, design: .default))
-                            Spacer()
+                //             ).frame(
+                //                 height: 30
+                //             )
+                //             Image(step["image"]!)
+                //             .resizable()
+                //             .frame(width: geometry.size.width - 60, height: 240)
+                //             .cornerRadius(10)
+                //             .padding(10)
+                //             // Text(step["title"]!)
+                //             // .foregroundColor(.black)
+                //             // .font(.system(size: 16, weight: .bold, design: .default))
+                //             Text(step["description"]!)
+                //             .foregroundColor(.black)
+                //             .font(.system(size: 16, weight: .bold, design: .default))
+                //             Spacer()
 
-                        }
-                        .padding(24)
-                    )
+                //         }
+                //         .padding(24)
+                //     )
                    
-                }
+                // }
 
-                    }
-                    }.offset(x: (self.backgroundOffset))
-                    .animation(.spring())
-                    .gesture(
-                        DragGesture()
-                            .onChanged { value in
-                                self.backgroundOffset = value.translation.width
-                            }
-                            .onEnded { value in
-                                 if value.translation.width > 10 {
-                                    if self.backgroundOffset >= 0 {
-                                        self.backgroundOffset -= 1
-                                    }
-                                } else if value.translation.width < -10 {
-                                    if self.backgroundOffset <= 4 {
-                                        self.backgroundOffset += 1
-                                    } 
-                                }
-                            self.selectedStep = Int((self.backgroundOffset + 20) / (geometry.size.width - 40))
-                            }
-                    )
+                //     }
+                //     }.offset(x: (self.backgroundOffset))
+                //     .animation(.spring())
+                //     .gesture(
+                //         DragGesture()
+                //             .onChanged { value in
+                //                 self.backgroundOffset = value.translation.width
+                //             }
+                //             .onEnded { value in
+                //                  if value.translation.width > 10 {
+                //                     if self.backgroundOffset >= 0 {
+                //                         self.backgroundOffset -= 1
+                //                     }
+                //                 } else if value.translation.width < -10 {
+                //                     if self.backgroundOffset <= 4 {
+                //                         self.backgroundOffset += 1
+                //                     } 
+                //                 }
+                //             self.selectedStep = Int((self.backgroundOffset + 20) / (geometry.size.width - 40))
+                //             }
+                //     )
 
                     
                 // }
                    //indicator
-                    HStack {
-                                ForEach(0..<steps.count, id: \.self) { i in
-                                    Circle()
-                                        .fill(i == 0 ? Color.black : Color.gray)
-                                        .frame(width: 8, height: 8)
-                                }
-                    }
-                    .padding(24)
-                    .background(Color.white)     
+                    // HStack {
+                    //             ForEach(0..<steps.count, id: \.self) { i in
+                    //                 Circle()
+                    //                     .fill(i == 0 ? Color.black : Color.gray)
+                    //                     .frame(width: 8, height: 8)
+                    //             }
+                    // }
+                    // .padding(24)
+                    // .background(Color.white)     
                     
                 
                 //Get Started
@@ -318,5 +318,51 @@ struct SettingView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+
+
+
+struct Step: Identifiable {
+    let id = UUID()
+    let image: String
+    let description: String
+}
+
+struct ImageCarousel: View {
+    private let steps: [Step] = [
+        Step(image: "step1", description: "Open the keyboard settings"),
+        Step(image: "step2", description: "Tap on 'Keyboards'"),
+        Step(image: "step3", description: "Tap on 'Add New Keyboard'"),
+        Step(image: "step4", description: "Select 'Custom Keyboard'"),
+        Step(image: "step5", description: "Select KeYbAI Keyboard")
+    ]
+    
+    var body: some View {
+        TabView {
+            ForEach(steps) { step in
+                VStack {
+                    Image(step.image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 300)
+                    
+                    Text(step.description)
+                        .font(.headline)
+                        .padding()
+                }
+            }
+        }
+        .tabViewStyle(PageTabViewStyle())
+        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        // .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 250)
+        
+    }
+}
+
+struct ImageCarousel_Previews: PreviewProvider {
+    static var previews: some View {
+        ImageCarousel()
     }
 }
