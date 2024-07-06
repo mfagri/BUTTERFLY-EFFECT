@@ -287,9 +287,9 @@ struct ImageCarousel: View {
                  VStack {
                      Rectangle()
                     .fill(Color.white)
-                    .frame(width: self.width - 40, height: 340)
+                    .frame(width: self.width - 40, height: 320)
                     .cornerRadius(10)
-                    .shadow(radius: 1)
+                    // .shadow(radius: 1)
                     .padding(10)
                    
                     .overlay(
