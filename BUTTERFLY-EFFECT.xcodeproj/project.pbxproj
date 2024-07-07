@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,6 +27,15 @@
 		AE319EA42C3285DB00FDFD4C /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = AE319EA32C3285DB00FDFD4C /* URLImage */; };
 		AEC52D7E2C350AC400DC904E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE319E602C3279FA00FDFD4C /* ContentView.swift */; };
 		AEC52D8E2C35163700DC904E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE319E612C3279FD00FDFD4C /* Assets.xcassets */; };
+		CF547F002C3AC14200026C4E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547EFF2C3AC14200026C4E /* OnboardingView.swift */; };
+		CF547F012C3AC14200026C4E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547EFF2C3AC14200026C4E /* OnboardingView.swift */; };
+		CF547F022C3AC14200026C4E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547EFF2C3AC14200026C4E /* OnboardingView.swift */; };
+		CF547F042C3B05A100026C4E /* HowToView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547F032C3B05A100026C4E /* HowToView.swift */; };
+		CF547F052C3B05A100026C4E /* HowToView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547F032C3B05A100026C4E /* HowToView.swift */; };
+		CF547F062C3B05A100026C4E /* HowToView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547F032C3B05A100026C4E /* HowToView.swift */; };
+		CF547F082C3B060200026C4E /* StepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547F072C3B060200026C4E /* StepsView.swift */; };
+		CF547F092C3B060200026C4E /* StepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547F072C3B060200026C4E /* StepsView.swift */; };
+		CF547F0A2C3B060200026C4E /* StepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547F072C3B060200026C4E /* StepsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +99,9 @@
 		AE7A5E5F2C36A3830024B40C /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = Home/HomeView.swift; sourceTree = "<group>"; };
 		AECC52072C34B6BD00D18D04 /* mykeyboardRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mykeyboardRelease.entitlements; sourceTree = "<group>"; };
 		AECC520D2C34BF7700D18D04 /* BUTTERFLY-EFFECTRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BUTTERFLY-EFFECTRelease.entitlements"; sourceTree = "<group>"; };
+		CF547EFF2C3AC14200026C4E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		CF547F032C3B05A100026C4E /* HowToView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToView.swift; sourceTree = "<group>"; };
+		CF547F072C3B060200026C4E /* StepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +178,9 @@
 				AE319E602C3279FA00FDFD4C /* ContentView.swift */,
 				AE319E612C3279FD00FDFD4C /* Assets.xcassets */,
 				AE0217432C36A8F700250821 /* HomeView.swift */,
+				CF547EFF2C3AC14200026C4E /* OnboardingView.swift */,
+				CF547F032C3B05A100026C4E /* HowToView.swift */,
+				CF547F072C3B060200026C4E /* StepsView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -416,6 +431,9 @@
 				AE1534D72C336AD9002EFA88 /* KeyboardViewController.swift in Sources */,
 				AE0217562C36A96600250821 /* HomeView.swift in Sources */,
 				AEC52D7E2C350AC400DC904E /* ContentView.swift in Sources */,
+				CF547F0A2C3B060200026C4E /* StepsView.swift in Sources */,
+				CF547F022C3AC14200026C4E /* OnboardingView.swift in Sources */,
+				CF547F062C3B05A100026C4E /* HowToView.swift in Sources */,
 				AE1534E62C3373CB002EFA88 /* viewkeyboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,8 +443,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE1534EC2C3374EC002EFA88 /* viewkeyboard.swift in Sources */,
+				CF547F042C3B05A100026C4E /* HowToView.swift in Sources */,
 				AE1535292C3384C6002EFA88 /* KeyboardViewController.swift in Sources */,
 				AE15352F2C3384CF002EFA88 /* BUTTERFLY_EFFECTApp.swift in Sources */,
+				CF547F082C3B060200026C4E /* StepsView.swift in Sources */,
+				CF547F002C3AC14200026C4E /* OnboardingView.swift in Sources */,
 				AE0217442C36A8F700250821 /* HomeView.swift in Sources */,
 				AE319E8A2C3279FD00FDFD4C /* ContentView.swift in Sources */,
 			);
@@ -437,8 +458,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE0217452C36A8F700250821 /* HomeView.swift in Sources */,
+				CF547F012C3AC14200026C4E /* OnboardingView.swift in Sources */,
+				CF547F092C3B060200026C4E /* StepsView.swift in Sources */,
 				AE1534F22C3374F3002EFA88 /* viewkeyboard.swift in Sources */,
 				AE319E8B2C3279FD00FDFD4C /* ContentView.swift in Sources */,
+				CF547F052C3B05A100026C4E /* HowToView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

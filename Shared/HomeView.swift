@@ -4,9 +4,9 @@ struct HomeView: View {
     @State private var selectedTab = 0
     init() {
     UITabBar.appearance().backgroundColor =  UIColor(Color.black)
-    UITabBar.appearance().barTintColor = UIColor(Color.blue.opacity(0.5))
+    UITabBar.appearance().barTintColor = UIColor(Color.purple.opacity(0.5))
     UITabBar.appearance().tintColor = UIColor(Color.black)
-    UITabBar.appearance().unselectedItemTintColor = UIColor(Color.black).withAlphaComponent(0.6)
+    UITabBar.appearance().unselectedItemTintColor = UIColor(Color.white).withAlphaComponent(0.6)
     UITabBar.appearance().isTranslucent = false
     UITabBar.appearance().layer.borderWidth = 0.0
     UITabBar.appearance().clipsToBounds = true
@@ -78,15 +78,15 @@ struct HomeTabView: View {
                 EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
                 )
                 //scroll view
-                VStack {
-                    Rectangle()
-                        .fill(Color.white)
-                        .frame(width: geometry.size.width, height: 360)
-                        .padding(10)
-                        .overlay(
-                            ImageCarousel(width: geometry.size.width, height: 340)
-                        )
-                }
+//                VStack {
+//                    Rectangle()
+//                        .fill(Color.white)
+//                        .frame(width: geometry.size.width, height: 360)
+//                        .padding(10)
+//                        .overlay(
+//                            ImageCarousel(width: geometry.size.width, height: 340)
+//                        )
+//                }
                 HStack{
                   Text("Future of KeYbAI"
                   )
@@ -161,6 +161,7 @@ struct SettingView: View {
      @State private var bgColor = Color.white
      @State private var selectedColor = Color.blue // Default color
      @State private var foregroundColor = Color.white
+    
     var body: some View {
         //keybAI settings
         GeometryReader {
@@ -246,97 +247,5 @@ struct SettingView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-    }
-}
-
-
-
-
-struct Step: Identifiable {
-    let id = UUID()
-    let image: String
-    let description: String
-}
-
-struct ImageCarousel: View {
-    //take with of the screen from geometry reader as a parameter
-    private let width: CGFloat
-    private let height: CGFloat
-    
-    init(width: CGFloat,height: CGFloat) {
-       self.width = width
-        self.height = height
-    }
-    
-
-    private let steps: [Step] = [
-        Step(image: "step1", description: "Open the keyboard settings"),
-        Step(image: "step2", description: "Tap on 'Keyboards'"),
-        Step(image: "step3", description: "Tap on 'Add New Keyboard'"),
-        Step(image: "step4", description: "Select 'Custom Keyboard'"),
-        Step(image: "step5", description: "Select KeYbAI Keyboard")
-    ]
-    
-    var body: some View {
-        TabView {
-            ForEach(steps) { step in
-                VStack {
-                Spacer().frame(
-                        height: 24
-                    )
-                 VStack {
-                     Rectangle()
-                    .fill(Color.white)
-                    .frame(width: self.width - 40, height: 320)
-                    .cornerRadius(10)
-                    // .shadow(radius: 1)
-                    .padding(10)
-                   
-                    .overlay(
-                        VStack{
-                            Spacer(
-                                
-                            ).frame(
-                                height: 30
-                            )
-                            Image(step.image)
-                            .resizable()
-                            .frame(width: self.width - 60, height: 240)
-                            .cornerRadius(10)
-                            .padding(10)
-                            // Text(step["title"]!)
-                            // .foregroundColor(.black)
-                            // .font(.system(size: 16, weight: .bold, design: .default))
-                            Text(step.description)
-                            .foregroundColor(.black)
-                            .font(.system(size: 16, weight: .bold, design: .default))
-                            Spacer()
-
-                        }
-                        .padding(24)
-                    )
-                 }
-                 //add space
-                    Spacer().frame(
-                        height: 44
-                    )
-                }
-                   
-            }
-        }
-        .tabViewStyle(PageTabViewStyle())
-        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))//i want to show the index always
-        .frame(width: width, height: height)
-
-        // .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 250)
-        
-    }
-}
-
-struct ImageCarousel_Previews: PreviewProvider {
-    static var previews: some View {
-        GeometryReader { geometry in
-            ImageCarousel(width: geometry.size.width, height: 340)
-        }
     }
 }
