@@ -17,13 +17,25 @@ struct HowToView: View {
                         if isOnboardingActive {
                             GeometryReader{
                                 geometry in
-                                VStack{
-                                    GoView(onPress: {
-                                        isOnboardingActive = false
-                                    })
+                                ZStack{
+                
                                     ImageCarousel(
                                         width: geometry.size.width, height: geometry.size.height / 1.5
                                     )
+                                    VStack{
+                                        Spacer()
+                                        HStack{
+                                            Spacer()
+                                            GoView(onPress: {
+                                                isOnboardingActive = false
+                                            }).padding(
+                                            EdgeInsets(
+                                                top: 0 , leading: 0, bottom: 24,trailing: 24
+                                            )
+                                            )
+                                            
+                                        }
+                                    }
                                 }
                             }
                         }

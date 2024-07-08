@@ -3,8 +3,8 @@ import UIKit
 struct HomeView: View {
     @State private var selectedTab = 0
     init() {
-    UITabBar.appearance().backgroundColor =  UIColor(Color.black)
-    UITabBar.appearance().barTintColor = UIColor(Color.purple.opacity(0.5))
+    UITabBar.appearance().backgroundColor =  UIColor(Color.purple)
+    UITabBar.appearance().barTintColor = UIColor(Color.purple.opacity(0.6))
     UITabBar.appearance().tintColor = UIColor(Color.black)
     UITabBar.appearance().unselectedItemTintColor = UIColor(Color.white).withAlphaComponent(0.6)
     UITabBar.appearance().isTranslucent = false
@@ -35,7 +35,7 @@ struct HomeView: View {
                                 Text("Setting")
                             }
                             .tag(2)
-                    }.accentColor(Color.white)
+                    }.accentColor(Color.white) 
                 }
             }
         }
@@ -56,8 +56,8 @@ struct HomeTabView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack{
-           Color.white.edgesIgnoringSafeArea(.all)
-           .overlay(   
+           Color.purple.edgesIgnoringSafeArea(.all)
+           .overlay(
             //scroll view
             ScrollView(.vertical, showsIndicators: false ) {
                         VStack{
