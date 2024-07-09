@@ -42,8 +42,8 @@ struct HomeView: View {
      init() {
         UIScrollView.appearance().bounces  = false
 
-        UITabBar.appearance().backgroundColor =  UIColor(Color.white.opacity(0.2)).withAlphaComponent(0.2)
-        UITabBar.appearance().barTintColor = UIColor(Color.pink.opacity(0.0)).withAlphaComponent(0.2)
+        UITabBar.appearance().backgroundColor =  UIColor(Color("afe")).withAlphaComponent(0.2)
+        UITabBar.appearance().barTintColor = UIColor(Color(hex: 0x7cb2fd)).withAlphaComponent(0.2)//7cb2fd //0x7baffc
         UITabBar.appearance().isTranslucent = true
         UITabBar.appearance().layer.borderWidth = 0.0
         UITabBar.appearance().clipsToBounds = true
@@ -76,7 +76,7 @@ struct HomeView: View {
                 .padding()
             }
             .frame(height: 70)
-            .background(Color.white.opacity(0.6))
+            .background(Color.white)
             .cornerRadius(35)
             .padding(
                 EdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 20)
@@ -85,6 +85,18 @@ struct HomeView: View {
         }
         .ignoresSafeArea()
 
+    }
+}
+
+extension Color {
+    init(hex: UInt, alpha: Double = 1) {
+        self.init(
+            .sRGB,
+            red: Double((hex >> 16) & 0xff) / 255,
+            green: Double((hex >> 08) & 0xff) / 255,
+            blue: Double((hex >> 00) & 0xff) / 255,
+            opacity: alpha
+        )
     }
 }
 
