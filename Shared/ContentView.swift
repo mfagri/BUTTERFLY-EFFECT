@@ -42,14 +42,16 @@ struct ContentView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(
-                LinearGradient(colors: [Color.purple,Color.blue.opacity(0.5)], startPoint: .top, endPoint: .bottom)
+                LinearGradient( gradient: Gradient(colors: [Color.purple,Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
             ).ignoresSafeArea()
            }
            else{
 //                HomeView()
                OnboardingView()
            }
-        }.onAppear {
+        }
+        .ignoresSafeArea()
+        .onAppear {
           
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
            

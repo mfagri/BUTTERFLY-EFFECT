@@ -36,49 +36,26 @@ struct ImageCarousel: View {
         TabView {
             ForEach(steps) { step in
                 VStack {
-                Spacer().frame(
-                        height: 24
-                    )
-                 VStack {
-                     Rectangle()
-                         .fill(Color.gray.opacity(0.0))
-                         .frame(width: self.width - 20, height: self.height * 0.6)
-                    .cornerRadius(10)
-                    // .shadow(radius: 1)
-                    .padding(10)
-                   
-                    .overlay(
-                        VStack{
+                 
+                       GroupBox(label: Text("   \(step.description)")) {
+                            VStack(alignment: .leading) {
                             Image(step.image)
-                            .resizable()
-                            .frame(width: self.width - 20, height: self.height / 2)
-                            .cornerRadius(10)
-                            .padding(10)
-                            Spacer().frame(
-                                height:20)
-                            Text(step.description)
-                            .foregroundColor(.white)
-                            .font(.system(size: 20, weight: .bold, design: .default))
-                            Spacer()
+                                                    .resizable()
+                                                    .frame(width: self.width * 0.8, height: self.height / 2)
+                                                    .cornerRadius(10)
+                                                    .padding(10)
+                            }
+                        
 
-                        }
-                        .padding(24)
-                    )
-                 }
+                       }.padding(
+                            .horizontal
+                       )
                     
-                }
                    
+                }      
             }
         }
         .tabViewStyle(PageTabViewStyle())
-        .background(
-            LinearGradient(colors:[ Color.purple,Color.blue.opacity(0.5)], startPoint: .top, endPoint: .bottom)
-        ).ignoresSafeArea()
-//        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))//i want to show the index always
-//        .frame(width: width, height: height * 0.7)
-
-        // .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 250)
-        
     }
 }
 
