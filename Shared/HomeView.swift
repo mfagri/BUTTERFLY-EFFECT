@@ -7,8 +7,8 @@ import UIKit
 
 enum TabbedItems: Int, CaseIterable{
     case home = 0
-    case keyboard
-    case profile
+    case keyboard = 1
+    case profile = 2
     
     var title: String{
         switch self {
@@ -42,9 +42,10 @@ struct HomeView: View {
      init() {
         UIScrollView.appearance().bounces  = false
 
-        UITabBar.appearance().backgroundColor =  UIColor(Color("afe")).withAlphaComponent(0.2)
-        UITabBar.appearance().barTintColor = UIColor(Color(hex: 0x7cb2fd)).withAlphaComponent(0.2)//7cb2fd //0x7baffc
+        // UITabBar.appearance().backgroundColor =  UIColor(Color("afe")).withAlphaComponent(0.2)
+        // UITabBar.appearance().barTintColor = UIColor(Color(hex: 0x7cb2fd)).withAlphaComponent(0.2)//7cb2fd //0x7baffc
         UITabBar.appearance().isTranslucent = true
+        UITabBar.appearance().isHidden = true
         UITabBar.appearance().layer.borderWidth = 0.0
         UITabBar.appearance().clipsToBounds = true
     }
@@ -59,7 +60,7 @@ struct HomeView: View {
                 FavoriteView()
                     .tag(1)
                 ProfileView()
-                    .tag(3)
+                    .tag(2)
             }.padding(
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             ).accentColor(Color.purple.opacity(0.5))
@@ -76,7 +77,7 @@ struct HomeView: View {
                 .padding()
             }
             .frame(height: 70)
-            .background(Color.white)
+            .background(Color.black)
             .cornerRadius(35)
             .padding(
                 EdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 20)
@@ -104,7 +105,7 @@ extension Color {
 struct ProfileView: View {
     var body: some View {
           VStack{
-           LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
+           LinearGradient(gradient: Gradient(colors: [Color.green, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.all)
             .overlay(
                 VStack{
@@ -283,13 +284,13 @@ extension HomeView{
             Image( systemName: imageName)
                 .resizable()
                 .renderingMode(.template)
-                .foregroundColor(isActive ? .purple: .black)
+                .foregroundColor(isActive ? .purple: .white)
                 .frame(width: 20, height: 20)
             if isActive{
                 Text(title)
 
                     .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(isActive ? .purple : .black)
+                    .foregroundColor(isActive ? .purple : .white)
             }
             Spacer()
         }
