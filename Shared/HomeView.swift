@@ -225,19 +225,132 @@ struct ThemesView: View {
 
 struct HomeOneView: View {
     var body: some View {
-       VStack{
+      
+      GeometryReader {
+        geometry in 
+         VStack{
            
             LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.all)
             .overlay(
                 VStack{
-                    //home page content
-                    //grad view with vstack
-        
+                    HStack{
+                          HStack{
+                        Rectangle(
+                        )
+                            .fill(Color.purple)
+                            .frame(width: 80, height: 80)
+                            .cornerRadius(20)
+                            .shadow(radius: 1.5)
+                            .padding(10).overlay(
+                                VStack{
+                                    Image(systemName: "star").resizable().frame(width: 15, height: 15).foregroundColor(Color.white)
+                                    Text("KeYbAI")
+                                    .foregroundColor(.white).font(.system(size: 16, weight: .bold, design: .default)).padding(0)
+                                    //random icon
+                                    HStack{
+                                        Image(systemName: "star").resizable().frame(width: 20, height: 20).foregroundColor(Color.white)
+                                        Image(systemName: "star").resizable().frame(width: 15, height: 15).foregroundColor(Color.white)
+                                    }
+                                }.padding(10)
+                            )
+                    }.padding(
+                        EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+                    )
+                        Text("Welcome to KeYbAI")
+                        .foregroundColor(.white).font(.system(size: 26, weight: .bold, design: .default))
+
+                        Spacer()
+                    }.padding(
+                        EdgeInsets(top: 50, leading: 24, bottom: 24, trailing: 24)
+                    )
+
+                    ///Customize Keyboard
+                    HStack{
+                        Text("Customize Keyboard")
+                        .foregroundColor(.white).font(.system(size: 18, weight: .bold, design: .default))
+                        Spacer()
+                    }.padding(
+                        EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                    )
+                    ////////
+                    HStack{
+                        Rectangle()
+                            .fill(Color.black.opacity(0.2))
+                            .frame(width:  geometry.size.width - 24, height:  geometry.size.height / 4)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .padding(10).overlay(
+                                HStack(spacing: 24){
+                                    HStack{
+                                        Rectangle()
+                                            .fill(Color(hex: 0x7cb2fd))
+                                            .frame(width: (geometry.size.width / 2) - 80, height: 150)
+                                            .cornerRadius(10)
+                                            .padding(10)
+                                    }
+                                    HStack{
+                                        Rectangle()
+                                            .fill(Color(hex: 0x7cb2fd))
+                                            .frame(width: (geometry.size.width / 2) - 80, height: 150)
+                                            .cornerRadius(10)
+                                            .padding(10)
+                                    }
+                                }.padding(
+                                    EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                                
+                                )
+                            )
+                    }
+                     HStack{
+                        Rectangle()
+                            .fill(Color.black.opacity(0.15))
+                            .frame(width:  geometry.size.width - 24, height:  geometry.size.height / 4)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .padding(10).overlay(
+                                HStack(spacing: 24){
+                                    HStack{
+                                        Rectangle()
+                                            .fill(Color(hex: 0x7cb2fd))
+                                            .frame(width: (geometry.size.width / 2) - 80, height: 150)
+                                            .cornerRadius(10)
+                                            .padding(10)
+                                    }
+                                    HStack{
+                                        Rectangle()
+                                            .fill(Color(hex: 0x7cb2fd))
+                                            .frame(width: (geometry.size.width / 2) - 80, height: 150)
+                                            .cornerRadius(10)
+                                            .padding(10)
+                                    }
+                                }.padding(
+                                    EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                                
+                                )
+                            )
+                    }
+                     HStack{
+                        Rectangle()
+                            .fill(Color.black.opacity(0.1))
+                            .frame(width:  geometry.size.width - 24, height:  geometry.size.height / 8)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .padding(10).overlay(
+                                HStack(spacing: 24){
+                                }.padding(
+                                    EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                                
+                                )
+                            )
+                    }
+                    Spacer().frame(
+                        height:  geometry.size.height / 8
+                    )
                 }
             )
           }
-         
+      }   
     }
 }
 
