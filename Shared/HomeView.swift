@@ -84,7 +84,7 @@ struct HomeView: View {
                 }
                 .padding()
             }
-            .frame(height: 70)
+            .frame(height: 65)
             .background(Color.white)
             .cornerRadius(35)
             .padding(
@@ -522,7 +522,7 @@ struct HomeView_Previews: PreviewProvider {
 
 extension HomeView{
     func CustomTabItem(imageName: String, title: String, isActive: Bool) -> some View{
-        HStack(spacing: 10){
+        VStack(spacing: 0){
             Spacer()
             Image( systemName: imageName)
                 .resizable()
@@ -537,7 +537,7 @@ extension HomeView{
             }
             Spacer()
         }
-        .frame(width: isActive ? .infinity : 60, height: 60)
+        .frame(width: isActive ? 100 : 60, height: 50)
         .background(isActive ? Color.purple.opacity(0.7) : Color.clear)
         .cornerRadius(30)
     }
