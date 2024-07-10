@@ -225,9 +225,9 @@ struct ThemesView: View {
 
 struct HomeOneView: View {
     var body: some View {
-      
-      GeometryReader {
+           GeometryReader {
         geometry in 
+  
          VStack{
            
             LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
@@ -284,18 +284,24 @@ struct HomeOneView: View {
                                 HStack(spacing: 24){
                                     HStack{
                                         Rectangle()
-                                            .fill(Color(hex: 0x7cb2fd))
-                                            .frame(width: (geometry.size.width / 2) - 80, height: 150)
+                                            .fill(Color.white)
+                                            .frame(width: (geometry.size.width / 2) - 80, height: (geometry.size.width / 2) - 80)
                                             .cornerRadius(10)
                                             .padding(10)
-                                    }
+                                            .overlay(
+                                                Image(systemName: "button").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                            )
+                                    }.rotation3DEffect(Angle(degrees:  1), axis: (x: 0, y: 0, z: 1))
                                     HStack{
                                         Rectangle()
-                                            .fill(Color(hex: 0x7cb2fd))
-                                            .frame(width: (geometry.size.width / 2) - 80, height: 150)
+                                            .fill(Color.white)
+                                            .frame(width: (geometry.size.width / 2) - 80, height: (geometry.size.width / 2) - 80)
                                             .cornerRadius(10)
                                             .padding(10)
-                                    }
+                                            .overlay(
+                                                Image(systemName: "keyboard").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                            )
+                                    }.rotation3DEffect(Angle(degrees:  -1), axis: (x: 0, y: 0, z: 1))
                                 }.padding(
                                     EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
                                 
@@ -312,18 +318,24 @@ struct HomeOneView: View {
                                 HStack(spacing: 24){
                                     HStack{
                                         Rectangle()
-                                            .fill(Color(hex: 0x7cb2fd))
-                                            .frame(width: (geometry.size.width / 2) - 80, height: 150)
+                                            .fill(Color.white)
+                                            .frame(width: (geometry.size.width / 2) - 80, height: (geometry.size.width / 2) - 80)
                                             .cornerRadius(10)
                                             .padding(10)
-                                    }
+                                            .overlay(
+                                                Image(systemName: "font").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                            )
+                                    }.rotation3DEffect(Angle(degrees:  -1), axis: (x: 0, y: 0, z: 1))
                                     HStack{
                                         Rectangle()
-                                            .fill(Color(hex: 0x7cb2fd))
-                                            .frame(width: (geometry.size.width / 2) - 80, height: 150)
+                                            .fill(Color.white)
+                                            .frame(width: (geometry.size.width / 2) - 80, height: (geometry.size.width / 2) - 80)
                                             .cornerRadius(10)
                                             .padding(10)
-                                    }
+                                            .overlay(
+                                                Image(systemName: "paintbrush").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                            )
+                                    }.rotation3DEffect(Angle(degrees:  1), axis: (x: 0, y: 0, z: 1))
                                 }.padding(
                                     EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
                                 
@@ -349,8 +361,10 @@ struct HomeOneView: View {
                     )
                 }
             )
-          }
+          
       }   
+    
+     } 
     }
 }
 

@@ -24,66 +24,79 @@ struct OutdoorActivity: Identifiable {
 
 struct OnboardingView: View {
     @State private var isOnboardingActive: Bool = true
-    init() {
-
-        UIScrollView.appearance().bounces  = false
-    }
+    @State private var selection = 0
     var body: some View {
-
-        VStack {
-            GeometryReader { geometry in
-                    VStack{
-                        if isOnboardingActive {
-                                VStack(spacing: 20) {
-                                       TabView {
-                                ForEach(outdoorActivitiesData) { outdoorActivity in
-                                    OnBoardingView(outDoorActivity: outdoorActivity, isOnboardingActive: $isOnboardingActive)
+              VStack{
+                  GeometryReader{
+                    g in 
+                       if isOnboardingActive{
+                         VStack{
+                                   Spacer().frame(
+                                        maxHeight: g.size.height / 4    
+                                   )
+                            VStack{
+                                ForEach(0..<outdoorActivitiesData.count,id: \.self) { index in
+                                if selection == index {
+                                        OnBoardingView(outDoorActivity: outdoorActivitiesData[index])
+                                              .transition(
+                                        .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                                        .animation(.easeInOut
+                                        
+                                        )
                                 }
+                            }.padding(
+                                .top, 50 
+                            )
                             }
-                            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-                                            ButtonView {
-                                                isOnboardingActive = false
-                                            }
-                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 24, trailing: 24))
-                                    Spacer()
+                            Spacer()
+                            ButtonView(onPress: {
+                                if selection < outdoorActivitiesData.count - 1 {
+                                    selection += 1
+                                } else {
+                                    selection = 0
+                                    isOnboardingActive = false
                                 }
-                        } else {
-                            HowToView()
-                        }
+                            }, text:(selection < outdoorActivitiesData.count - 1) ? "Next" : "Get Started")
+                            .frame(maxHeight: .infinity, alignment: .bottom)
+                            .padding(.bottom, 60)
                     }
-           }
-        }
-        .ignoresSafeArea()
-        .onAppear {
-           UIScrollView.appearance().bounces  = false
-        }
-        .background(
-            LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
-        )
-
+                    } else {
+                        HowToView()
+                    }
+                }
+              }  .background(
+                        LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
+                    ).ignoresSafeArea()
     }
 }
 
 struct OnBoardingView: View {
     var outDoorActivity: OutdoorActivity
-    @Binding var isOnboardingActive: Bool
+    // @Binding var isOnboardingActive: Bool
 
     var body: some View {
-
-                VStack(spacing: 20) {
+        VStack(alignment: .leading, spacing: 20) {
                     Image(outDoorActivity.image)
                         .resizable()
                         .scaledToFit()
                         .shadow(color: Color(red: 0, green: 0, blue: 0), radius: 3, x: 2, y: 2)
-                        .frame(width: 240, height: 240)
+                        .frame(width: 250, height: 250, alignment: .center)
+                        .padding(
+                            EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                        )
                     
                     Text(outDoorActivity.title)
                         .fontWeight(.heavy)
-                        .font(.system(size: 50))
+                        .font(.system(size: 35))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .padding(
                             EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+                        ) .fixedSize(horizontal: false, vertical: true)
+                         .lineLimit(2)
+                        .frame(
+                            maxWidth: .infinity,
+                            alignment: .center
                         )
                     
                     Text(outDoorActivity.headline)
@@ -94,9 +107,11 @@ struct OnBoardingView: View {
                             EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
                         )
                         .multilineTextAlignment(.center)
-
-                
-            
+                         .fixedSize(horizontal: false, vertical: true)
+                        .frame(
+                            maxWidth: .infinity,
+                            alignment: .center
+                        ).lineLimit(5)
         }
     }
 
@@ -105,15 +120,14 @@ struct OnBoardingView: View {
 
 struct ButtonView: View {
     var onPress: () -> ()
-
+    var text: String
     var body: some View {
-        Text("Get Started")
+        Text(text)
             .fontWeight(.bold)
             .font(.system(size: 20))
-            .padding(.horizontal, 25)
+            .padding(.horizontal, 24)
             .padding(.vertical, 12)
             .background(
-                // Capsule().strokeBorder(lineWidth: 2)
                 Capsule().fill(Color.purple)
             )
             .foregroundColor(.white)
@@ -121,7 +135,7 @@ struct ButtonView: View {
                 onPress()
             }.frame(
                 maxWidth: 200,
-                alignment: .trailing
+                alignment: .center
             )
     }
 }
