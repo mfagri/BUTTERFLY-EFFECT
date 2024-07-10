@@ -71,7 +71,7 @@ struct HomeView: View {
                     .tag(3)
             }.padding(
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-            ).accentColor(Color.purple.opacity(0.5))
+            ).accentColor(Color.gray.opacity(0.5))
             ZStack{
                 HStack{
                     ForEach((TabbedItems.allCases), id: \.self){ item in
@@ -85,7 +85,7 @@ struct HomeView: View {
                 .padding()
             }
             .frame(height: 70)
-            .background(Color.black)
+            .background(Color.white)
             .cornerRadius(35)
             .padding(
                 EdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 20)
@@ -299,8 +299,8 @@ struct HomeOneView: View {
 
                     ///Customize Keyboard
                     HStack{
-                        Text("Customize Keyboard")
-                        .foregroundColor(.white).font(.system(size: 18, weight: .bold, design: .default))
+                        Text("Customize Your")
+                        .foregroundColor(.white).font(.system(size: 20, weight: .bold, design: .default))
                         Spacer()
                     }.padding(
                         EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
@@ -308,79 +308,71 @@ struct HomeOneView: View {
                     ////////
                     HStack{
                         Rectangle()
-                            .fill(Color.black.opacity(0.2))
-                            .frame(width:  geometry.size.width - 24, height:  geometry.size.height / 4)
+                            .fill(Color.black.opacity(0.15))
+                            .frame(width:  geometry.size.width - 24, height:  geometry.size.height / 2.5)
                             .cornerRadius(10)
                             .shadow(radius: 1)
                             .padding(10).overlay(
-                                HStack(spacing: 24){
+                                VStack{
+                                    HStack(spacing: 24){
                                     HStack{
                                         Rectangle()
                                             .fill(Color.white)
-                                            .frame(width: (geometry.size.width / 2) - 80, height: (geometry.size.width / 2) - 80)
+                                            .frame(width: (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
                                             .cornerRadius(10)
                                             .padding(10)
                                             .overlay(
                                                 VStack{
-                                                    Image(systemName: "paintbrush").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                                    Image(systemName: "paintbrush").resizable().frame(width: 24, height: 24).foregroundColor(Color.black)
                                                     Text("Keyboard")
-                                                    .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                                    .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
                                                 }
                                             )
                                     }.rotation3DEffect(Angle(degrees:  1), axis: (x: 0, y: 0, z: 1))
                                     HStack{
                                         Rectangle()
                                             .fill(Color.white)
-                                            .frame(width: (geometry.size.width / 2) - 80, height: (geometry.size.width / 2) - 80)
+                                            .frame(width: (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
                                             .cornerRadius(10)
                                             .padding(10)
                                             .overlay(
                                                 VStack{
-                                                    Image(systemName: "paintbrush").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                                    Image(systemName: "pencil").resizable().frame(width: 24, height: 24).foregroundColor(Color.black)
                                                     Text("Buttons")
-                                                    .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                                    .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
                                                 }
                                             )
                                     }.rotation3DEffect(Angle(degrees:  -1), axis: (x: 0, y: 0, z: 1))
                                 }.padding(
                                     EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
-                                
                                 )
-                            )
-                    }
-                     HStack{
-                        Rectangle()
-                            .fill(Color.black.opacity(0.15))
-                            .frame(width:  geometry.size.width - 24, height:  geometry.size.height / 4)
-                            .cornerRadius(10)
-                            .shadow(radius: 1)
-                            .padding(10).overlay(
-                                HStack(spacing: 24){
+                                
+                                 HStack(spacing: 24){
                                     HStack{
                                         Rectangle()
                                             .fill(Color.white)
-                                            .frame(width: (geometry.size.width / 2) - 80, height: (geometry.size.width / 2) - 80)
+                                            .frame(width: (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
                                             .cornerRadius(10)
                                             .padding(10)
                                             .overlay(
                                                VStack{
-                                                    Image(systemName: "paintbrush").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                                    Image(systemName: "textformat.subscript").resizable().frame(width: 24, height: 24).foregroundColor(Color.black)
                                                     Text("Text")
-                                                    .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                                    .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
                                                 }
                                             )
                                     }.rotation3DEffect(Angle(degrees:  -1), axis: (x: 0, y: 0, z: 1))
                                     HStack{
                                         Rectangle()
                                             .fill(Color.white)
-                                            .frame(width: (geometry.size.width / 2) - 80, height: (geometry.size.width / 2) - 80)
+                                            .frame(width: (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
                                             .cornerRadius(10)
                                             .padding(10)
                                             .overlay(
                                                 VStack{
-                                                    Image(systemName: "paintbrush").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                                    Image(systemName: "message").resizable().frame(width: 24, height: 24).foregroundColor(Color.black)
                                                     Text("GPT")
-                                                    .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                                    .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
                                                 }
                                             )
                                     }.rotation3DEffect(Angle(degrees:  1), axis: (x: 0, y: 0, z: 1))
@@ -388,12 +380,25 @@ struct HomeOneView: View {
                                     EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
                                 
                                 )
+                                }
                             )
                     }
-                     HStack{
+                    ////
+                       HStack{
+                        Text("Top Themes")
+                        .foregroundColor(.white).font(.system(size: 20, weight: .bold, design: .default))
+                        Spacer()
+                    }.padding(
+                        EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                    )
+                    //theme selection
+                    ScrollView(.horizontal, showsIndicators: false){
+                        HStack{
+                            ForEach(0..<10){ index in
+                               HStack{
                         Rectangle()
                             .fill(Color.black.opacity(0.1))
-                            .frame(width:  geometry.size.width - 24, height:  geometry.size.height / 8)
+                            .frame(width:  geometry.size.width - 24, height:  geometry.size.height / 6)
                             .cornerRadius(10)
                             .shadow(radius: 1)
                             .padding(10).overlay(
@@ -403,6 +408,9 @@ struct HomeOneView: View {
                                 
                                 )
                             )
+                    }
+                            }
+                        }
                     }
                     Spacer().frame(
                         height:  geometry.size.height / 8
@@ -519,18 +527,18 @@ extension HomeView{
             Image( systemName: imageName)
                 .resizable()
                 .renderingMode(.template)
-                .foregroundColor(isActive ? .purple: .white)
+                .foregroundColor(isActive ? .white: .black)
                 .frame(width: 20, height: 20)
             if isActive{
                 Text(title)
 
                     .font(.system(size: 14, weight: .bold))
-                    .foregroundColor(isActive ? .purple : .white)
+                    .foregroundColor(isActive ? .white : .black)
             }
             Spacer()
         }
         .frame(width: isActive ? .infinity : 60, height: 60)
-        .background(isActive ? Color.purple.opacity(0.4) : Color.clear)
+        .background(isActive ? Color.purple.opacity(0.7) : Color.clear)
         .cornerRadius(30)
     }
 }
