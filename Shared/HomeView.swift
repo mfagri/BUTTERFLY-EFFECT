@@ -111,50 +111,118 @@ extension Color {
 
 
 struct ProfileView: View {
+    var Languages = ["English", "French", "Spanish", "German", "Italian", "Chinese", "Japanese", "Korean", "Arabic", "Russian"]
+    //selected language
+    @State private var selectedLanguage = "English"
     var body: some View {
           VStack{
            LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.all)
             .overlay(
                 VStack{
-  
-                        GroupBox(label: Text("App Mode")){
+                    //text app Settings
+                    HStack{
+                        Text("App Settings")
+                        .foregroundColor(.white).font(.system(size: 26, weight: .bold, design: .default))
+                        Spacer()
+                    }.padding(
+                        EdgeInsets(top: 50, leading: 24, bottom: 24, trailing: 24)
+                    )
+                    HStack{
+                        Text("App mode")
+                        .foregroundColor(Color.white.opacity(0.7)).font(.system(size: 20, weight: .bold, design: .default))
+                        Spacer()
+                    }.padding(
+                        EdgeInsets(top: 0, leading: 48, bottom: 14, trailing: 48)
+                    )
+                    
+                      HStack{
+                        Rectangle()
+                            .fill(Color.black.opacity(0.15))
+                            .frame(width: .infinity, height: 150)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .padding(10).overlay(
                             HStack{
+                                Spacer()
                                 VStack{
                                     Text("Dark Mode")
-                                    .foregroundColor(.white).font(.system(size: 18, weight: .bold, design: .default))
+                                    .foregroundColor(Color.black.opacity(0.7)).font(.system(size: 18, weight: .bold, design: .default))
                                     Spacer()
                                     Image(systemName: "moon.fill")
                                         .resizable()
                                         .frame(width: 50, height: 50)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.black.opacity(0.7))
                                 }.padding(
-                                    EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                                    EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
                                 )
-
                                 Spacer()
                                 VStack{
                                     Text("Light Mode")
-                                    .foregroundColor(.white).font(.system(size: 18, weight: .bold, design: .default))
+                                    .foregroundColor(Color.yellow.opacity(0.7)).font(.system(size: 18, weight: .bold, design: .default))
                                     Spacer()
                                     Image(systemName: "sun.max.fill")
                                         .resizable()
                                         .frame(width: 50, height: 50)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.yellow.opacity(0.7))
                                 }.padding(
-                                    EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                                    EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
                                 )
+                                Spacer()
                             }.frame(
                                 maxWidth: .infinity,
                                 maxHeight: 100
                             )
-                        }
-                        .background(Color.black.opacity(0.2))
-                        // .foregroundColor(Color.black.opacity(0.2))
-                        .padding(
-                            EdgeInsets(top: 50, leading: 24, bottom: 24, trailing: 24)
-                        )
-                    
+                            )
+                      }.padding(
+                        EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                      )
+                    //app language
+                    HStack{
+                        Text("App Language")
+                        .foregroundColor(Color.white.opacity(0.7)).font(.system(size: 20, weight: .bold, design: .default))
+                        Spacer()
+                    }.padding(
+                        EdgeInsets(top: 0, leading: 48, bottom: 14, trailing: 48)
+                    )
+                    HStack{
+                        Rectangle()
+                            .fill(Color.black.opacity(0.15))
+                            .frame(width: .infinity, height: 80)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .padding(10).overlay(
+                            HStack{
+                                //app language
+                                Text("Select a language")
+                                .foregroundColor(Color.white).font(.system(size: 18, weight: .bold, design: .default))
+                                Spacer()
+                                //dropdown
+                                // DropDownMenu()
+                                Menu {
+                                    ForEach(Languages, id: \.self) { language in
+                                        Button(action: {
+                                            self.selectedLanguage = language
+                                        }) {
+                                            Text(language).foregroundColor(.white)
+                                        }
+                                    }
+                                    } label: {
+                                        Text(self.selectedLanguage).foregroundColor(.white)
+                                    }
+                                
+                            }.frame(
+                                maxWidth: .infinity,
+                                maxHeight: 100
+                            ).padding(
+                                EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                            
+                            
+                            )
+                            )
+                      }.padding(
+                        EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                      )
                     
                 }
             )
@@ -346,7 +414,7 @@ struct HomeOneView: View {
                                     HStack{
                                         Rectangle()
                                             .fill(Color.white)
-                                            .frame(width: (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
+                                            .frame(width:  (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
                                             .cornerRadius(10)
                                             .padding(10)
                                             .overlay(
@@ -568,5 +636,24 @@ extension HomeView{
         .frame(width: isActive ? 100 : 60, height: 50)
         .background(isActive ? Color.purple.opacity(0.7) : Color.clear)
         .cornerRadius(30)
+    }
+}
+
+////drop down 
+struct DropDownMenu: View {
+    var friuts = ["apple", "banana", "orange", "kiwi"]
+    @State private var selectedFruit: String = "banana"
+
+    var body: some View {
+        VStack {
+            Picker("fruits", selection: $selectedFruit) {
+                ForEach(friuts, id: \.self) { fruit in
+                    Text(fruit)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        .background(Color(UIColor.lightGray).opacity(0.4))
+
     }
 }
