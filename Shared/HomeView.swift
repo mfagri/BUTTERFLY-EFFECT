@@ -9,6 +9,7 @@ enum TabbedItems: Int, CaseIterable{
     case home = 0
     case keyboard = 1
     case profile = 2
+    case favorites = 3
     
     var title: String{
         switch self {
@@ -18,7 +19,10 @@ enum TabbedItems: Int, CaseIterable{
             return "themes"
         case .profile:
             return "Profile"
+        case .favorites:
+            return "Favorites"
         }
+
     }
     
     var iconName: String{
@@ -29,6 +33,8 @@ enum TabbedItems: Int, CaseIterable{
             return "keyboard"
         case .profile:
             return "person"
+        case .favorites:
+            return "heart"
         }
     }
 }
@@ -61,6 +67,8 @@ struct HomeView: View {
                     .tag(1)
                 ProfileView()
                     .tag(2)
+                FavoriteView()
+                    .tag(3)
             }.padding(
                 EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             ).accentColor(Color.purple.opacity(0.5))
@@ -128,7 +136,31 @@ struct ProfileView: View {
     }
 }
 
-
+struct FavoriteView: View {
+    var body: some View {
+          VStack{
+           LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
+            .edgesIgnoringSafeArea(.all)
+            .overlay(
+                VStack{
+                    Image(systemName: "heart.fill")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .foregroundColor(.white)
+                        .padding(10)
+                    Text("Favorites")
+                        .font(.system(size: 24, weight: .bold, design: .default))
+                        .foregroundColor(.white)
+                    Text("This is your favorites")
+                        .font(.system(size: 16, weight: .regular, design: .default))
+                        .foregroundColor(.white)
+                }
+            )
+           
+          }
+          
+    }
+}
 
 struct ThemesView: View {
          @State private var isOn = false
@@ -289,7 +321,11 @@ struct HomeOneView: View {
                                             .cornerRadius(10)
                                             .padding(10)
                                             .overlay(
-                                                Image(systemName: "button").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                                VStack{
+                                                    Image(systemName: "paintbrush").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                                    Text("Keyboard")
+                                                    .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                                }
                                             )
                                     }.rotation3DEffect(Angle(degrees:  1), axis: (x: 0, y: 0, z: 1))
                                     HStack{
@@ -299,7 +335,11 @@ struct HomeOneView: View {
                                             .cornerRadius(10)
                                             .padding(10)
                                             .overlay(
-                                                Image(systemName: "keyboard").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                                VStack{
+                                                    Image(systemName: "paintbrush").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                                    Text("Buttons")
+                                                    .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                                }
                                             )
                                     }.rotation3DEffect(Angle(degrees:  -1), axis: (x: 0, y: 0, z: 1))
                                 }.padding(
@@ -323,7 +363,11 @@ struct HomeOneView: View {
                                             .cornerRadius(10)
                                             .padding(10)
                                             .overlay(
-                                                Image(systemName: "font").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                               VStack{
+                                                    Image(systemName: "paintbrush").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                                    Text("Text")
+                                                    .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                                }
                                             )
                                     }.rotation3DEffect(Angle(degrees:  -1), axis: (x: 0, y: 0, z: 1))
                                     HStack{
@@ -333,7 +377,11 @@ struct HomeOneView: View {
                                             .cornerRadius(10)
                                             .padding(10)
                                             .overlay(
-                                                Image(systemName: "paintbrush").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                                VStack{
+                                                    Image(systemName: "paintbrush").resizable().frame(width: 20, height: 20).foregroundColor(Color.black)
+                                                    Text("GPT")
+                                                    .foregroundColor(.black).font(.system(size: 16, weight: .bold, design: .default))
+                                                }
                                             )
                                     }.rotation3DEffect(Angle(degrees:  1), axis: (x: 0, y: 0, z: 1))
                                 }.padding(
