@@ -113,21 +113,49 @@ extension Color {
 struct ProfileView: View {
     var body: some View {
           VStack{
-           LinearGradient(gradient: Gradient(colors: [Color.green, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
+           LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.all)
             .overlay(
                 VStack{
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .foregroundColor(.white)
-                        .padding(10)
-                    Text("Profile")
-                        .font(.system(size: 24, weight: .bold, design: .default))
-                        .foregroundColor(.white)
-                    Text("This is your profile")
-                        .font(.system(size: 16, weight: .regular, design: .default))
-                        .foregroundColor(.white)
+  
+                        GroupBox(label: Text("App Mode")){
+                            HStack{
+                                VStack{
+                                    Text("Dark Mode")
+                                    .foregroundColor(.white).font(.system(size: 18, weight: .bold, design: .default))
+                                    Spacer()
+                                    Image(systemName: "moon.fill")
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                        .foregroundColor(.white)
+                                }.padding(
+                                    EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                                )
+
+                                Spacer()
+                                VStack{
+                                    Text("Light Mode")
+                                    .foregroundColor(.white).font(.system(size: 18, weight: .bold, design: .default))
+                                    Spacer()
+                                    Image(systemName: "sun.max.fill")
+                                        .resizable()
+                                        .frame(width: 50, height: 50)
+                                        .foregroundColor(.white)
+                                }.padding(
+                                    EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                                )
+                            }.frame(
+                                maxWidth: .infinity,
+                                maxHeight: 100
+                            )
+                        }
+                        .background(Color.black.opacity(0.2))
+                        // .foregroundColor(Color.black.opacity(0.2))
+                        .padding(
+                            EdgeInsets(top: 50, leading: 24, bottom: 24, trailing: 24)
+                        )
+                    
+                    
                 }
             )
            
