@@ -33,7 +33,7 @@ struct HowToView: View {
                                     }
                                 
                         } else {
-                            HomeView()
+                            MainView()
                         }
                     }
            }

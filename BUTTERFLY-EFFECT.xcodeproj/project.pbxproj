@@ -36,6 +36,15 @@
 		CF547F082C3B060200026C4E /* StepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547F072C3B060200026C4E /* StepsView.swift */; };
 		CF547F092C3B060200026C4E /* StepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547F072C3B060200026C4E /* StepsView.swift */; };
 		CF547F0A2C3B060200026C4E /* StepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF547F072C3B060200026C4E /* StepsView.swift */; };
+		CF89F76D2C40542700A31383 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F76C2C40542700A31383 /* SettingsView.swift */; };
+		CF89F76E2C40542700A31383 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F76C2C40542700A31383 /* SettingsView.swift */; };
+		CF89F76F2C40542700A31383 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F76C2C40542700A31383 /* SettingsView.swift */; };
+		CF89F7712C4054EA00A31383 /* ThemesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F7702C4054EA00A31383 /* ThemesView.swift */; };
+		CF89F7722C4054EA00A31383 /* ThemesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F7702C4054EA00A31383 /* ThemesView.swift */; };
+		CF89F7732C4054EA00A31383 /* ThemesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F7702C4054EA00A31383 /* ThemesView.swift */; };
+		CF89F7752C4056E200A31383 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F7742C4056E200A31383 /* MenuView.swift */; };
+		CF89F7762C4056E200A31383 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F7742C4056E200A31383 /* MenuView.swift */; };
+		CF89F7772C4056E200A31383 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F7742C4056E200A31383 /* MenuView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +111,9 @@
 		CF547EFF2C3AC14200026C4E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		CF547F032C3B05A100026C4E /* HowToView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToView.swift; sourceTree = "<group>"; };
 		CF547F072C3B060200026C4E /* StepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsView.swift; sourceTree = "<group>"; };
+		CF89F76C2C40542700A31383 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CF89F7702C4054EA00A31383 /* ThemesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesView.swift; sourceTree = "<group>"; };
+		CF89F7742C4056E200A31383 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +193,9 @@
 				CF547EFF2C3AC14200026C4E /* OnboardingView.swift */,
 				CF547F032C3B05A100026C4E /* HowToView.swift */,
 				CF547F072C3B060200026C4E /* StepsView.swift */,
+				CF89F76C2C40542700A31383 /* SettingsView.swift */,
+				CF89F7702C4054EA00A31383 /* ThemesView.swift */,
+				CF89F7742C4056E200A31383 /* MenuView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -429,8 +444,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE1534D72C336AD9002EFA88 /* KeyboardViewController.swift in Sources */,
+				CF89F76F2C40542700A31383 /* SettingsView.swift in Sources */,
 				AE0217562C36A96600250821 /* HomeView.swift in Sources */,
 				AEC52D7E2C350AC400DC904E /* ContentView.swift in Sources */,
+				CF89F7732C4054EA00A31383 /* ThemesView.swift in Sources */,
+				CF89F7772C4056E200A31383 /* MenuView.swift in Sources */,
 				CF547F0A2C3B060200026C4E /* StepsView.swift in Sources */,
 				CF547F022C3AC14200026C4E /* OnboardingView.swift in Sources */,
 				CF547F062C3B05A100026C4E /* HowToView.swift in Sources */,
@@ -442,11 +460,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF89F7712C4054EA00A31383 /* ThemesView.swift in Sources */,
 				AE1534EC2C3374EC002EFA88 /* viewkeyboard.swift in Sources */,
 				CF547F042C3B05A100026C4E /* HowToView.swift in Sources */,
 				AE1535292C3384C6002EFA88 /* KeyboardViewController.swift in Sources */,
+				CF89F76D2C40542700A31383 /* SettingsView.swift in Sources */,
 				AE15352F2C3384CF002EFA88 /* BUTTERFLY_EFFECTApp.swift in Sources */,
 				CF547F082C3B060200026C4E /* StepsView.swift in Sources */,
+				CF89F7752C4056E200A31383 /* MenuView.swift in Sources */,
 				CF547F002C3AC14200026C4E /* OnboardingView.swift in Sources */,
 				AE0217442C36A8F700250821 /* HomeView.swift in Sources */,
 				AE319E8A2C3279FD00FDFD4C /* ContentView.swift in Sources */,
@@ -457,9 +478,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF89F76E2C40542700A31383 /* SettingsView.swift in Sources */,
 				AE0217452C36A8F700250821 /* HomeView.swift in Sources */,
 				CF547F012C3AC14200026C4E /* OnboardingView.swift in Sources */,
 				CF547F092C3B060200026C4E /* StepsView.swift in Sources */,
+				CF89F7762C4056E200A31383 /* MenuView.swift in Sources */,
+				CF89F7722C4054EA00A31383 /* ThemesView.swift in Sources */,
 				AE1534F22C3374F3002EFA88 /* viewkeyboard.swift in Sources */,
 				AE319E8B2C3279FD00FDFD4C /* ContentView.swift in Sources */,
 				CF547F052C3B05A100026C4E /* HowToView.swift in Sources */,
