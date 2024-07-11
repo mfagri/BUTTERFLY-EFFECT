@@ -30,7 +30,7 @@ enum TabbedItems: Int, CaseIterable{
         case .home:
             return "house"
         case .keyboard:
-            return "keyboard"
+            return "keyboard.chevron.compact.left"
         case .profile:
             return "person"
         case .favorites:
@@ -114,12 +114,14 @@ struct ProfileView: View {
     var Languages = ["English", "French", "Spanish", "German", "Italian", "Chinese", "Japanese", "Korean", "Arabic", "Russian"]
     //selected language
     @State private var selectedLanguage = "English"
+    @State private var isOn = false
     var body: some View {
           VStack{
            LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.all)
             .overlay(
-                VStack{
+                ScrollView(showsIndicators: false){
+                       VStack{
                     //text app Settings
                     HStack{
                         Text("App Settings")
@@ -129,7 +131,7 @@ struct ProfileView: View {
                         EdgeInsets(top: 50, leading: 24, bottom: 24, trailing: 24)
                     )
                     HStack{
-                        Text("App mode")
+                        Text("Theme")
                         .foregroundColor(Color.white.opacity(0.7)).font(.system(size: 20, weight: .bold, design: .default))
                         Spacer()
                     }.padding(
@@ -139,39 +141,51 @@ struct ProfileView: View {
                       HStack{
                         Rectangle()
                             .fill(Color.black.opacity(0.15))
-                            .frame(width: .infinity, height: 150)
+                            .frame(width: .infinity, height: 80)
                             .cornerRadius(10)
                             .shadow(radius: 1)
                             .padding(10).overlay(
                             HStack{
-                                Spacer()
-                                VStack{
+                                
+                              
                                     Text("Dark Mode")
-                                    .foregroundColor(Color.black.opacity(0.7)).font(.system(size: 18, weight: .bold, design: .default))
-                                    Spacer()
-                                    Image(systemName: "moon.fill")
-                                        .resizable()
-                                        .frame(width: 50, height: 50)
-                                        .foregroundColor(Color.black.opacity(0.7))
-                                }.padding(
-                                    EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
-                                )
+                                    .foregroundColor(Color.white).font(.system(size: 16, weight: .bold, design: .default))
+                                    
+                                
                                 Spacer()
-                                VStack{
-                                    Text("Light Mode")
-                                    .foregroundColor(Color.yellow.opacity(0.7)).font(.system(size: 18, weight: .bold, design: .default))
-                                    Spacer()
-                                    Image(systemName: "sun.max.fill")
-                                        .resizable()
-                                        .frame(width: 50, height: 50)
-                                        .foregroundColor(Color.yellow.opacity(0.7))
-                                }.padding(
-                                    EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
-                                )
-                                Spacer()
+                                // VStack{
+                                //     Text("Light Mode")
+                                //     .foregroundColor(Color.yellow.opacity(0.7)).font(.system(size: 16, weight: .bold, design: .default))
+                                //     Spacer()
+                                //     Image(systemName: "sun.max.fill")
+                                //         .resizable()
+                                //         .frame(width: 30, height: 30)
+                                //         .foregroundColor(Color.yellow.opacity(0.7))
+                                // }.padding(
+                                //     EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                                // )
+                                //toggle
+                                Toggle("", isOn: $isOn)
+                                    .toggleStyle(SwitchToggleStyle(tint: Color.red))
+                                    .padding(
+                                        EdgeInsets(top: 0, leading: 1, bottom: 0, trailing: 1)
+                                    )
+                                    .labelsHidden()
+                                    .foregroundColor(Color.white)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 15) // or any other shape you prefer
+                                            .stroke(Color.white, lineWidth: 2) // Set the color and width of the border
+                                    )
+
+                                    
+                                
                             }.frame(
                                 maxWidth: .infinity,
-                                maxHeight: 100
+                                maxHeight: 60
+                            ).padding(
+                                EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                            
+                            
                             )
                             )
                       }.padding(
@@ -179,11 +193,11 @@ struct ProfileView: View {
                       )
                     //app language
                     HStack{
-                        Text("App Language")
+                        Text("Language")
                         .foregroundColor(Color.white.opacity(0.7)).font(.system(size: 20, weight: .bold, design: .default))
                         Spacer()
                     }.padding(
-                        EdgeInsets(top: 0, leading: 48, bottom: 14, trailing: 48)
+                        EdgeInsets(top: 0, leading: 48, bottom: 0, trailing: 48)
                     )
                     HStack{
                         Rectangle()
@@ -195,7 +209,7 @@ struct ProfileView: View {
                             HStack{
                                 //app language
                                 Text("Select a language")
-                                .foregroundColor(Color.white).font(.system(size: 18, weight: .bold, design: .default))
+                                .foregroundColor(Color.white).font(.system(size: 16, weight: .bold, design: .default))
                                 Spacer()
                                 //dropdown
                                 // DropDownMenu()
@@ -223,7 +237,193 @@ struct ProfileView: View {
                       }.padding(
                         EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
                       )
-                    
+                    //rate & privacy & share & feedback
+                    //more
+                    HStack{
+                        Text("More")
+                        .foregroundColor(.white).font(.system(size: 26, weight: .bold, design: .default))
+                        Spacer()
+                    }.padding(
+                        EdgeInsets(top: 24, leading: 24, bottom: 0, trailing: 24)
+                    )
+                    //rate
+                    //  HStack{
+                    //     Text("Rate")
+                    //     .foregroundColor(Color.white.opacity(0.7)).font(.system(size: 20, weight: .bold, design: .default))
+                    //     Spacer()
+                    // }.padding(
+                    //     EdgeInsets(top: 0, leading: 48, bottom: 14, trailing: 48)
+                    // )
+                    HStack{
+                        Rectangle()
+                            .fill(Color.black.opacity(0.15))
+                            .frame(width: .infinity, height: 80)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .padding(10).overlay(
+                            HStack{
+                               
+                                Text("Rate us")
+                                .foregroundColor(Color.white).font(.system(size: 16, weight: .bold, design: .default))
+                                Spacer()
+                                // Menu {
+                                //     ForEach(Languages, id: \.self) { language in
+                                //         Button(action: {
+                                //             self.selectedLanguage = language
+                                //         }) {
+                                //             Text(language).foregroundColor(.white)
+                                //         }
+                                //     }
+                                //     } label: {
+                                //         Text(self.selectedLanguage).foregroundColor(.white)
+                                //     }
+                                //arrow icon
+                                Image(systemName: "arrow.right")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(Color.white)
+                            }.frame(
+                                maxWidth: .infinity,
+                                maxHeight: 100
+                            ).padding(
+                                EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                            
+                            
+                            )
+                            )
+                      }.padding(
+                        EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                      ) 
+                    HStack{
+                        Rectangle()
+                            .fill(Color.black.opacity(0.15))
+                            .frame(width: .infinity, height: 80)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .padding(10).overlay(
+                            HStack{
+                               
+                                Text("Privacy")
+                                .foregroundColor(Color.white).font(.system(size: 16, weight: .bold, design: .default))
+                                Spacer()
+                                // Menu {
+                                //     ForEach(Languages, id: \.self) { language in
+                                //         Button(action: {
+                                //             self.selectedLanguage = language
+                                //         }) {
+                                //             Text(language).foregroundColor(.white)
+                                //         }
+                                //     }
+                                //     } label: {
+                                //         Text(self.selectedLanguage).foregroundColor(.white)
+                                //     }
+                                  Image(systemName: "arrow.right")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(Color.white)
+                                
+                            }.frame(
+                                maxWidth: .infinity,
+                                maxHeight: 100
+                            ).padding(
+                                EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                            
+                            
+                            )
+                            )
+                      }.padding(
+                        EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                      )  
+                    HStack{
+                        Rectangle()
+                            .fill(Color.black.opacity(0.15))
+                            .frame(width: .infinity, height: 80)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .padding(10).overlay(
+                            HStack{
+                               
+                                Text("Share")
+                                .foregroundColor(Color.white).font(.system(size: 16, weight: .bold, design: .default))
+                                Spacer()
+                                // Menu {
+                                //     ForEach(Languages, id: \.self) { language in
+                                //         Button(action: {
+                                //             self.selectedLanguage = language
+                                //         }) {
+                                //             Text(language).foregroundColor(.white)
+                                //         }
+                                //     }
+                                //     } label: {
+                                //         Text(self.selectedLanguage).foregroundColor(.white)
+                                //     }
+                                  Image(systemName: "arrow.right")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(Color.white)
+                                
+                            }.frame(
+                                maxWidth: .infinity,
+                                maxHeight: 100
+                            ).padding(
+                                EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                            
+                            
+                            )
+                            )
+                      }.padding(
+                        EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                      ) 
+                    //about app
+                    HStack{
+                        Text("About")
+                        .foregroundColor(.white).font(.system(size: 26, weight: .bold, design: .default))
+                        Spacer()
+                    }.padding(
+                        EdgeInsets(top: 24, leading: 24, bottom: 0, trailing: 24)
+                    )
+                    //info about app
+                    HStack{
+                        Rectangle()
+                            .fill(Color.black.opacity(0.15))
+                            .frame(width: .infinity, height: 150)
+                            .cornerRadius(10)
+                            .shadow(radius: 1)
+                            .padding(10).overlay(
+                            VStack{
+                                Text("KeYbAI")
+                                .foregroundColor(Color.white).font(.system(size: 16, weight: .bold, design: .default))
+                                Spacer().frame(
+                                    height: 10
+                                )
+                                //more info what the app does text
+                                Text("KeYbAI is a keyboard app that uses AI to predict what you want to type next. It learns from your typing habits and provides suggestions based on your typing history.")
+                                    .foregroundColor(Color.white).font(.system(size: 16, weight: .regular, design: .default))
+                                    .multilineTextAlignment(.leading)
+                                    .padding(
+                                        EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+                                    )
+                                    .frame(
+                                        maxWidth: .infinity,
+                                        alignment: .leading
+                                    )
+                                
+                            }.frame(
+                                maxWidth: .infinity,
+                                maxHeight: 200
+                            ).padding(
+                                EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                            
+                            
+                            )
+                            )
+                      }.padding(
+                        EdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                      )
+                    Spacer().frame(
+                        height: 100
+                    )
+                }
                 }
             )
            
@@ -639,21 +839,3 @@ extension HomeView{
     }
 }
 
-////drop down 
-struct DropDownMenu: View {
-    var friuts = ["apple", "banana", "orange", "kiwi"]
-    @State private var selectedFruit: String = "banana"
-
-    var body: some View {
-        VStack {
-            Picker("fruits", selection: $selectedFruit) {
-                ForEach(friuts, id: \.self) { fruit in
-                    Text(fruit)
-                }
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-        .background(Color(UIColor.lightGray).opacity(0.4))
-
-    }
-}
