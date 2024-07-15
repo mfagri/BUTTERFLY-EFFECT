@@ -2,7 +2,8 @@ import SwiftUI
 
 struct viewkeyboard: View {
     @State private var isUpperCase = false
-       @State private var isSymbolMode = false
+    @State private var isSymbolMode = false
+    @State private var isSymbolMode2 = false
 
     private var selectedColor: Color
     private var backgroundColor: Color = .white
@@ -23,7 +24,7 @@ struct viewkeyboard: View {
     var body: some View {
 
               ZStack {
-        Image("bg2")
+        Image("bg1")
             .resizable()
             .scaledToFill()
             .frame(width: screenWidth, height: .infinity)
@@ -45,11 +46,47 @@ struct viewkeyboard: View {
                     ForEach(row, id: \.self) { key in
             //    GeometryReader { g in
                                 Button(action: {
+                                    // if self.getButtonText(key: key) == "abc" && self.isSymbolMode {
+                                    //         self.isSymbolMode != self.isSymbolMode
+                                    //         self.isUpperCase = false
+                                    // }
+                                    if key == "{&=" {
+                                        self.isSymbolMode = false
+                                        self.isSymbolMode2.toggle()
+                                    }
+                                    else if key == "en" {
+                                        self.isUpperCase.toggle()
+                                    }
+                                    else if key == "123" {
+                                        if self.isSymbolMode {
+                                            self.isSymbolMode.toggle()
+                                        }
+                                        else {
+                                            self.isSymbolMode.toggle()
+                                            self.isUpperCase = false
+                                        }
+                                    }
+                                    else if key == "abc" {
+                                        self.isUpperCase.toggle()
+                                        self.isSymbolMode.toggle()
+                                        self.isSymbolMode2.toggle()
+                                    }
+                                    else {
+                                        // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: self.getKeyOutput(key: key))
                                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: self.getKeyOutput(key: key))
+                                    }
                                 }) {
-                                    if self.getButtonText(key: key) == "delete" || self.getButtonText(key: key) == "return" || self.getButtonText(key: key) == "space"
+                                    if self.getButtonText(key: key) == "delete" || self.getButtonText(key: key) == "return" || self.getButtonText(key: key) == "space" || self.getButtonText(key: key) == "abc" || self.getButtonText(key: key) == "123" || self.getButtonText(key: key) == "emoji"
                                     {
-                                        if self.getButtonText(key: key) == "delete" {
+                                        if self.getButtonText(key: key) == "abc" && self.isSymbolMode {
+                                                                                   Text("abc")
+                                        .frame(width: self.getKeyWidth(key: key), height: 45)
+                                        .background(self.selectedColor)
+                                        .foregroundColor(self.foregroundColor)
+                                        .cornerRadius(5)
+                                        .font(.system(size: 16, weight: .bold, design: .default))
+                                        }
+                                        else if self.getButtonText(key: key) == "delete" {
                                             Image(systemName: "delete.left")
                                                .frame(width: self.getKeyWidth(key: key), height: 45)
                                         .background(self.selectedColor)
@@ -59,6 +96,30 @@ struct viewkeyboard: View {
                                         }
                                         else if self.getButtonText(key: key) == "space" {
                                             Image(systemName: "space")
+                                                                                         .frame(width: self.getKeyWidth(key: key), height: 45)
+                                        .background(self.selectedColor)
+                                        .foregroundColor(self.foregroundColor)
+                                        .cornerRadius(5)
+                                        .font(.system(size: 16, weight: .bold, design: .default))
+                                        }
+                                        else if self.getButtonText(key: key) == "abc" {
+                                            Image(systemName: "arrowshape.up.fill")
+                                                                                         .frame(width: self.getKeyWidth(key: key), height: 45)
+                                        .background(self.selectedColor)
+                                        .foregroundColor(self.foregroundColor)
+                                        .cornerRadius(5)
+                                        .font(.system(size: 16, weight: .bold, design: .default))
+                                        }
+                                        else if self.getButtonText(key: key) == "123" {
+                                            Image(systemName: "number")
+                                                                                         .frame(width: self.getKeyWidth(key: key), height: 45)
+                                        .background(self.selectedColor)
+                                        .foregroundColor(self.foregroundColor)
+                                        .cornerRadius(5)
+                                        .font(.system(size: 16, weight: .bold, design: .default))
+                                        }
+                                        else if self.getButtonText(key: key) == "emoji" {
+                                            Image(systemName: "smiley")
                                                                                          .frame(width: self.getKeyWidth(key: key), height: 45)
                                         .background(self.selectedColor)
                                         .foregroundColor(self.foregroundColor)
@@ -141,11 +202,19 @@ struct viewkeyboard: View {
         }
         if isSymbolMode {
             keys = [
-                // ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "Delete"],
                 ["1","2","3","4","5","6","7","8","9","0"],
                 [ "@", "#", "$","&", "_", "-","(", ")","=","%"],
-                ["{&=","\"", "*", "\'", "}", ":", "/", "!","?","+","Delete"],
-                ["abc","emoji",",","Space","." ,"Return"]
+                ["\"", "*", "\'", ":", "/", "!","?","+","Delete"],
+                ["{&=","abc","emoji",",","Space","." ,"Return"]
+            ]
+            return keys
+        }
+        else if isSymbolMode2{
+            keys = [
+                ["1","2","3","4","5","6","7","8","9","0"],
+                [ "[", "]", "{","}", "<", ">","^", "∑","⇒"],
+                ["`", ";", "÷", "\\", "|", "/","×","≠","Delete"],
+                ["123","abc","emoji",",","Space","." ,"Return"]
             ]
             return keys
         }
@@ -163,6 +232,12 @@ struct viewkeyboard: View {
             return "return"
         case "Delete":
             return "delete"
+        case "en":
+            return "abc"
+        case "123":
+            return "123"
+        case "emoji":
+            return "emoji"
         default:
             return key
         }
