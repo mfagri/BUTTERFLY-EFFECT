@@ -175,9 +175,9 @@ struct SettingsView: View {
                                 //         Text(self.selectedLanguage).foregroundColor(.white)
                                 //     }
                                 //arrow icon
-                                Image(systemName: "arrow.right")
+                                Image(systemName: "greaterthan")
                                     .resizable()
-                                    .frame(width: 20, height: 20)
+                                    .frame(width: 15, height: 20)
                                     .foregroundColor(Color.white)
                             }.frame(
                                 maxWidth: .infinity,
@@ -214,9 +214,9 @@ struct SettingsView: View {
                                 //     } label: {
                                 //         Text(self.selectedLanguage).foregroundColor(.white)
                                 //     }
-                                  Image(systemName: "arrow.right")
+                                  Image(systemName: "greaterthan")
                                     .resizable()
-                                    .frame(width: 20, height: 20)
+                                    .frame(width: 15, height: 20)
                                     .foregroundColor(Color.white)
                                 
                             }.frame(
@@ -254,9 +254,9 @@ struct SettingsView: View {
                                 //     } label: {
                                 //         Text(self.selectedLanguage).foregroundColor(.white)
                                 //     }
-                                  Image(systemName: "arrow.right")
+                                  Image(systemName: "greaterthan")
                                     .resizable()
-                                    .frame(width: 20, height: 20)
+                                    .frame(width: 15, height: 20)
                                     .foregroundColor(Color.white)
                                 
                             }.frame(
