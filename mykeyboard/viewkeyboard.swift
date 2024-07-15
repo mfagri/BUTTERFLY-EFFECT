@@ -35,7 +35,6 @@ struct ViewKeyboard: View {
                     .frame(height: 50)
                     
                 Spacer().frame(height: 5)
-                
                 ForEach(getRows(), id: \.self) { row in
                     HStack(spacing: 5) {
                         ForEach(row, id: \.self) { key in
@@ -114,7 +113,12 @@ struct ViewKeyboard: View {
         case "return":
             return AnyView(Image(systemName: "return"))
         case "abc":
-            return AnyView(Image(systemName: "arrowshape.up.fill"))
+            if isSymbolMode || isSymbolMode2 {
+                return AnyView(Image(systemName: "character"))
+            } else {
+                return AnyView(Image(systemName: "arrowshape.up.fill"))
+            }
+            // return AnyView(Image(systemName: "arrowshape.up.fill"))
         case "123":
             return AnyView(Image(systemName: "number"))
         case "emoji":
@@ -129,9 +133,13 @@ struct ViewKeyboard: View {
     func handleKeyPress(key: String) {
         switch key {
         case "{&=":
-            if isSymbolMode {
+            if isSymbolMode == true {
                 isSymbolMode = false
-                isSymbolMode2.toggle()
+                isSymbolMode2 = true
+            }
+            else  {
+                isSymbolMode2 = false
+                isSymbolMode = true
             }
         case "en":
             isUpperCase.toggle()
@@ -145,8 +153,8 @@ struct ViewKeyboard: View {
             }
         case "abc":
             isUpperCase.toggle()
-            isSymbolMode.toggle()
-            isSymbolMode2.toggle()
+            isSymbolMode = false
+            isSymbolMode2 = false
         default:
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addkey"), object: getKeyOutput(key: key))
         }
