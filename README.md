@@ -8,32 +8,11 @@ Butterfly Effect is a custom keyboard app developed in SwiftUI. It features a fu
 
 ## Screenshots
 
-### Screenshot 1
-<img src="screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2000.02.51.png" width="300">
-
-
-### Screenshot 2
-<img src="screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2000.38.37.png" width="300">
-
-
-### Screenshot 3
-<img src="screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2001.04.01.png" width="300">
-
-
-### Screenshot 4
-<img src="screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2002.30.59.png" width="300">
-
-
-
-### Screenshot 5
-<img src="screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2003.53.56.png" width="300">
-
-### Screenshot 6
-<img src="screens/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202024-07-03%20at%2007.03.13.png" width="300">
-
-### Screenshot 7
-<img src="screens/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202024-07-03%20at%2007.03.22.png" width="300">
-*final result for now :)*
+| ![Screenshot 1](screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2000.02.51.png) | ![Screenshot 2](screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2000.38.37.png) | ![Screenshot 3](screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2001.04.01.png) |
+|:--:|:--:|:--:|
+| ![Screenshot 4](screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2002.30.59.png) | ![Screenshot 5](screens/Simulator%20Screen%20Shot%20-%20iPhone%2012%20-%202024-07-02%20at%2003.53.56.png) | ![Screenshot 6](screens/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202024-07-03%20at%2007.03.13.png) |
+| ![Screenshot 7](screens/Simulator%20Screen%20Shot%20-%20iPhone%2011%20-%202024-07-03%20at%2007.03.22.png) | ![Screenshot 8](screens/Simulator%20Screenshot%20-%20iPhone%2015%20-%202024-07-11%20at%2016.19.33.png) | ![Screenshot 9](screens/Simulator%20Screenshot%20-%20iPhone%2015%20-%202024-07-11%20at%2016.19.36.png) |
+| ![Screenshot 10](screens/Simulator%20Screenshot%20-%20iPhone%2015%20-%202024-07-11%20at%2016.19.40.png) | ![Screenshot 11](screens/Simulator%20Screenshot%20-%20iPhone%2015%20-%202024-07-11%20at%2016.19.45.png) | ![Screenshot 12](screens/Simulator%20Screenshot%20-%20iPhone%2015%20-%202024-07-11%20at%2018.33.31.png) |
 
 ## Features
 
