@@ -37,18 +37,22 @@ struct ThemesView: View {
                                   )
                                   //theme selection
                                   ScrollView(.vertical, showsIndicators: false){
-                                      VStack{
+                                      VStack(spacing:40){
                                               Spacer().frame(
                                       height: 20
                                   )
                                           ForEach(0..<10){ index in
                                             ZStack{
+
                                                     HStack{
                                                     Rectangle()
                                                         .fill(Color(hex: 0x7cb2fd))
-                                                        .frame(width: inGeometry.size.width - 20 , height: 150)
+                                                        .frame(width: inGeometry.size.width - 20 , height: inGeometry.size.height/3)
                                                         .cornerRadius(10)
                                                 }.rotation3DEffect(Angle(degrees: (index % 2 != 0) ? 1 : -1), axis: (x: 0, y: 0, z: 1))
+                                                .overlay(
+                                                                                                    ViewKeyboard(selectedColor: Color(.white), backgroundColor: Color(.white), foregroundColor: Color(.black), backgroundImage: "bg1", IshaveImage: false, bottunColor: Color(.blue), buttonTextColor: Color(.white), buttoncurner: 20,keyboardWidth: inGeometry.size.width - 60, isInthemes: false)
+                                                )
                                                 VStack{
                                                   HStack{
                                                     Spacer()
@@ -75,15 +79,15 @@ struct ThemesView: View {
                                                 }
                                                 Spacer()
                                                 }
-                                              }.frame(width: inGeometry.size.width, height: 170)
+                                              }.frame(width: inGeometry.size.width, height: 270)
                                             //   .background(Color.white.opacity(0.4))
                                               .padding(
-                                                    EdgeInsets(top: 15, leading: 0, bottom: 0, trailing: 0)
+                                                    EdgeInsets(top: 15, leading: 0, bottom: 20, trailing: 0)
                                               )
                                             
                                           }
                                            Spacer().frame(
-                                      height: 100
+                                      height: 90
                                   )
                                       }
                                   }

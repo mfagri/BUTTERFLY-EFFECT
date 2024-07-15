@@ -38,7 +38,7 @@ class KeyboardViewController: UIInputViewController {
         }
         
         // Initialize viewkeyboard with a selected color binding
-        let hostingController = UIHostingController(rootView: ViewKeyboard(selectedColor: Color(selectedColor), backgroundColor: Color(.white), foregroundColor: Color(.black)))
+        let hostingController = UIHostingController(rootView: ViewKeyboard(selectedColor: Color(selectedColor), backgroundColor: Color(.white), foregroundColor: Color(.black), backgroundImage: "bg1", IshaveImage: true, bottunColor: Color(.blue), buttonTextColor: Color(.white), buttoncurner: 20, keyboardWidth: UIScreen.main.bounds.width, isInthemes: true))
         view.addKeyboardView(hostingController.view)
         
         NotificationCenter.default.addObserver(

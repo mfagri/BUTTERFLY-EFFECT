@@ -8,32 +8,52 @@ struct ViewKeyboard: View {
     private var selectedColor: Color
     private var backgroundColor: Color = .white
     private var foregroundColor: Color = .black
+    private var backgroundImage: String = "bg1" // Default background image
+    private var IshaveImage: Bool = false
+    private var bottunColor: Color = .white
+    private var buttonTextColor: Color = .black
+    private var buttoncurner: CGFloat = 10
     private var screenWidth: CGFloat = UIScreen.main.bounds.width
     private var screenHeight: CGFloat = UIScreen.main.bounds.height
-
+    private var keyboardWidth: CGFloat = UIScreen.main.bounds.width
+    private var isInthemes = false
     @State private var showingAlert = false
     
-    init(selectedColor: Color , backgroundColor: Color = .white, foregroundColor: Color = .black) {
+    init(selectedColor: Color , backgroundColor: Color = .white, foregroundColor: Color = .black, backgroundImage: String = "", IshaveImage: Bool = false, bottunColor: Color = .white, buttonTextColor: Color = .black, buttoncurner: CGFloat = 10, keyboardWidth: CGFloat = UIScreen.main.bounds.width, isInthemes: Bool = false) {
         self.selectedColor = selectedColor
         self.backgroundColor = backgroundColor
         self.foregroundColor = foregroundColor
+        self.IshaveImage = IshaveImage
+        self.backgroundImage = backgroundImage
+        self.bottunColor = bottunColor
+        self.buttonTextColor = buttonTextColor
+        self.buttoncurner = buttoncurner
+        self.keyboardWidth = keyboardWidth
+        self.isInthemes = isInthemes
+
     }
     
     var body: some View {
         ZStack {
-            Image("bg1")
-                .resizable()
-                .scaledToFill()
-                .frame(width: screenWidth, height: .infinity)
-            
+            if IshaveImage {
+                Image(backgroundImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: keyboardWidth, height: .infinity)
+            }
+            else {
+                backgroundColor
+                    .edgesIgnoringSafeArea(.all)
+            }
             VStack(spacing: 5) {
                 // TextField to take what is typed
-                TextField("The worst she can do is say no", text: .constant("")) // Binding to a constant string just for display
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(5)
-                    .frame(height: 50)
-                    
+                if isInthemes {
+                    TextField("The worst she can do is say no", text: .constant(""))
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(5)
+                        .frame(height: 50)
+                }
                 Spacer().frame(height: 5)
                 ForEach(getRows(), id: \.self) { row in
                     HStack(spacing: 5) {
@@ -43,9 +63,9 @@ struct ViewKeyboard: View {
                             }) {
                                 getKeyView(for: key)
                                     .frame(width: getKeyWidth(key: key), height: 45)
-                                    .background(selectedColor.opacity(0.5))
-                                    .foregroundColor(foregroundColor)
-                                    .cornerRadius(5)
+                                    .background(bottunColor)
+                                    .foregroundColor(buttonTextColor)
+                                    .cornerRadius(buttoncurner)
                                     .font(.system(size: 16, weight: .bold, design: .default))
                             }
                         }
@@ -54,9 +74,9 @@ struct ViewKeyboard: View {
                 
                 Spacer().frame(height: 5)
             }
-            .frame(width: screenWidth, height: .infinity)
+            .frame(width: keyboardWidth, height: .infinity)
         }
-        .frame(width: screenWidth, height: .infinity)
+        .frame(width: keyboardWidth, height: .infinity)
     }
     
     func getKeyWidth(key: String) -> CGFloat {
@@ -66,7 +86,7 @@ struct ViewKeyboard: View {
         case "Return", "Delete":
             return 34
         default:
-            return screenWidth / 12
+            return keyboardWidth / 12
         }
     }
 
