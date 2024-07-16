@@ -83,7 +83,7 @@ struct ThemesView: View {
 
                                                     HStack{
                                                     Rectangle()
-                                                        .fill(theme.selectedColor)
+                                                        .fill(theme.selectedColor.opacity(0.0))
                                                         .frame(width: inGeometry.size.width - 20 , height: inGeometry.size.height/3.5)
                                                         .cornerRadius(10)
                                                 }.rotation3DEffect(Angle(degrees: (index % 2 != 0) ? 1 : -1), axis: (x: 0, y: 0, z: 1))
@@ -98,12 +98,13 @@ struct ThemesView: View {
                     bottunColor: theme.buttonColor,
                     buttonTextColor: theme.buttonTextColor,
                     buttoncurner: theme.buttonCorner,
-                    keyboardWidth: UIScreen.main.bounds.width - 80,
+                    keyboardWidth: UIScreen.main.bounds.width - 20,
                     isInthemes: theme.isInThemes
                 )
-                .frame(height: 210) // Adjust frame height as needed
+                .frame(height: 210)
+                .cornerRadius(10)
                 .padding(
-                    EdgeInsets(top:0,leading:20,bottom:0,trailing:20)
+                    EdgeInsets(top:0,leading:0,bottom:0,trailing:0)
                 ).rotation3DEffect(Angle(degrees: (index % 2 != 0) ? 1 : -1), axis: (x: 0, y: 0, z: 1))
                                                 )
                                                 VStack{
