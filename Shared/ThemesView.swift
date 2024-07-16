@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct Theme {
     let selectedColor: Color
@@ -21,11 +22,11 @@ struct Theme {
 
 let themes = [
     Theme(selectedColor: Color(.white), backgroundColor: Color(.white), foregroundColor: Color(.black), backgroundImage: "bg1", isHaveImage: true, buttonColor: Color(.blue), buttonTextColor: Color(.white), buttonCorner: 20, isInThemes: false),
-    Theme(selectedColor: Color(.black), backgroundColor: Color(.gray), foregroundColor: Color(.white), backgroundImage: "bg2", isHaveImage: true, buttonColor: Color(.gray), buttonTextColor: Color(.yellow), buttonCorner: 15, isInThemes: true),
+    Theme(selectedColor: Color(.black), backgroundColor: Color(.gray), foregroundColor: Color(.white), backgroundImage: "bg2", isHaveImage: true, buttonColor: Color(.gray), buttonTextColor: Color(.yellow), buttonCorner: 15, isInThemes: false),
     Theme(selectedColor: Color(.red), backgroundColor: Color(.black), foregroundColor: Color(.red), backgroundImage: "bg1", isHaveImage: false, buttonColor: Color(.red), buttonTextColor: Color(.white), buttonCorner: 10, isInThemes: false),
-    Theme(selectedColor: Color(.blue), backgroundColor: Color(.lightGray), foregroundColor: Color(.blue), backgroundImage: "bg1", isHaveImage: false, buttonColor: Color(.cyan), buttonTextColor: Color(.black), buttonCorner: 20, isInThemes: true),
+    Theme(selectedColor: Color(.blue), backgroundColor: Color(.lightGray), foregroundColor: Color(.blue), backgroundImage: "bg1", isHaveImage: false, buttonColor: Color(.cyan), buttonTextColor: Color(.black), buttonCorner: 20, isInThemes: false),
     Theme(selectedColor: Color(.green), backgroundColor: Color(.white), foregroundColor: Color(.green), backgroundImage: "bg2", isHaveImage: true, buttonColor: Color(.green), buttonTextColor: Color(.green), buttonCorner: 5, isInThemes: false),
-    Theme(selectedColor: Color(.orange), backgroundColor: Color(.gray), foregroundColor: Color(.orange), backgroundImage: "bg1", isHaveImage: false, buttonColor: Color(.orange), buttonTextColor: Color(.white), buttonCorner: 30, isInThemes: true),
+    Theme(selectedColor: Color(.orange), backgroundColor: Color(.gray), foregroundColor: Color(.orange), backgroundImage: "bg1", isHaveImage: false, buttonColor: Color(.orange), buttonTextColor: Color(.white), buttonCorner: 30, isInThemes: false),
     Theme(selectedColor: Color(.purple), backgroundColor: Color(.gray), foregroundColor: Color(.purple), backgroundImage: "bg2", isHaveImage: true, buttonColor: Color(.purple), buttonTextColor: Color(.white), buttonCorner: 15, isInThemes: false)
     // Theme(selectedColor: Color(.pink), backgroundColor: Color(.white), foregroundColor: Color(.pink), backgroundImage: "bg2", isHaveImage: false, buttonColor: Color(.pink), buttonTextColor: Color(.black), buttonCorner: 25, isInThemes: true),
     // Theme(selectedColor: Color(.cyan), backgroundColor: Color(.black), foregroundColor: Color(.cyan), backgroundImage: "bg2", isHaveImage: true, buttonColor: Color(.cyan), buttonTextColor: Color(.black), buttonCorner: 10, isInThemes: false),
@@ -82,8 +83,8 @@ struct ThemesView: View {
 
                                                     HStack{
                                                     Rectangle()
-                                                        .fill(Color(hex: 0x7cb2fd))
-                                                        .frame(width: inGeometry.size.width - 20 , height: inGeometry.size.height/3)
+                                                        .fill(theme.selectedColor)
+                                                        .frame(width: inGeometry.size.width - 20 , height: inGeometry.size.height/3.5)
                                                         .cornerRadius(10)
                                                 }.rotation3DEffect(Angle(degrees: (index % 2 != 0) ? 1 : -1), axis: (x: 0, y: 0, z: 1))
                                                 .overlay(
@@ -97,11 +98,13 @@ struct ThemesView: View {
                     bottunColor: theme.buttonColor,
                     buttonTextColor: theme.buttonTextColor,
                     buttoncurner: theme.buttonCorner,
-                    keyboardWidth: UIScreen.main.bounds.width - 60,
+                    keyboardWidth: UIScreen.main.bounds.width - 80,
                     isInthemes: theme.isInThemes
                 )
-                .frame(height: 300) // Adjust frame height as needed
-                .padding()
+                .frame(height: 210) // Adjust frame height as needed
+                .padding(
+                    EdgeInsets(top:0,leading:20,bottom:0,trailing:20)
+                ).rotation3DEffect(Angle(degrees: (index % 2 != 0) ? 1 : -1), axis: (x: 0, y: 0, z: 1))
                                                 )
                                                 VStack{
                                                   HStack{
@@ -115,7 +118,7 @@ struct ThemesView: View {
                                                             color: Color.black.opacity(0.5),
                                                             radius: 2, x: 0, y: 0
                                                         ).overlay(
-                                                          //add checkmark
+                                                          
                                                             Image(systemName: "checkmark")
                                                                 .resizable()
                                                                 .frame(width: 20, height: 20)
@@ -130,7 +133,6 @@ struct ThemesView: View {
                                                 Spacer()
                                                 }
                                               }.frame(width: inGeometry.size.width, height: 270)
-                                            //   .background(Color.white.opacity(0.4))
                                               .padding(
                                                     EdgeInsets(top: 15, leading: 0, bottom: 20, trailing: 0)
                                               )
@@ -153,6 +155,18 @@ struct ThemesView: View {
         
     }
 }
+
+// extension Color {
+//     init(hex: UInt, alpha: Double = 1) {
+//         self.init(
+//             .sRGB,
+//             red: Double((hex >> 16) & 0xff) / 255,
+//             green: Double((hex >> 08) & 0xff) / 255,
+//             blue: Double((hex >> 00) & 0xff) / 255,
+//             opacity: alpha
+//         )
+//     }
+// }
 
 #Preview {
     ThemesView()

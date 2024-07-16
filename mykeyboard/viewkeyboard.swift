@@ -36,10 +36,13 @@ struct ViewKeyboard: View {
     var body: some View {
         ZStack {
             if IshaveImage {
-                Image(backgroundImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: keyboardWidth, height: .infinity)
+                VStack {
+                    Image(backgroundImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width:keyboardWidth, height: .infinity)
+                }
+                .frame(width:keyboardWidth, height: .infinity)
             }
             else {
                 backgroundColor
