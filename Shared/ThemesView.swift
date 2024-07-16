@@ -89,7 +89,7 @@ struct ThemesView: View {
                                   .foregroundColor(.white).font(.system(size: 26, weight: .bold, design: .default))
                                   Spacer()
                               }.padding(
-                                  EdgeInsets(top: 50, leading: 24, bottom: 24, trailing: 24)
+                                  EdgeInsets(top: 40, leading: 24, bottom: 24, trailing: 24)
                               )
                               //theme selection
                               VStack{
@@ -102,7 +102,7 @@ struct ThemesView: View {
                                   )
                                   //theme selection
                                   ScrollView(.vertical, showsIndicators: false){
-                                      VStack(spacing:20){
+                                      VStack(spacing:0){
                                               Spacer().frame(
                                       height: 20
                                   )
@@ -164,7 +164,7 @@ struct ThemesView: View {
                                                 }
                                               }.frame(width: inGeometry.size.width, height: 270)
                                               .padding(
-                                                    EdgeInsets(top: 15, leading: 0, bottom: 20, trailing: 0)
+                                                    EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
                                               )
                                             
                                           }
