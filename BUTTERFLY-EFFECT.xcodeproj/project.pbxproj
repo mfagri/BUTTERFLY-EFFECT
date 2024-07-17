@@ -114,6 +114,8 @@
 		CF89F76C2C40542700A31383 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		CF89F7702C4054EA00A31383 /* ThemesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesView.swift; sourceTree = "<group>"; };
 		CF89F7742C4056E200A31383 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		CFDA115C2C47671E00CBE864 /* BUTTERFLY-EFFECT (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BUTTERFLY-EFFECT (iOS).entitlements"; sourceTree = "<group>"; };
+		CFDA115D2C47672200CBE864 /* mykeyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mykeyboard.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 		AE1534D52C336AD9002EFA88 /* mykeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				CFDA115D2C47672200CBE864 /* mykeyboard.entitlements */,
 				AECC52072C34B6BD00D18D04 /* mykeyboardRelease.entitlements */,
 				AE1534D62C336AD9002EFA88 /* KeyboardViewController.swift */,
 				AE1534D82C336AD9002EFA88 /* Info.plist */,
@@ -171,6 +174,7 @@
 		AE319E592C3279FA00FDFD4C = {
 			isa = PBXGroup;
 			children = (
+				CFDA115C2C47671E00CBE864 /* BUTTERFLY-EFFECT (iOS).entitlements */,
 				AECC520D2C34BF7700D18D04 /* BUTTERFLY-EFFECTRelease.entitlements */,
 				AE319E5E2C3279FA00FDFD4C /* Shared */,
 				AE319E682C3279FD00FDFD4C /* iOS */,
@@ -530,7 +534,9 @@
 		AE1534DD2C336AD9002EFA88 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = mykeyboard/mykeyboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MX8V83YKFH;
 				INFOPLIST_FILE = mykeyboard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -552,6 +558,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = mykeyboard/mykeyboardRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MX8V83YKFH;
 				INFOPLIST_FILE = mykeyboard/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -686,7 +693,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "BUTTERFLY-EFFECT (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MX8V83YKFH;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -711,7 +720,7 @@
 				CODE_SIGN_ENTITLEMENTS = "BUTTERFLY-EFFECTRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MX8V83YKFH;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

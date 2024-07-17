@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct MenuView: View {
+    
+    init(){
+        print("hello")
+//        let defaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT")
+//        defaults?.set("555644", forKey: "userID")
+//        defaults?.synchronize()
+    }
     var body: some View {
            GeometryReader {
         geometry in

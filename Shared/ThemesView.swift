@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct Theme {
+struct Theme: Codable {
     let selectedColor: Color
     let backgroundColor: Color
     let foregroundColor: Color
@@ -18,7 +18,58 @@ struct Theme {
     let buttonTextColor: Color
     let buttonCorner: CGFloat
     let isInThemes: Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case selectedColor
+        case backgroundColor
+        case foregroundColor
+        case backgroundImage
+        case isHaveImage
+        case buttonColor
+        case buttonTextColor
+        case buttonCorner
+        case isInThemes
+    }
 }
+
+extension Color: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let hexString = try container.decode(String.self)
+        self = Color(hex: hexString)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.toHex())
+    }
+    
+    func toHex() -> String? {
+        guard let components = cgColor?.components, components.count >= 3 else {
+            return nil
+        }
+        
+        let r = components[0]
+        let g = components[1]
+        let b = components[2]
+        let a = components.count >= 4 ? components[3] : 1.0
+        
+        if a < 1.0 {
+            return String(format: "#%02lX%02lX%02lX%02lX",
+                          lroundf(Float(r * 255)),
+                          lroundf(Float(g * 255)),
+                          lroundf(Float(b * 255)),
+                          lroundf(Float(a * 255)))
+        } else {
+            return String(format: "#%02lX%02lX%02lX",
+                          lroundf(Float(r * 255)),
+                          lroundf(Float(g * 255)),
+                          lroundf(Float(b * 255)))
+        }
+    }
+}
+
+
 
 let themes = [
     Theme(selectedColor: Color(hex: "#FFFFFF"), backgroundColor: Color(hex: "#FFFFFF"), foregroundColor: Color(hex: "#000000"), backgroundImage: "bg1", isHaveImage: true, buttonColor: Color(hex: "#0000FF"), buttonTextColor: Color(hex: "#FFFFFF"), buttonCorner: 20, isInThemes: false),
@@ -69,120 +120,132 @@ let themes = [
     Theme(selectedColor: Color(hex: "#DAA520"), backgroundColor: Color(hex: "#D3D3D3"), foregroundColor: Color(hex: "#DAA520"), backgroundImage: "bg46", isHaveImage: true, buttonColor: Color(hex: "#DAA520"), buttonTextColor: Color(hex: "#000000"), buttonCorner: 20, isInThemes: false),
     Theme(selectedColor: Color(hex: "#B0C4DE"), backgroundColor: Color(hex: "#FFFFFF"), foregroundColor: Color(hex: "#B0C4DE"), backgroundImage: "bg47", isHaveImage: true, buttonColor: Color(hex: "#B0C4DE"), buttonTextColor: Color(hex: "#000000"), buttonCorner: 5, isInThemes: false),
     
-
+    
 ]
 
 struct ThemesView: View {
-         @State private var isOn = false
+    @State private var isOn = false
     var body: some View {
         GeometryReader {
             inGeometry in
-               VStack{
-              LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
-                .overlay(
-                 VStack{
-                    //   ScrollView(.vertical, showsIndicators: false){
-                          VStack{
-                              HStack{
-                                  Text("Themes")
-                                  .foregroundColor(.white).font(.system(size: 26, weight: .bold, design: .default))
-                                  Spacer()
-                              }.padding(
-                                  EdgeInsets(top: 40, leading: 24, bottom: 24, trailing: 24)
-                              )
-                              //theme selection
-                              VStack{
-                                  HStack{
-                                      Text("Select a theme")
-                                      .foregroundColor(Color.white.opacity(0.7)).font(.system(size: 18, weight: .bold, design: .default))
-                                      Spacer()
-                                  }.padding(
-                                      EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
-                                  )
-                                  //theme selection
-                                  ScrollView(.vertical, showsIndicators: false){
-                                      VStack(spacing:0){
-                                              Spacer().frame(
-                                      height: 20
-                                  )
-                                          ForEach(themes.indices, id: \.self) { index in
-                                          let theme = themes[index]
-                                            ZStack{
-
+            VStack{
+                LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
+                    .overlay(
+                        VStack{
+                            //   ScrollView(.vertical, showsIndicators: false){
+                            VStack{
+                                HStack{
+                                    Text("Themes")
+                                        .foregroundColor(.white).font(.system(size: 26, weight: .bold, design: .default))
+                                    Spacer()
+                                }.padding(
+                                    EdgeInsets(top: 40, leading: 24, bottom: 24, trailing: 24)
+                                )
+                                //theme selection
+                                VStack{
+                                    HStack{
+                                        Text("Select a theme")
+                                            .foregroundColor(Color.white.opacity(0.7)).font(.system(size: 18, weight: .bold, design: .default))
+                                        Spacer()
+                                    }.padding(
+                                        EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                                    )
+                                    //theme selection
+                                    ScrollView(.vertical, showsIndicators: false){
+                                        VStack(spacing:0){
+                                            Spacer().frame(
+                                                height: 20
+                                            )
+                                            ForEach(themes.indices, id: \.self) { index in
+                                                let theme = themes[index]
+                                                ZStack{
+                                                    
                                                     HStack{
-                                                    Rectangle()
-                                                        .fill(theme.selectedColor.opacity(0.0))
-                                                        .frame(width: inGeometry.size.width - 20 , height: inGeometry.size.height/3.5)
-                                                        .cornerRadius(10)
-                                                }.rotation3DEffect(Angle(degrees: (index % 2 != 0) ? 1 : -1), axis: (x: 0, y: 0, z: 1))
-                                                .overlay(
-                                                                                                    // ViewKeyboard(selectedColor: Color(.white), backgroundColor: Color(.white), foregroundColor: Color(.black), backgroundImage: "bg1", IshaveImage: false, bottunColor: Color(.blue), buttonTextColor: Color(.white), buttoncurner: 20,keyboardWidth: inGeometry.size.width - 60, isInthemes: false)
-                                                                                                    ViewKeyboard(
-                    selectedColor: theme.selectedColor,
-                    backgroundColor: theme.backgroundColor,
-                    foregroundColor: theme.foregroundColor,
-                    backgroundImage: theme.backgroundImage,
-                    IshaveImage: theme.isHaveImage,
-                    bottunColor: theme.buttonColor,
-                    buttonTextColor: theme.buttonTextColor,
-                    buttoncurner: theme.buttonCorner,
-                    keyboardWidth: UIScreen.main.bounds.width - 20,
-                    isInthemes: theme.isInThemes
-                )
-                .frame(height: 210)
-                .cornerRadius(10)
-                .padding(
-                    EdgeInsets(top:0,leading:0,bottom:0,trailing:0)
-                ).rotation3DEffect(Angle(degrees: (index % 2 != 0) ? 1 : -1), axis: (x: 0, y: 0, z: 1))
-                                                )
-                                                VStack{
-                                                  HStack{
-                                                    Spacer()
-                                                       HStack{
-                                                    Rectangle()
-                                                        .fill(Color.white)
-                                                        .frame(width:30 , height: 30)
-                                                        .cornerRadius(10)
-                                                        .shadow(
-                                                            color: Color.black.opacity(0.5),
-                                                            radius: 2, x: 0, y: 0
-                                                        ).overlay(
-                                                          
-                                                            Image(systemName: "checkmark")
-                                                                .resizable()
-                                                                .frame(width: 20, height: 20)
-                                                                .foregroundColor(Color(hex: 0x7cb2fd))
+                                                        Rectangle()
+                                                            .fill(theme.selectedColor.opacity(0.0))
+                                                            .frame(width: inGeometry.size.width - 20 , height: inGeometry.size.height/3.5)
+                                                            .cornerRadius(10)
+                                                    }.rotation3DEffect(Angle(degrees: (index % 2 != 0) ? 1 : -1), axis: (x: 0, y: 0, z: 1))
+                                                        .overlay(
+                                                            // ViewKeyboard(selectedColor: Color(.white), backgroundColor: Color(.white), foregroundColor: Color(.black), backgroundImage: "bg1", IshaveImage: false, bottunColor: Color(.blue), buttonTextColor: Color(.white), buttoncurner: 20,keyboardWidth: inGeometry.size.width - 60, isInthemes: false)
+                                                            ViewKeyboard(
+                                                                selectedColor: theme.selectedColor,
+                                                                backgroundColor: theme.backgroundColor,
+                                                                foregroundColor: theme.foregroundColor,
+                                                                backgroundImage: theme.backgroundImage,
+                                                                IshaveImage: theme.isHaveImage,
+                                                                bottunColor: theme.buttonColor,
+                                                                buttonTextColor: theme.buttonTextColor,
+                                                                buttoncurner: theme.buttonCorner,
+                                                                keyboardWidth: UIScreen.main.bounds.width - 20,
+                                                                isInthemes: theme.isInThemes
+                                                            )
+                                                            .frame(height: 210)
+                                                            .cornerRadius(10)
+                                                            .padding(
+                                                                EdgeInsets(top:0,leading:0,bottom:0,trailing:0)
+                                                            ).rotation3DEffect(Angle(degrees: (index % 2 != 0) ? 1 : -1), axis: (x: 0, y: 0, z: 1))
                                                         )
-                                                       }
-                                                       .padding(
-                                                            EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)
-                                                        
-                                                       )
-                                                }
-                                                Spacer()
-                                                }
-                                              }.frame(width: inGeometry.size.width, height: 270)
-                                              .padding(
-                                                    EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
-                                              )
-                                            
-                                          }
-                                           Spacer().frame(
-                                      height: 90
-                                  )
-                                      }
-                                  }
-                                 
-                              }
-                        //   }
-
-                      }
-                 }
-                )
-          }
+                                                    VStack{
+                                                        HStack{
+                                                            Spacer()
+                                                            Button(action: {
+                                                                saveTheme(theme)
+                                                            }) {
+                                                                HStack{
+                                                                Rectangle()
+                                                                    .fill(Color.white)
+                                                                    .frame(width:30 , height: 30)
+                                                                    .cornerRadius(10)
+                                                                    .shadow(
+                                                                        color: Color.black.opacity(0.5),
+                                                                        radius: 2, x: 0, y: 0
+                                                                    ).overlay(
+                                                                        
+                                                                        Image(systemName: "checkmark")
+                                                                            .resizable()
+                                                                            .frame(width: 20, height: 20)
+                                                                            .foregroundColor(Color(hex: 0x7cb2fd))
+                                                                    )
+                                                            }
+                                                                .padding(
+                                                                    EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)
+                                                                    
+                                                                )
+                                                            }
+                                                        }
+                                                        Spacer()
+                                                    }
+                                                }.frame(width: inGeometry.size.width, height: 270)
+                                                    .padding(
+                                                        EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+                                                    )
+                                                
+                                            }
+                                            Spacer().frame(
+                                                height: 90
+                                            )
+                                        }
+                                    }
+                                    
+                                }
+                                //   }
+                                
+                            }
+                        }
+                    )
+            }
         }
         
+    }
+    
+    func saveTheme(_ theme: Theme) {
+        let defaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT")
+        if let encoded = try? JSONEncoder().encode(theme) {
+            defaults?.set(encoded, forKey: "selectedTheme")
+            defaults?.synchronize()
+        }
     }
 }
 
@@ -214,6 +277,7 @@ extension Color {
     }
 }
 
+extension CGFloat: Codable {}
 
 #Preview {
     ThemesView()

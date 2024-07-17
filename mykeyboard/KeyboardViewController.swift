@@ -5,8 +5,8 @@ class KeyboardViewController: UIInputViewController {
     
     @IBOutlet var nextKeyboardButton: UIButton!
     private var selectedColor: UIColor = .white // Default color
-    private let userDefaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT")
-
+    private let userDefaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT")
+    
     override func updateViewConstraints() {
         super.updateViewConstraints()
     }
@@ -29,16 +29,32 @@ class KeyboardViewController: UIInputViewController {
         
         // Load selected color from UserDefaults
         
-        let loadedData = loadFromKeychain(key: "greeting")
-        loadString(forKey: "greeting")
-        if let string = loadedData {
-            print("The loaded string is: \(string)")
-        } else {
-            print("No greeting string found in UserDefaults")
-        }
         
+        //        loadString(forKey: "greeting")
+        let keyboardtheme : Theme = loadTheme()
+        let selectedColor: Color = keyboardtheme.selectedColor
+        let backgroundColor: Color = keyboardtheme.backgroundColor
+        let foregroundColor: Color = keyboardtheme.foregroundColor
+        let backgroundImage: String = keyboardtheme.backgroundImage
+        let isHaveImage: Bool = keyboardtheme.isHaveImage
+        let bottunColor: Color = keyboardtheme.buttonColor
+        let buttonTextColor: Color = keyboardtheme.buttonTextColor
+        let buttoncurner: CGFloat = keyboardtheme.buttonCorner
+        let keyboardWidth: CGFloat = UIScreen.main.bounds.width
+        let isInthemes: Bool = true
         // Initialize viewkeyboard with a selected color binding
-        let hostingController = UIHostingController(rootView: ViewKeyboard(selectedColor: Color(selectedColor), backgroundColor: Color(.white), foregroundColor: Color(.black), backgroundImage: "bg1", IshaveImage: true, bottunColor: Color(.blue), buttonTextColor: Color(.white), buttoncurner: 20, keyboardWidth: UIScreen.main.bounds.width, isInthemes: true))
+        let hostingController = UIHostingController(rootView: ViewKeyboard(
+            selectedColor: selectedColor,
+            backgroundColor: backgroundColor,
+            foregroundColor: foregroundColor,
+            backgroundImage: backgroundImage,
+            IshaveImage: isHaveImage,
+            bottunColor: bottunColor,
+            buttonTextColor: buttonTextColor,
+            buttoncurner: buttoncurner,
+            keyboardWidth: keyboardWidth,
+            isInthemes: isInthemes
+        ))
         view.addKeyboardView(hostingController.view)
         
         NotificationCenter.default.addObserver(
@@ -78,46 +94,26 @@ class KeyboardViewController: UIInputViewController {
     
     // MARK: - UserDefaults handling
     
-     func loadString(forKey key: String) -> String? {
-        if let userDefaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT") {
-            let savedString = userDefaults.string(forKey: key)
-            print("Loaded string \"\(savedString)\" from UserDefaults with key: \(key)")
-            
-            if let savedString = savedString {
-                print("Loaded string \"\(savedString)\" from UserDefaults with key: \(key)")
-                return savedString
-            } else {
-                loadFromKeychain(key: key)
-                print("No string data found for key: \(key) in UserDefaults")
-                return nil
-            }
-        } else {
-            print("Failed to access UserDefaults with App Group")
-            return nil
+    //     func loadString(forKey key: String) {
+    //         let defaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT")
+    //         let greeting = defaults?.string(forKey: "userID")
+    //         print("string iiis  \(greeting)")
+    //
+    //    }
+    
+    //to get theme
+    func loadTheme() -> Theme {
+        let defaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT")
+        if let savedThemeData = defaults?.data(forKey: "selectedTheme"),
+           let savedTheme = try? JSONDecoder().decode(Theme.self, from: savedThemeData) {
+            return savedTheme
         }
+        let themey : Theme = Theme(selectedColor: Color(hex: "#FFFFFF"), backgroundColor: Color(hex: "#FFFFFF"), foregroundColor: Color(hex: "#000000"), backgroundImage: "bg1", isHaveImage: true, buttonColor: Color(hex: "#0000FF"), buttonTextColor: Color(hex: "#FFFFFF"), buttonCorner: 20, isInThemes: false)
+        return themey
     }
-
-    func loadFromKeychain(key: String) -> Data? {
-    let query: [String: Any] = [
-        kSecClass as String: kSecClassGenericPassword,
-        kSecAttrAccount as String: key,
-        kSecReturnData as String: kCFBooleanTrue!,
-        kSecMatchLimit as String: kSecMatchLimitOne,
-        kSecAttrAccessGroup as String: "group.com.BUTTERFLY-EFFECT.BUTTERFLY-EFFECT"
-    ]
-
-    var dataTypeRef: AnyObject? = nil
-    let status: OSStatus = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
-    if status == errSecSuccess {
-        //print the data 
-        print("Data found")
-        print(dataTypeRef as Any)
-        return dataTypeRef as? Data
-    } else {
-        return nil
-    }
-    }
-
+    
+    
+    
     // func loadString(forKey key: String) -> String? {
     //     if let savedString = userDefaults?.string(forKey: key) {
     //         print("Loaded string \"\(savedString)\" from UserDefaults with key: \(key)")
