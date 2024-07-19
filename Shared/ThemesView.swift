@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct Theme: Codable {
+struct Theme: Codable , Equatable{
     let selectedColor: Color
     let backgroundColor: Color
     let foregroundColor: Color
@@ -30,9 +30,21 @@ struct Theme: Codable {
         case buttonCorner
         case isInThemes
     }
+
+    static func == (lhs: Theme, rhs: Theme) -> Bool {
+        return lhs.selectedColor == rhs.selectedColor &&
+               lhs.backgroundColor == rhs.backgroundColor &&
+               lhs.foregroundColor == rhs.foregroundColor &&
+               lhs.backgroundImage == rhs.backgroundImage &&
+               lhs.isHaveImage == rhs.isHaveImage &&
+               lhs.buttonColor == rhs.buttonColor &&
+               lhs.buttonTextColor == rhs.buttonTextColor &&
+               lhs.buttonCorner == rhs.buttonCorner &&
+               lhs.isInThemes == rhs.isInThemes
+    }
 }
 
-extension Color: Codable {
+extension Color: Codable , Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let hexString = try container.decode(String.self)
@@ -66,6 +78,10 @@ extension Color: Codable {
                           lroundf(Float(g * 255)),
                           lroundf(Float(b * 255)))
         }
+    }
+
+    public static func == (lhs: Color, rhs: Color) -> Bool {
+        return lhs.toHex() == rhs.toHex()
     }
 }
 
@@ -125,7 +141,12 @@ let themes = [
 
 struct ThemesView: View {
     @State private var isOn = false
+    @State private var selectedTheme = Theme(selectedColor: Color(hex: "#FFFFFF"), backgroundColor: Color(hex: "#FFFFFF"), foregroundColor: Color(hex: "#000000"), backgroundImage: "bg1", isHaveImage: true, buttonColor: Color(hex: "#0000FF"), buttonTextColor: Color(hex: "#FFFFFF"), buttonCorner: 20, isInThemes: false)
+    init(){
+        selectedTheme = loadTheme()
+    }
     var body: some View {
+
         GeometryReader {
             inGeometry in
             VStack{
@@ -192,6 +213,7 @@ struct ThemesView: View {
                                                             Spacer()
                                                             Button(action: {
                                                                 saveTheme(theme)
+                                                                selectedTheme = theme
                                                             }) {
                                                                 HStack{
                                                                 Rectangle()
@@ -202,11 +224,11 @@ struct ThemesView: View {
                                                                         color: Color.black.opacity(0.5),
                                                                         radius: 2, x: 0, y: 0
                                                                     ).overlay(
-                                                                        
                                                                         Image(systemName: "checkmark")
                                                                             .resizable()
                                                                             .frame(width: 20, height: 20)
-                                                                            .foregroundColor(Color(hex: 0x7cb2fd))
+                                                                            .foregroundColor(Color(hex:  self.selectedTheme == theme ? "#0000FF" : "#FFFFFF") // Color(hex: "#0000FF")
+                                                                            ) 
                                                                     )
                                                             }
                                                                 .padding(
@@ -221,6 +243,12 @@ struct ThemesView: View {
                                                     .padding(
                                                         EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
                                                     )
+                                                    .onAppear(){
+                                                        selectedTheme = loadTheme()
+                                                        if CompareTheme(theme){
+                                                            selectedTheme = theme
+                                                        }
+                                                    }
                                                 
                                             }
                                             Spacer().frame(
@@ -246,6 +274,26 @@ struct ThemesView: View {
             defaults?.set(encoded, forKey: "selectedTheme")
             defaults?.synchronize()
         }
+    }
+    
+    /////////
+    func loadTheme() -> Theme {
+        let defaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT")
+        if let savedThemeData = defaults?.data(forKey: "selectedTheme"),
+           let savedTheme = try? JSONDecoder().decode(Theme.self, from: savedThemeData) {
+            return savedTheme
+        }
+        let themey : Theme = Theme(selectedColor: Color(hex: "#FFFFFF"), backgroundColor: Color(hex: "#FFFFFF"), foregroundColor: Color(hex: "#000000"), backgroundImage: "bg1", isHaveImage: true, buttonColor: Color(hex: "#0000FF"), buttonTextColor: Color(hex: "#FFFFFF"), buttonCorner: 20, isInThemes: false)
+        return themey
+    }
+
+    func CompareTheme(_ theme: Theme) -> Bool {
+        let defaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT")
+        if let savedThemeData = defaults?.data(forKey: "selectedTheme"),
+           let savedTheme = try? JSONDecoder().decode(Theme.self, from: savedThemeData) {
+            return savedTheme == theme
+        }
+        return false
     }
 }
 

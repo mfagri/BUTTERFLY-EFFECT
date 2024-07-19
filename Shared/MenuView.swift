@@ -74,40 +74,51 @@ struct MenuView: View {
                             .padding(10).overlay(
                                 VStack{
                                     HStack(spacing: 24){
-                                    HStack{
-                                        Rectangle()
-                                            .fill(Color.white)
-                                            .frame(width:  (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
-                                            .cornerRadius(10)
-                                            .padding(10)
-                                            .overlay(
-                                                VStack{
-                                                    Image(systemName: "paintbrush").resizable().frame(width: 24, height: 24).foregroundColor(Color.black)
-                                                    Text("Keyboard")
-                                                    .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
-                                                }
-                                            )
-                                    }.rotation3DEffect(Angle(degrees:  1), axis: (x: 0, y: 0, z: 1))
-                                    HStack{
-                                        Rectangle()
-                                            .fill(Color.white)
-                                            .frame(width: (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
-                                            .cornerRadius(10)
-                                            .padding(10)
-                                            .overlay(
-                                                VStack{
-                                                    Image(systemName: "pencil").resizable().frame(width: 24, height: 24).foregroundColor(Color.black)
-                                                    Text("Buttons")
-                                                    .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
-                                                }
-                                            )
-                                    }.rotation3DEffect(Angle(degrees:  -1), axis: (x: 0, y: 0, z: 1))
-                                }.padding(
-                                    EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
-                                )
+                                    Button(action: {
+                                        print("keyboard")
+                                    }) {
+                                        HStack{
+                                            Rectangle()
+                                                .fill(Color.white)
+                                                .frame(width:  (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
+                                                .cornerRadius(10)
+                                                .padding(10)
+                                                .overlay(
+                                                    VStack{
+                                                        Image(systemName: "paintbrush").resizable().frame(width: 24, height: 24).foregroundColor(Color.black)
+                                                        Text("Keyboard")
+                                                        .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
+                                                    }
+                                                )
+                                        }.rotation3DEffect(Angle(degrees:  1), axis: (x: 0, y: 0, z: 1))
+                                    }
+                                    Button(action: {
+                                        print("buttons")
+                                    }) {
+                                        HStack{
+                                            Rectangle()
+                                                .fill(Color.white)
+                                                .frame(width: (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
+                                                .cornerRadius(10)
+                                                .padding(10)
+                                                .overlay(
+                                                    VStack{
+                                                        Image(systemName: "pencil").resizable().frame(width: 24, height: 24).foregroundColor(Color.black)
+                                                        Text("Buttons")
+                                                        .foregroundColor(.black).font(.system(size: 18, weight: .bold, design: .default))
+                                                    }
+                                                )
+                                        }.rotation3DEffect(Angle(degrees:  -1), axis: (x: 0, y: 0, z: 1))
+                                        }.padding(
+                                            EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
+                                        )
+                                    }
                                 
                                  HStack(spacing: 24){
-                                    HStack{
+                                    Button(action: {
+                                        print("text")
+                                    }) {
+                                     HStack{
                                         Rectangle()
                                             .fill(Color.white)
                                             .frame(width: (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
@@ -121,7 +132,11 @@ struct MenuView: View {
                                                 }
                                             )
                                     }.rotation3DEffect(Angle(degrees:  -1), axis: (x: 0, y: 0, z: 1))
-                                    HStack{
+                                    }
+                                    Button(action: {
+                                        print("gpt")
+                                    }) {
+                                           HStack{
                                         Rectangle()
                                             .fill(Color.white)
                                             .frame(width: (geometry.size.width / 2) - 90, height: (geometry.size.width / 2) - 90)
@@ -135,11 +150,14 @@ struct MenuView: View {
                                                 }
                                             )
                                     }.rotation3DEffect(Angle(degrees:  1), axis: (x: 0, y: 0, z: 1))
+                                    }
+
                                 }.padding(
                                     EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
                                 
                                 )
                                 }
+                                
                             )
                     }
                     ////
