@@ -17,9 +17,10 @@ struct ViewKeyboard: View {
     private var screenHeight: CGFloat = UIScreen.main.bounds.height
     private var keyboardWidth: CGFloat = UIScreen.main.bounds.width
     private var isInthemes = false
+    private var imageData: Data = Data()
     @State private var showingAlert = false
     
-    init(selectedColor: Color , backgroundColor: Color = .white, foregroundColor: Color = .black, backgroundImage: String = "", IshaveImage: Bool = false, bottunColor: Color = .white, buttonTextColor: Color = .black, buttoncurner: CGFloat = 10, keyboardWidth: CGFloat = UIScreen.main.bounds.width, isInthemes: Bool = false) {
+    init(selectedColor: Color , backgroundColor: Color = .white, foregroundColor: Color = .black, backgroundImage: String = "", IshaveImage: Bool = false, bottunColor: Color = .white, buttonTextColor: Color = .black, buttoncurner: CGFloat = 10, keyboardWidth: CGFloat = UIScreen.main.bounds.width, isInthemes: Bool = false, imageData: Data = Data()) {
         self.selectedColor = selectedColor
         self.backgroundColor = backgroundColor
         self.foregroundColor = foregroundColor
@@ -30,17 +31,24 @@ struct ViewKeyboard: View {
         self.buttoncurner = buttoncurner
         self.keyboardWidth = keyboardWidth
         self.isInthemes = isInthemes
-
+        self.imageData = imageData
     }
     
     var body: some View {
         ZStack {
             if IshaveImage {
                 VStack {
-                    Image(backgroundImage)
+                    if imageData.isEmpty {
+                                            Image(backgroundImage)
                         .resizable()
                         .scaledToFill()
                         .frame(width:keyboardWidth, height: .infinity)
+                    } else {
+                        Image(uiImage: UIImage(data: imageData)!)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width:keyboardWidth, height: .infinity)
+                    }
                 }
                 .frame(width:keyboardWidth, height: .infinity)
             }

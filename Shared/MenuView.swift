@@ -19,7 +19,8 @@ struct MenuView: View {
            GeometryReader {
         geometry in
   
-         VStack{
+         NavigationView{
+            VStack{
            
             LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.all)
@@ -65,7 +66,9 @@ struct MenuView: View {
                         EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
                     )
                     ////////
-                    HStack{
+                    // NavigationStack
+                    // {
+                          HStack{
                         Rectangle()
                             .fill(Color.black.opacity(0.15))
                             .frame(width:  geometry.size.width - 24, height:  geometry.size.height / 2.5)
@@ -74,9 +77,12 @@ struct MenuView: View {
                             .padding(10).overlay(
                                 VStack{
                                     HStack(spacing: 24){
-                                    Button(action: {
-                                        print("keyboard")
-                                    }) {
+                                             NavigationLink(destination: CustomkeyboardUIView()) {
+                                    // Button(action: {
+                                        
+                                
+                                      
+                                    // }) {
                                         HStack{
                                             Rectangle()
                                                 .fill(Color.white)
@@ -92,6 +98,7 @@ struct MenuView: View {
                                                 )
                                         }.rotation3DEffect(Angle(degrees:  1), axis: (x: 0, y: 0, z: 1))
                                     }
+                                            //  }
                                     Button(action: {
                                         print("buttons")
                                     }) {
@@ -109,10 +116,11 @@ struct MenuView: View {
                                                     }
                                                 )
                                         }.rotation3DEffect(Angle(degrees:  -1), axis: (x: 0, y: 0, z: 1))
-                                        }.padding(
+                                        
+                                        }
+                                    }.padding(
                                             EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24)
                                         )
-                                    }
                                 
                                  HStack(spacing: 24){
                                     Button(action: {
@@ -160,6 +168,7 @@ struct MenuView: View {
                                 
                             )
                     }
+                    // }
                     ////
                        HStack{
                         Text("Top Themes")
@@ -197,6 +206,7 @@ struct MenuView: View {
           
       }
     
+         }
      }
     }
 }

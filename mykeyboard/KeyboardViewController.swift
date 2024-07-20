@@ -53,7 +53,8 @@ class KeyboardViewController: UIInputViewController {
             buttonTextColor: buttonTextColor,
             buttoncurner: buttoncurner,
             keyboardWidth: keyboardWidth,
-            isInthemes: isInthemes
+            isInthemes: isInthemes,
+            imageData: Data()
         ))
         view.addKeyboardView(hostingController.view)
         
@@ -108,7 +109,7 @@ class KeyboardViewController: UIInputViewController {
            let savedTheme = try? JSONDecoder().decode(Theme.self, from: savedThemeData) {
             return savedTheme
         }
-        let themey : Theme = Theme(selectedColor: Color(hex: "#FFFFFF"), backgroundColor: Color(hex: "#FFFFFF"), foregroundColor: Color(hex: "#000000"), backgroundImage: "bg1", isHaveImage: true, buttonColor: Color(hex: "#0000FF"), buttonTextColor: Color(hex: "#FFFFFF"), buttonCorner: 20, isInThemes: false)
+        let themey : Theme = Theme(selectedColor: Color(hex: "#FFFFFF"), backgroundColor: Color(hex: "#FFFFFF"), foregroundColor: Color(hex: "#000000"), backgroundImage: "bg1", isHaveImage: true, buttonColor: Color(hex: "#0000FF"), buttonTextColor: Color(hex: "#FFFFFF"), buttonCorner: 20, isInThemes: false,imageData: Data())
         return themey
     }
     

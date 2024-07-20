@@ -45,6 +45,9 @@
 		CF89F7752C4056E200A31383 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F7742C4056E200A31383 /* MenuView.swift */; };
 		CF89F7762C4056E200A31383 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F7742C4056E200A31383 /* MenuView.swift */; };
 		CF89F7772C4056E200A31383 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89F7742C4056E200A31383 /* MenuView.swift */; };
+		CFDA115F2C4BB5D800CBE864 /* CustomkeyboardUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDA115E2C4BB5D800CBE864 /* CustomkeyboardUIView.swift */; };
+		CFDA11602C4BB5D800CBE864 /* CustomkeyboardUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDA115E2C4BB5D800CBE864 /* CustomkeyboardUIView.swift */; };
+		CFDA11612C4BB5D800CBE864 /* CustomkeyboardUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDA115E2C4BB5D800CBE864 /* CustomkeyboardUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +119,7 @@
 		CF89F7742C4056E200A31383 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		CFDA115C2C47671E00CBE864 /* BUTTERFLY-EFFECT (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BUTTERFLY-EFFECT (iOS).entitlements"; sourceTree = "<group>"; };
 		CFDA115D2C47672200CBE864 /* mykeyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mykeyboard.entitlements; sourceTree = "<group>"; };
+		CFDA115E2C4BB5D800CBE864 /* CustomkeyboardUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomkeyboardUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +204,7 @@
 				CF89F76C2C40542700A31383 /* SettingsView.swift */,
 				CF89F7702C4054EA00A31383 /* ThemesView.swift */,
 				CF89F7742C4056E200A31383 /* MenuView.swift */,
+				CFDA115E2C4BB5D800CBE864 /* CustomkeyboardUIView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -455,6 +460,7 @@
 				CF89F7772C4056E200A31383 /* MenuView.swift in Sources */,
 				CF547F0A2C3B060200026C4E /* StepsView.swift in Sources */,
 				CF547F022C3AC14200026C4E /* OnboardingView.swift in Sources */,
+				CFDA11612C4BB5D800CBE864 /* CustomkeyboardUIView.swift in Sources */,
 				CF547F062C3B05A100026C4E /* HowToView.swift in Sources */,
 				AE1534E62C3373CB002EFA88 /* viewkeyboard.swift in Sources */,
 			);
@@ -470,6 +476,7 @@
 				AE1535292C3384C6002EFA88 /* KeyboardViewController.swift in Sources */,
 				CF89F76D2C40542700A31383 /* SettingsView.swift in Sources */,
 				AE15352F2C3384CF002EFA88 /* BUTTERFLY_EFFECTApp.swift in Sources */,
+				CFDA115F2C4BB5D800CBE864 /* CustomkeyboardUIView.swift in Sources */,
 				CF547F082C3B060200026C4E /* StepsView.swift in Sources */,
 				CF89F7752C4056E200A31383 /* MenuView.swift in Sources */,
 				CF547F002C3AC14200026C4E /* OnboardingView.swift in Sources */,
@@ -490,6 +497,7 @@
 				CF89F7722C4054EA00A31383 /* ThemesView.swift in Sources */,
 				AE1534F22C3374F3002EFA88 /* viewkeyboard.swift in Sources */,
 				AE319E8B2C3279FD00FDFD4C /* ContentView.swift in Sources */,
+				CFDA11602C4BB5D800CBE864 /* CustomkeyboardUIView.swift in Sources */,
 				CF547F052C3B05A100026C4E /* HowToView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
