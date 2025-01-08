@@ -1,184 +1,347 @@
 import SwiftUI
 import PhotosUI
 
-struct CustomkeyboardUIView: View {
-    @State var selectedColor = Color(hex: "#FFFFFF")
-    @State var backgroundColor = Color(hex: "#FFFFFF")
-    @State var foregroundColor = Color(hex: "#000000")
-    @State var backgroundImage = "bg1"
-    @State var IshaveImage = true
-    @State var bottunColor = Color(hex: "#0000FF")
-    @State var buttonTextColor = Color(hex: "#FFFFFF")
-    @State var buttoncurner: CGFloat = 20
-    @State var keyboardWidth = UIScreen.main.bounds.width
-    @State var isInthemes = false
+struct CustomKeyboardUIView: View {
+    // MARK: - State Properties
+    @State private var selectedColor = Color(hex: "#FFFFFF")
+    @State private var backgroundColor = Color(hex: "#FFFFFF")
+    @State private var foregroundColor = Color(hex: "#000000")
+    @State private var backgroundImage = "bg1"
+    @State private var isHaveImage = true
+    @State private var buttonColor = Color(hex: "#0000FF")
+    @State private var buttonTextColor = Color(hex: "#FFFFFF")
+    @State private var buttonCorner: CGFloat = 20
+    @State private var keyboardWidth = UIScreen.main.bounds.width
+    @State private var isInThemes = false
     @State private var isImagePickerPresented = false
     @State private var selectedImage: UIImage?
     @State private var isLoading = false
-
+    
+    // MARK: - Body
     var body: some View {
         NavigationView {
             ZStack {
-                VStack {
+                Color(hex: "#F5F5F5").ignoresSafeArea() // Light gray background
+                
+                VStack(spacing: 0) {
+                    // Custom Navigation Bar
+                    CustomNavigationBar()
+                    
                     ScrollView(showsIndicators: false) {
-                        ViewKeyboard(
-                            selectedColor: selectedColor,
-                            backgroundColor: backgroundColor,
-                            foregroundColor: foregroundColor,
-                            backgroundImage: backgroundImage,
-                            IshaveImage: IshaveImage,
-                            bottunColor: bottunColor,
-                            buttonTextColor: buttonTextColor,
-                            buttoncurner: buttoncurner,
-                            keyboardWidth: keyboardWidth,
-                            isInthemes: isInthemes,
-                            imageData: selectedImage != nil ? selectedImage!.pngData()! : Data()
-                        )
-                        .frame(width: keyboardWidth, height: UIScreen.main.bounds.height / 3.5)
-                        .padding(EdgeInsets(top: 24, leading: 0, bottom: 10, trailing: 0))
-                        
-                        ColorPicker("Selected Color", selection: $selectedColor)
-                            .padding(EdgeInsets(top: 0, leading: 24, bottom: 10, trailing: 24))
-                        
-                        ColorPicker("Background Color", selection: $backgroundColor)
-                            .padding(EdgeInsets(top: 0, leading: 24, bottom: 10, trailing: 24))
-                        
-                        ColorPicker("Foreground Color", selection: $foregroundColor)
-                            .padding(EdgeInsets(top: 0, leading: 24, bottom: 10, trailing: 24))
-                        
-                        ColorPicker("Button Color", selection: $bottunColor)
-                            .padding(EdgeInsets(top: 0, leading: 24, bottom: 10, trailing: 24))
-                        
-                        ColorPicker("Button Text Color", selection: $buttonTextColor)
-                            .padding(EdgeInsets(top: 0, leading: 24, bottom: 10, trailing: 24))
-                        
-                        HStack {
-                            Text("Button Corner: \(buttoncurner, specifier: "%.0f")")
-                                .padding(EdgeInsets(top: 0, leading: 24, bottom: 10, trailing: 24))
-                            Spacer()
+                        VStack(spacing: 20) {
+                            // Preview Section
+                            KeyboardPreviewSection(
+                                selectedColor: selectedColor,
+                                backgroundColor: backgroundColor,
+                                foregroundColor: foregroundColor,
+                                backgroundImage: backgroundImage,
+                                isHaveImage: isHaveImage,
+                                buttonColor: buttonColor,
+                                buttonTextColor: buttonTextColor,
+                                buttonCorner: buttonCorner,
+                                keyboardWidth: keyboardWidth,
+                                isInThemes: isInThemes,
+                                imageData: selectedImage?.pngData() ?? Data()
+                            )
+                            
+                            // Colors Section
+                            ColorsSection(
+                                selectedColor: $selectedColor,
+                                backgroundColor: $backgroundColor,
+                                foregroundColor: $foregroundColor,
+                                buttonColor: $buttonColor,
+                                buttonTextColor: $buttonTextColor
+                            )
+                            
+                            // Button Style Section
+                            ButtonStyleSection(
+                                buttonCorner: $buttonCorner
+                            )
+                            
+                            // Image Section
+                            ImageSection(
+                                isHaveImage: $isHaveImage,
+                                selectedImage: $selectedImage,
+                                isImagePickerPresented: $isImagePickerPresented,
+                                isLoading: $isLoading
+                            )
                         }
-                        
-                        Slider(value: $buttoncurner, in: 0...50, step: 1)
-                            .padding(EdgeInsets(top: 0, leading: 24, bottom: 10, trailing: 24))
-                        
-                        Toggle("Have Image", isOn: $IshaveImage)
-                            .padding(EdgeInsets(top: 0, leading: 24, bottom: 10, trailing: 24))
-                        
-                        VStack {
-                            if let selectedImage = selectedImage {
-                                Image(uiImage: selectedImage)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 100, height: 100)
-                            } else {
-                                Text("Select a photo")
-                            }
-
-                            Button(action: {
-                                isImagePickerPresented = true
-                            }) {
-                                Text("Open Photo Picker")
-                            }
-                            .sheet(isPresented: $isImagePickerPresented) {
-                                ImagePicker(selectedImage: $selectedImage)
-                            }
-                            .padding(EdgeInsets(top: 0, leading: 24, bottom: 40, trailing: 24))
-
-                            Button(action: {
-                                if selectedImage != nil {
-                                    saveImage()
-                                } else {
-                                    print("No image selected")
-                                }
-                            }) {
-                                Text("Save Image")
-                            }
-
-                            Button(action: loadImage) {
-                                Text("Load Saved Image")
-                            }
-
-                            Spacer().frame(height: 50)
-                        }
-                        .onAppear(perform: loadImage)
+                        .padding(.horizontal)
                     }
                 }
-                .navigationBarTitle("")
-                .navigationBarHidden(true)
-                .navigationBarBackButtonHidden(true)
                 
                 if isLoading {
-                    Color.black.opacity(0.5).edgesIgnoringSafeArea(.all)
-                    ProgressView("Loading...").progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    LoadingOverlay()
                 }
             }
-            .ignoresSafeArea()
-        }
-    }
-
-    private func saveImage() {
-        guard let selectedImage = selectedImage else { return }
-        guard let imageData = selectedImage.pngData() else { return }
-        
-        let defaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT")
-        let chunkSize = 1024 * 1024  // 1 MB
-        let totalChunks = Int(ceil(Double(imageData.count) / Double(chunkSize)))
-        
-        for chunkIndex in 0..<totalChunks {
-            let start = chunkIndex * chunkSize
-            let end = min(start + chunkSize, imageData.count)
-            let chunk = imageData[start..<end]
-            let base64String = chunk.base64EncodedString()
-            defaults?.set(base64String, forKey: "selectedImage_chunk_\(chunkIndex)")
-        }
-        
-        defaults?.set(totalChunks, forKey: "selectedImage_chunk_count")
-        print("Image saved to UserDefaults in \(totalChunks) chunks")
-    }
-
-    private func loadImage() {
-        isLoading = true
-        DispatchQueue.global(qos: .userInitiated).async {
-            let defaults = UserDefaults(suiteName: "group.com.BUTTERFLY-EFFECT")
-            guard let totalChunks = defaults?.integer(forKey: "selectedImage_chunk_count"), totalChunks > 0 else {
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    print("No chunks found in UserDefaults")
-                }
-                return
-            }
-            
-            var imageData = Data()
-            
-            for chunkIndex in 0..<totalChunks {
-                if let base64String = defaults?.string(forKey: "selectedImage_chunk_\(chunkIndex)"),
-                   let chunk = Data(base64Encoded: base64String) {
-                    imageData.append(chunk)
-                } else {
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                        print("Failed to load chunk \(chunkIndex)")
-                    }
-                    return
-                }
-            }
-            
-            if let image = UIImage(data: imageData) {
-                DispatchQueue.main.async {
-                    self.selectedImage = image
-                    self.isLoading = false
-                    print("Image successfully loaded from chunks")
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    print("Failed to convert chunks to UIImage")
-                }
-            }
+            .navigationBarHidden(true)
         }
     }
 }
 
+// MARK: - Custom Navigation Bar
+struct CustomNavigationBar: View {
+    var body: some View {
+        HStack {
+            Text("Keyboard Customization")
+                .font(.title2)
+                .fontWeight(.bold)
+            Spacer()
+        }
+        .padding()
+        .background(Color.white)
+        .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
+    }
+}
+
+// MARK: - Keyboard Preview Section
+struct KeyboardPreviewSection: View {
+    let selectedColor: Color
+    let backgroundColor: Color
+    let foregroundColor: Color
+    let backgroundImage: String
+    let isHaveImage: Bool
+    let buttonColor: Color
+    let buttonTextColor: Color
+    let buttonCorner: CGFloat
+    let keyboardWidth: CGFloat
+    let isInThemes: Bool
+    let imageData: Data
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Preview")
+                .font(.headline)
+                .padding(.leading, 4)
+            
+            ViewKeyboard(
+                selectedColor: selectedColor,
+                backgroundColor: backgroundColor,
+                foregroundColor: foregroundColor,
+                backgroundImage: backgroundImage,
+                IshaveImage: isHaveImage,
+                bottunColor: buttonColor,
+                buttonTextColor: buttonTextColor,
+                buttoncurner: buttonCorner,
+                keyboardWidth: keyboardWidth,
+                isInthemes: isInThemes,
+                imageData: imageData
+            )
+            .frame(width: keyboardWidth, height: UIScreen.main.bounds.height / 3.5)
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        }
+        .padding(.vertical)
+        .padding(.horizontal)
+    }
+}
+
+// MARK: - Colors Section
+struct ColorsSection: View {
+    @Binding var selectedColor: Color
+    @Binding var backgroundColor: Color
+    @Binding var foregroundColor: Color
+    @Binding var buttonColor: Color
+    @Binding var buttonTextColor: Color
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Colors")
+                .font(.headline)
+                .padding(.leading, 4)
+            
+            CustomColorPicker("Selected Color", selection: $selectedColor)
+            CustomColorPicker("Background", selection: $backgroundColor)
+            CustomColorPicker("Foreground", selection: $foregroundColor)
+            CustomColorPicker("Button", selection: $buttonColor)
+            CustomColorPicker("Button Text", selection: $buttonTextColor)
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+    }
+}
+
+// MARK: - Button Style Section
+struct ButtonStyleSection: View {
+    @Binding var buttonCorner: CGFloat
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Button Style")
+                .font(.headline)
+                .padding(.leading, 4)
+            
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Text("Corner Radius: \(Int(buttonCorner))")
+                    Spacer()
+                    Text("\(Int(buttonCorner))")
+                        .foregroundColor(.gray)
+                }
+                
+                Slider(value: $buttonCorner, in: 0...50, step: 1)
+                    .accentColor(.blue)
+            }
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+    }
+}
+
+// MARK: - Image Section
+struct ImageSection: View {
+    @Binding var isHaveImage: Bool
+    @Binding var selectedImage: UIImage?
+    @Binding var isImagePickerPresented: Bool
+    @Binding var isLoading: Bool
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Background Image")
+                .font(.headline)
+                .padding(.leading, 4)
+            
+            VStack(spacing: 16) {
+                Toggle("Enable Background Image", isOn: $isHaveImage)
+                    .padding(.bottom, 8)
+                
+                if isHaveImage {
+                    ImagePreviewAndControls(
+                        selectedImage: $selectedImage,
+                        isImagePickerPresented: $isImagePickerPresented
+                    )
+                }
+            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 2)
+        }
+    }
+}
+
+// MARK: - Supporting Views
+struct CustomColorPicker: View {
+    let title: String
+    @Binding var selection: Color
+    
+    init(_ title: String, selection: Binding<Color>) {
+        self.title = title
+        self._selection = selection
+    }
+    
+    var body: some View {
+        HStack {
+            Text(title)
+            Spacer()
+            ColorPicker("", selection: $selection)
+                .labelsHidden()
+        }
+    }
+}
+
+struct ImagePreviewAndControls: View {
+    @Binding var selectedImage: UIImage?
+    @Binding var isImagePickerPresented: Bool
+    
+    var body: some View {
+        VStack(spacing: 16) {
+            if let image = selectedImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 120, height: 120)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                    )
+            } else {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.gray.opacity(0.1))
+                    .frame(width: 120, height: 120)
+                    .overlay(
+                        Image(systemName: "photo")
+                            .font(.system(size: 30))
+                            .foregroundColor(.gray)
+                    )
+            }
+            
+            HStack(spacing: 12) {
+                Button(action: { isImagePickerPresented = true }) {
+                    Label(
+                        selectedImage == nil ? "Select Image" : "Change Image",
+                        systemImage: "photo.on.rectangle.angled"
+                    )
+                    .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(PrimaryButtonStyle())
+                .sheet(isPresented: $isImagePickerPresented) {
+                    ImagePicker(selectedImage: $selectedImage)
+                }
+                
+                if selectedImage != nil {
+                    Button(action: { selectedImage = nil }) {
+                        Label("Remove", systemImage: "trash")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(SecondaryButtonStyle())
+                }
+            }
+            Spacer().frame(height: 40)
+        }
+    }
+}
+
+struct LoadingOverlay: View {
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.5)
+                .ignoresSafeArea()
+            
+            VStack(spacing: 16) {
+                ProgressView()
+                    .scaleEffect(1.5)
+                Text("Loading...")
+                    .font(.headline)
+                    .foregroundColor(.white)
+            }
+            .padding(24)
+            .background(Color.black.opacity(0.7))
+            .cornerRadius(12)
+        }
+    }
+}
+
+// MARK: - Custom Button Styles
+struct PrimaryButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+    }
+}
+
+struct SecondaryButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(Color.red.opacity(0.1))
+            .foregroundColor(.red)
+            .cornerRadius(10)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+    }
+}
+
+// MARK: - Image Picker
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
     @Environment(\.presentationMode) private var presentationMode
@@ -216,8 +379,9 @@ struct ImagePicker: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
 }
 
-struct CustomkeyboardUIView_Previews: PreviewProvider {
+// MARK: - Preview
+struct CustomKeyboardUIView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomkeyboardUIView()
+        CustomKeyboardUIView()
     }
 }

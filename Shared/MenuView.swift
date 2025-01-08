@@ -77,7 +77,7 @@ struct MenuView: View {
                             .padding(10).overlay(
                                 VStack{
                                     HStack(spacing: 24){
-                                             NavigationLink(destination: CustomkeyboardUIView()) {
+                                             NavigationLink(destination: CustomKeyboardUIView()) {
                                     // Button(action: {
                                         
                                 
